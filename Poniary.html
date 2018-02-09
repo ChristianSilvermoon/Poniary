@@ -1,0 +1,1122 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title id=page_title>Poniary</title>
+	<meta charset="utf-8">
+</head>
+<style type="text/css">
+	html {
+		font-family: verdana;
+		text-shadow:
+			-1px -1px 0 #000,
+			1px -1px 0 #000,
+			-1px 1px 0 #000,
+			1px 1px 0 #000;
+	}
+
+	body {
+		transition: ease-in-out 1s;
+		background-color: black;
+		background: radial-gradient(ellipse at center, #000000 0%,#00303f 100%) no-repeat center center fixed; /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+		color: #00A7FF;
+	}
+
+	.ffwin > tbody > tr > td {
+		background: #003F8C; /* Old browsers */
+		background: linear-gradient(135deg,  #003F8C 0%,#000000 100%);
+		border: 2px white outset;
+		border-radius: 4px;
+		color: white;
+		padding: 6px;
+	}
+
+	.crimwin {
+		/*Red Final Fantasy-esque Window*/
+		background: #6B0015; /* Old browsers */
+		background: linear-gradient(135deg,  #6B0015 0%,#000000 100%)!important;
+		border: 2px white outset;
+		border-radius: 4px;
+		color: white;
+		padding: 6px;
+	}
+
+	.goldwin {
+		/*Gold final fantasy-esque Window*/
+		background: #606000; /* Old browsers */
+		background: linear-gradient(135deg,  #606000 0%,#000000 100%)!important;
+		border: 2px white outset;
+		border-radius: 4px;
+		color: white;
+		padding: 6px;
+	}
+
+	.refElement {
+		display: none;
+	}
+
+	.indent {
+		padding-left: 54px;
+	}
+
+	.presize {
+		font-size: 80%;
+	}
+
+	a:link, a:visited {
+		color: #F2C574;
+		text-decoration: none;
+		transition: 0.2s ease-in;
+	}
+
+	a:hover {
+		color: #26FF6A;
+		transition: 0.2s ease-in;
+	}
+
+	input, textarea {
+	  border-radius: 4px;
+	  border: 1px inset rgba(255, 255, 255, 0.4);
+	  background: rgba(0, 0, 0, 0.2);
+	  color: white;
+	}
+
+	input[type=text][disabled], textarea[type=text][disabled] {
+  		border: none;
+	}
+
+	textarea {
+		width: 100%;
+	}
+
+	::-moz-selection {
+		background: #C228ED;
+	}
+
+	::selection {
+		background: #C228ED;
+	}
+
+	.top-button {
+		position: fixed;
+		right: 10px;
+		bottom: 10px;
+	}
+
+	.max_width {
+		width: 100%;
+	}
+
+	.list_table tr td {
+		border-bottom: dotted 1px gray;
+		border-right: dotted 1px gray;
+	}
+
+	.vi {
+		border-left: 2px inset white;
+	}
+
+	#TableOfContents {
+		position: fixed;
+		top: 86px;
+		padding-left: 2px;
+		bottom: 16px;
+		width: 200px;
+		overflow-y: auto;
+	}
+
+	#TableOfContents > table {
+		width: 100%;
+	}
+
+	#main {
+		/*Character Sheet table*/
+		padding-top: 40px;
+		top: 86px;
+		padding-left: 210px;
+		min-width: 200px;
+		max-width: 1212px;
+	}
+
+	#editor {
+		display: none;
+	}
+
+	#editorOn {
+		background: rgba(0, 0, 0, 0.5);
+		z-index: 1000;
+		top: 0px;
+		left: 0px;
+		position: fixed;
+		width: 100%;
+		height: 100%;
+		overflow-y: scroll;
+	}
+
+	#editorcontainer {
+		margin: auto;
+		width: 80%;
+		padding-top: 5%;
+	}
+
+	#infocontainer {
+		width: 90%;
+	}
+
+	#TopBar {
+		position: fixed;
+		width: 100%;
+	}
+
+	#SaveBox, #LoadBox, #MsgBox, #PonyContextMenu {
+		transition: ease-in-out 1s;
+		display: none;
+	}
+
+	#SaveBoxOn, #LoadBoxOn, #MsgBoxOn, #PonyContextMenuOn {
+		transition: ease-in-out 1s;
+		top: 0px;
+		left: 0px;
+		opacity: 100%;
+		visibility: visible;
+		position: fixed;
+		z-index: 9999;
+		height: 100%;
+		width: 100%;
+		background: rgba(0, 0, 0, 0.5);
+	}
+
+</style>
+<style id=autosave_status type="text/css">
+	body {
+		background: radial-gradient(ellipse at center, #000000 0%,#00303f 100%) no-repeat center center fixed; /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	}
+</style>
+<body>
+	<table id=TopBar class=ffwin>
+		<tr>
+			<td class=goldwin><center>♥~Poniary~♥</center></td>
+		</tr>
+		<tr>
+			<td>
+				<a href="javascript:void(0)" title="Save Data to JSON file" onclick="saveBtnClick()">▼ Save</a>
+				<span style="padding-left: 15px;"></span>
+				<a href="javascript:void(0)" title="Load Data from JSON file" onclick="loadBtnClick()">▲ Load</a>
+				<span style="padding-left: 15px;"></span>
+				<a href="javascript:void(0)" title="Unload Everything/Refresh Page" onclick="unloadBtnClick()">⟳ Unload</a>
+			</td>
+		</tr>
+	</table>
+	<!--End of Top Bar-->
+
+	<div id=TableOfContents>Loading...<br/>Please Ensure JS is Enabled</div>
+	<div id=main><br/><br/><table id=infocontainer class=ffwin></table></div>
+	<div id=editor>
+		<table id=editorcontainer class=ffwin><tr><td>
+			Character Name: <input id=Editor_Name type=text placeholder="Character Name" onkeyup="rmIllChars(this)"></input>
+			<span style="float: right;">Subtitle: <input id=Editor_Subtitle type=text placeholder="Subtitle" onkeyup="rmIllChars(this)"></input></span><hr/>
+
+			Images: [<input id="Editor_ImageSubmitter" type=file accept="image/*"></input> <a href="javascript:void(0)" onclick="editorFunc('newImg')">+Add</a>]<br/>
+			<table class=list_table id="Editor_Images"></table><br/>
+			<br/>
+			Background Color: <input id=Editor_Bkg type=color></input><br/>
+			Creator: <input id=Editor_Creator type=text placeholder="Creator Name" onkeyup="rmIllChars(this)"></input> [<a href="javascript:void(0)" onclick="document.getElementById('Editor_Creator').value = ponydata.MetaInf.author" title="Set as Author of Save From Meta Information">Set As Author</a>]<br/>
+			Birth Date: <input id=Editor_DOB type=text placeholder="Birth Date" onkeyup="rmIllChars(this)"></input><br/>
+			Birth Place: <input id=Editor_BirthPlace type=text placeholder="Birth Place" onkeyup="rmIllChars(this)"></input><br/>
+			Race: <input id=Editor_Race type=text placeholder="Birth Place" onkeyup="rmIllChars(this)"></input><br/>
+			Gender: <select id=Editor_Gender type=listbox>
+					<option>Undefined</option>
+					<option>Female</option>
+					<option>Intersex</option>
+					<option>Male</option>
+					<option>N/a</option>
+					<option>Other</option>
+				</select><br/>
+			Orientation: <input id=Editor_Orientation type=text placeholder="Orientation" onkeyup="rmIllChars(this)"></input><br/>
+			Occupation: <input id=Editor_Occupation type=text placeholder="Occupation" onkeyup="rmIllChars(this)"></input><br/>
+			Special Talent: <input id=Editor_Talent type=text placeholder="Special Talent" onkeyup="rmIllChars(this)"></input><br/>
+			Cutie Mark: <input id=Editor_CutieMark type=text placeholder="Cutie Mark" onkeyup="rmIllChars(this)"></input><br/>
+			Universe: <input id=Editor_Universe type=text placeholder="Universe" onkeyup="rmIllChars(this)"></input><br/>
+			<br/>
+			Custom Fields: [<a href="javascript:void(0)" onclick="editorFunc('newCustField')">+New</a>]<br/>
+			<table class=list_table id="Editor_CustomFields"></table>
+			<br/>
+			Coloration: [<a href="javascript:void(0)" onclick="editorFunc('newColor')">+New</a>]<br/>
+			<table class=list_table id="Editor_Colors"></table>
+			<br/>
+			Family: [<a href="javascript:void(0)" onclick="editorFunc('newFamily')">+New</a>]<br/>
+			<table class=list_table id="Editor_Family"></table>
+			<br/>
+			Description:<br/>
+			<textarea rows=10 id=Editor_Description onkeyup="rmIllChars(this)"></textarea><br/>
+			<br/>
+			Abilities: [<a href="javascript:void(0)" onclick="editorFunc('newAbility')">+New</a>]<br/>
+			<table class=list_table id="Editor_Abilities"></table><br/>
+			<br/>
+			<hr/><br/>
+			<center><a href="javascript:void(0)" onclick="editorSav('save')">Save</a><br/>
+			<a href="javascript:void(0)" onclick="editorSav('cancel')">Discard</center><br/>
+		</td></tr></table>
+	</div>
+	<div id="Page_Help" class="refElement">
+		<table id="infocontainer" class=ffwin>
+			<tr>
+				<td>
+					Help<hr/>
+					<center>
+						Finding yourself confused? Not sure what to do? <br/>No worries! This help page is here to help you get started!<br/>
+					</center>
+					<br>
+					<b><u>Understanding The Interface</b></u><br/>
+					The interface is designed with <i>Ease of Use</i> in mind. So hopefull it should be easy to jump right in.<br/>
+					<br/>
+					<u>The Blue Bar at The Top</u><br/>
+					Contains three options that deal with your <b><u>SAVE DATA</u></b>.<br/>
+					You might call this the "Data Bar"</br>
+					<br/>
+					The first option "Save" will pull up a window allowing you to save entirety of your work!
+					You will be prompted to save "<code style='background: rgba(0,0,0,0.2);'>PoniarySave.json</code>". It is <b>Imparitive</b> that you do <b>NOT</b> lose this file. It contains the details
+					of all the characters in the Table Of Contents on the left, including image content and will be needed in the future to continue viewing and editing those same characters!<br/>
+					<br/>
+					The second option "Load" will pull up a window allowing you to select a "<code style='background: rgba(0,0,0,0.2);'>PoniarySave.json</code>" file. The file can be called anything, but it must be a JSON file.
+					You can load files in three different <i>modes</i>. If you're unfamiliar with the terms "prepend" and "append" you might be a tad confused here, but we'll clear that up. To <u>prepend</u> something is to
+					<i>add something to the begining of it</i>. Loading files in <u>Prepend Mode</u> will cause the ponies it contains to be added to the beginning of the Character List. Similarly, <u>append</u> means
+					adding to the end of something. In this case, adding the characters from your loaded file to the end of the Character List. <u>Overwrite Mode</u> is the basic behavior you're most likely familiar with from
+					most computer applications: Replacing current data with the contents of the selected file entirely. It's worth noting that loading files at any point will Overwrite the current <i>Meta Information</i> with
+					the data contained in the file. We'll get to Meta Information Later.<br/>
+					<br/>
+					Unload is just the same as clicking "Refresh" or hitting F5 in your browser, but with a cautionary prompt... and if you have unsaved changes, possibly a double prompt.<br/>
+					<br/>
+					<u>Table Of Contents</u><br/>
+					This contains the <i>built-in pages</i>, like this one, and the <i>Character List</i>.<br/>
+					<br/>
+					Home a page you initally start up to. It's just a nice welcome page, nothing more.<br/>
+					<br/>
+					Help Document... well, that's what you're viewing right now :P<br/>
+					<br/>
+					Meta Infromation. This is a somewhat important feature! What is Meta Information? Meta Information is <i>information that describes other information</i>. In this case, it contains some helpful Information
+					and controls related to the current <i>Save Data</i>. This information includes the <i>Save Version</i>, which may be different if your data comes from a different version of Poniary. Next is an estimated
+					file size of your save. This is <b>NOT</b> 100% accurate, but can really help you out. In messenger programs like <a href=https://discordapp.com/ target="_blank">Discord</a>, you just might run into a
+					file size limit when trying to share your "<code style='background: rgba(0,0,0,0.2);'>PoniarySave.json</code>" with your friends. There's ways of reducing your Save size in a later section. It will also
+					show you a character count, which can be pretty neat if you like keeping track of just how many characters you actually have. The <i>Author</i> box should contain your name, the sole purpose of this is
+					to help identify the save as <i>yours</i>. Finally, there's <i>Locked</i>... what's that do? That disables features that have to do with modifying the current Save. This can be used to prevent accidental
+					modifications.<br/>
+					<br/>
+					Software License. What's this? This is the License that Poniary is released under: <a href="http://unlicense.org/">The Unlicense</a>. In short, Poniary is Public Domain and comes with <b>NO</b> warranty.<br/>
+					<br/>
+					The Character List! One of the most imporant parts, if not these most important part, of Poniary! This list contains all characters in the current Save Data. This gets it's own section!<br/>
+					<br/><br/>
+					<b><u>Character List</b></u><br/>
+					Clicking the "+" link to the right of "Characters" in the Table Of Contents to the left will create a <i>Brand New</i> character and pull them up in the <u>Character Editor</u>, where you can fill out
+					details on said character, such as their name, color scheme, and more.<br/>
+					<br/>
+					Clicking the "?" will pull up a menu related to the currently selected character that will allow you to: See their estimated contribution to the file size, move them up or down in the list, edit them,
+					make a copy of them at the end of the list, save them to an individual "<code style='background: rgba(0,0,0,0.2);'>PoniarySave.json</code>" all by themsevles, or delete them!<br/>
+					<br/>
+					The Context menu, activated by the "?" can also be accessed by <b>Right Clicking</b> on a charcter, or <b>Long Pressing</b> them, in the case of Android.<br/>
+					<br/>
+					Lastly, hovering over characters with your cursor will present you some information about them, such as their <i>Subtitle</i> and <i>Estimated File Size</i>.
+					<br/><br/>
+					<b><u>Tip: BBCode</u></b><br/>
+					Bulletin Board Code is pretty common place on the Internet today... and you can use it here too!<br/>
+					<br/>
+					The <b>Character Editor</b> supports BBCode in <i>ALL</i> Fields. Go nuts!<br/>
+					<br/>
+
+					<table class=list_table>
+						<tr>
+							<td colspan=2><center>Supported BBCode</center></td>
+						</tr>
+						<tr>
+							<td>BBCode</td><td>Result</td>
+						</tr>
+						<tr>
+							<td>[b]Bold Text[/b]</td><td><b>Bold Text</b></td>
+						</tr>
+						<tr>
+							<td>[i]Italic Text[/i]</td><td><i>Italic Text</i></td>
+						</tr>
+						<tr>
+							<td>[u]Underlined Text[/u]</td><td><u>Underlined Text</u></td>
+						</tr>
+						<tr>
+							<td>[s]Struckthrough Text[/s]</td><td><s>Struckthrough Text</s></td>
+						</tr>
+						<tr>
+							<td>This is [sup]Superscript[/sup]</td><td>This is <sup>Superscript</sup></td>
+						</tr>
+						<tr>
+							<td>This is [sub]Subscript[/sup]</td><td>This is <sub>Subscript</sub></td>
+						</tr>
+					</table>
+
+					<br/><br/>
+					<b><u>Tip: Reducing Save File Size</u></b><br/>
+					Bumping into a limit on sharing files over a messenger? Just want your Save Data smaller? Here are some easy solutions!<br/>
+					<br/>
+					<u>Division</u><br/>
+					Hover over the characters in your list... do you see the file sizes? These contribute to your total! You could try <i>saving</i> your larger characters to their own files and deleting them from your
+					current save! You still have all the details, just across multiple files instead of one.<br/>
+					<br/>
+					<u>Watching your Pictures</u><br/>
+					Did you know pictures are <i>larger than text</i>? It's true! Choosing your pictures <i>wisely</i> can have massive impact on file size! Poniary displays images at 100x100 when viewing and 50x50 when editing.
+					While you <i>can</i> store images of any type and resolution you want, it may not be needed. Additionally, certain file types are HUGE compared to others, so choose your image formats wisely.<br/>
+					<br/>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div id="SaveBox"></div>
+	<div id="LoadBox"></div>
+	<div id="MsgBox"></div>
+	<div id="PonyContextMenu" style="overflow-y: auto;">
+		<table class=ffwin style="top: 30%; left: 45%; position: absolute;">
+			<tr>
+				<td>
+					<center>
+					<b><u>-Pony Menu-</b></u><br/>
+					<br/>
+					</center>
+					Pony: <span style="color: #26FF6A;" id="PonyContextMenuName"></span><br/>
+					<span title="Estimated, not exact">Size</span>: <span style="color: #26FF6A;" id="PonyContextMenuSize"></span><br/>
+					<center>
+					<span class="lockable"><br/>
+					Move: <a href="javascript:void(0)" title="Move character up in list" onclick="movePone('up');">↑ Up</a>/<a href="javascript:void(0)" title="Move character down in list" onclick="movePone('down');">↓ Down</a><br/><br/>
+					<a href="javascript:void(0)" title="Edit Character" onclick="editBtnClick(); document.getElementById('PonyContextMenuOn').id = 'PonyContextMenu'">Edit Character</a><br/>
+					<a href="javascript:void(0)" ttile="Copy Character" onclick="copyPony();document.getElementById('PonyContextMenuOn').id = 'PonyContextMenu'">Copy Character</a></span><br/>
+					<span id="PonyContextMenuSave" onclick="document.getElementById('PonyContextMenuOn').id = 'PonyContextMenu'"></span><br/>
+					<span class="lockable"><a href="javascript:void(0)" title="Delete Character" onclick="delBtnClick(); document.getElementById('PonyContextMenuOn').id = 'PonyContextMenu'">Delete Character</a><br/></span><br/>
+					<a href="javascript:void(0)" title="ESC" onclick="document.getElementById('PonyContextMenuOn').id = 'PonyContextMenu'">Return</a><br/>
+					</center>
+				</td>
+			</tr>
+		</table>
+	</div>
+
+	<script>
+
+		function getURLParams() {
+				var currentURL = window.location.href;
+				var params = currentURL.split("?");
+				params.shift();
+				params = params.toString().split("&");
+				return params;
+			}
+
+		function getURLParam(target) {
+				var params = getURLParams();
+
+				for( var i = 0; i < params.length; i++ ) {
+					var test = params[i].split("=");
+
+					if( test[0] == target ) {
+						return test[1];
+					}
+
+					delete test;
+				}
+
+				return null;
+		}
+
+		function rmIllChars(element) {
+			//Remove Illegal Characters from passed in element value.
+			//Should be used with onkeyup="rmIllChars(this)"
+			element.value = element.value.replace(/</g,"").replace(/>/g,"");
+		}
+
+		function ponyContextMenu() {
+			if ( typeof viewing == "number" ) {
+				var singlePoneData = {};
+				singlePoneData.MetaInf = JSON.parse(JSON.stringify(ponydata.MetaInf));
+				singlePoneData.TableOfContents = [];
+				singlePoneData.TableOfContents[0] = JSON.parse(JSON.stringify(ponydata.TableOfContents[viewing]));
+
+				var data = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(singlePoneData));
+				document.getElementById('PonyContextMenuSave').innerHTML = "<a href=\"" + data + "\" download=\"PoniarySave.json\" onclick=\"origponydata = Object.assign(ponydata); CloseSaveBox();\">Save Character</a>";
+
+				document.getElementById('PonyContextMenuName').innerHTML = bbCodeDecode(ponydata.TableOfContents[viewing].name);
+				document.getElementById('PonyContextMenuSize').innerHTML = getSizeEstimate(ponydata.TableOfContents[viewing]);
+
+				document.getElementById('PonyContextMenu').id = "PonyContextMenuOn";
+			} else {
+				msgBox("Select a Pony first.","-Pony Menu-");
+			}
+		}
+
+		function copyPony() {
+			var newslot = ponydata.TableOfContents.length;
+			var current = viewing;
+			ponydata.TableOfContents[newslot] = JSON.parse(JSON.stringify(ponydata.TableOfContents[viewing]));
+			setStage();
+			loadPon(current);
+			msgBox("Successfully copied <b>" + bbCodeStrip(ponydata.TableOfContents[current].name) + "</b>!","Copied Character");
+		}
+
+		function movePone(dir) {
+			if ( (viewing > 0)&&(dir == "up" ) ) {
+				var tmpPony = JSON.stringify( ponydata.TableOfContents[viewing] );
+				ponydata.TableOfContents[viewing] = JSON.parse( JSON.stringify( ponydata.TableOfContents[(viewing - 1)] ));
+				ponydata.TableOfContents[(viewing - 1)] = JSON.parse(tmpPony);
+				var slot = (viewing - 1);
+				setStage();
+				loadPon(slot);
+				document.getElementById('PonyContextMenuOn').id = "PonyContextMenu";
+				ponyContextMenu();
+
+			} else if ( (viewing < (ponydata.TableOfContents.length - 1) )&&(dir == "down") ) {
+				var tmpPony = JSON.stringify( ponydata.TableOfContents[viewing] );
+				ponydata.TableOfContents[viewing] = JSON.parse( JSON.stringify( ponydata.TableOfContents[(viewing + 1)] ));
+				ponydata.TableOfContents[(viewing + 1)] = JSON.parse(tmpPony);
+				var slot = (viewing + 1);
+				setStage();
+				loadPon(slot);
+				document.getElementById('PonyContextMenuOn').id = "PonyContextMenu";
+				ponyContextMenu();
+			}
+		}
+
+		function newBtnClick() {
+			var newCharString = "{\"name\":\"New Pony\",\"bkg\":\"#003F8C\",\"img\":[],\"subtitle\":\"New Character\",\"creator\":\"unknown\",\"dob\":\"unknown\",\"birth_place\":\"unknown\",\"race\":\"unknown\",\"gender\":\"Undefined\",\"orientation\":\"unknown\",\"occupation\": \"unknown\",\"special_talent\":\"unknown\",\"cutie_mark\":\"unknown\",\"universe\":\"unknown\",\"customFields\":[],\"colors\":[],\"family\":[],\"bio\":\"This is a new, unedited character.\\n\\nUse the editor and make them yours!\",\"abilities\":[]}";
+			var newPonySlot = ponydata.TableOfContents.length;
+			ponydata.TableOfContents[newPonySlot] = JSON.parse(newCharString);
+			msgBox("A new character's been added!<br/>Why not fill in some details?","Character Created")
+			setStage();
+			loadPon(newPonySlot)
+			editBtnClick();
+		}
+
+		function editorSav(opt) {
+			if(opt == "cancel") {
+				//Cancel Button
+				msgBox("Do you really want to discard <u>All Changes</u> to <br/><b>" + bbCodeStrip(ponydata.TableOfContents[viewing].name) +"</b>?<br/><br/><a href=\"javascript:void(0)\" onclick=\"editorSav('confirmdiscard'); CloseMsgBox()\">Yes, Really.</a><br/><a href=\"javascript:void(0)\" onclick=\"editorSav('save'); CloseMsgBox();\">Actually, I meant save.</a>", "Discard?");
+			} else if (opt == "confirmdiscard") {
+				//Confirm Cancel
+				document.getElementById('editorOn').id = "editor";
+			} else if (opt == "save") {
+				//Save Button
+				editorPony.name = document.getElementById("Editor_Name").value;
+				editorPony.subtitle = document.getElementById("Editor_Subtitle").value;
+
+				//imgTb.firstChild.children[0].children[1].firstChild.attributes.src.nodeValue
+				var imgFinal = []; //New Array
+				var imgTb = document.getElementById("Editor_Images");
+				if (imgTb.firstChild != null) {
+					for (i = 0; i < imgTb.firstChild.children.length; i++) {
+						imgFinal[i] = [ imgTb.firstChild.children[i].children[2].firstChild.value, imgTb.firstChild.children[i].children[1].firstChild.attributes.src.nodeValue ];
+					}
+				}
+				editorPony.img = imgFinal;
+
+				editorPony.bkg = document.getElementById("Editor_Bkg").value;
+				editorPony.creator = document.getElementById("Editor_Creator").value;
+				editorPony.dob = document.getElementById("Editor_DOB").value;
+				editorPony.birth_place = document.getElementById("Editor_BirthPlace").value;
+				editorPony.race = document.getElementById("Editor_Race").value;
+				editorPony.gender = document.getElementById("Editor_Gender").value;
+				editorPony.orientation = document.getElementById("Editor_Orientation").value;
+				editorPony.occupation = document.getElementById("Editor_Occupation").value;
+				editorPony.special_talent = document.getElementById("Editor_Talent").value;
+				editorPony.cutie_mark = document.getElementById("Editor_CutieMark").value;
+				editorPony.universe = document.getElementById("Editor_Universe").value;
+
+				//Custom Fields
+				var custFields = []; //New Array
+				var cftb = document.getElementById("Editor_CustomFields");
+				if (cftb.firstChild != null) {
+					for (i = 0; i < cftb.firstChild.children.length; i++) {
+						if ( cftb.firstChild.children[i].children[1].firstChild.value.length > 0) {
+							//Ensure first field has a name
+							custFields[i] = [cftb.firstChild.children[i].children[1].firstChild.value, cftb.firstChild.children[i].children[2].firstChild.value ];
+						}
+					}
+				}
+				editorPony.customFields = custFields;
+				//Colors
+				var epColorsFinal = []; //New Array
+				var epcolors = document.getElementById("Editor_Colors");
+				if (epcolors.firstChild != null) {
+					for (i = 0; i < epcolors.firstChild.children.length; i++) {
+							epColorsFinal[i] = [epcolors.firstChild.children[i].children[1].firstChild.value.toUpperCase(), epcolors.firstChild.children[i].children[2].firstChild.value ];
+					}
+				}
+				editorPony.colors = epColorsFinal;
+
+				//Family
+				var famFinal = []; //New Array
+				var familyTb = document.getElementById('Editor_Family');
+				if (familyTb.firstChild != null) {
+					for (i = 0; i < familyTb.firstChild.children.length; i++) {
+						if ( familyTb.firstChild.children[i].children[1].firstChild.value.length > 0) {
+							//Ensure first field has a name
+							famFinal[i] = [familyTb.firstChild.children[i].children[1].firstChild.value, familyTb.firstChild.children[i].children[2].firstChild.value ];
+						}
+					}
+				}
+				editorPony.family = famFinal;
+
+				editorPony.bio = document.getElementById("Editor_Description").value;
+
+				//Abilities
+				var abFinal = []; //New Array
+				var abTb = document.getElementById('Editor_Abilities');
+				if ( abTb.firstChild != null) {
+					for (i = 0; i < abTb.firstChild.children.length; i++) {
+						abFinal[i] = [ abTb.firstChild.children[i].children[1].firstChild.value, abTb.firstChild.children[i].children[2].firstChild.value, abTb.firstChild.children[i].children[3].firstChild.value, abTb.firstChild.children[i].children[4].firstChild.value ];
+					}
+				}
+				editorPony.abilities = abFinal;
+
+				msgBox("Really save changes to <b>" + bbCodeStrip(ponydata.TableOfContents[viewing].name) + "</b><br/><br/><a href=\"javascript:void(0)\" onclick=\"editorSav('saveconfirm'); CloseMsgBox();\">Yes, Save!</a><br/><a href=\"javascript:void(0)\" onclick=\"editorSav('cancel'); CloseMsgBox();\">Actually, I meant Discard</a>","Really Save?");
+			} else if (opt == "saveconfirm") {
+				//Save was confirmed
+				ponydata.TableOfContents[viewing] = JSON.parse(JSON.stringify(editorPony));
+				document.getElementById('editorOn').id = "editor";
+				var tmpview = viewing;
+				setStage();
+				loadPon(tmpview);
+			}
+		}
+
+		function editorFunc(arg) {
+			if(arg == "newCustField") {
+				var tb = document.getElementById('Editor_CustomFields');
+				tb.insertRow().innerHTML = "<td><a href=\"javascript:void(0)\" onclick=\"this.parentNode.parentNode.remove()\">X</a></td><td><input type=\"text\" onkeyup=\"rmIllChars(this)\" placeholder=\"Field\"></input></td><td><input type=\"text\" onkeyup=\"rmIllChars(this)\" placeholder=\"Value\"></input></td>"
+			} else if (arg == "newColor") {
+				var tb = document.getElementById('Editor_Colors');
+				tb.insertRow().innerHTML = "<td><a href=\"javascript:void(0)\" onclick=\"this.parentNode.parentNode.remove()\">X</a></td><td><input type=\"color\"></input></td><td><input type=\"text\" onkeyup=\"rmIllChars(this)\" placeholder=\"What holds this color?\"></input></td>"
+			} else if (arg == "newFamily") {
+				var tb = document.getElementById('Editor_Family');
+				tb.insertRow().innerHTML = "<td><a href=\"javascript:void(0)\" onclick=\"this.parentNode.parentNode.remove()\">X</a></td><td><input type=\"text\" onkeyup=\"rmIllChars(this)\" placeholder=\"Relation\"></input></td><td><input type=\"text\" onkeyup=\"rmIllChars(this)\" placeholder=\"Family Member Name\"></input></td>"
+			} else if (arg == "newAbility") {
+				var abilityTb = document.getElementById('Editor_Abilities');
+				abilityTb.insertRow().innerHTML = "<td><a href=\"javascript:void(0)\" onclick=\"this.parentNode.parentNode.remove()\">X</a></td><td><input type=\"text\" onkeyup=\"rmIllChars(this)\" placeholder=\"Type\"></input></td><td><input type=\"text\" onkeyup=\"rmIllChars(this)\" placeholder=\"Subtype\"></input></td><td><input type=\"text\" onkeyup=\"rmIllChars(this)\" placeholder=\"Name\"></input></td><td><input type=\"text\" onkeyup=\"rmIllChars(this)\" placeholder=\"Description\"></input></td>";
+			} else if (arg == "newImg") {
+				var reader = new FileReader();
+				var file = document.getElementById('Editor_ImageSubmitter').files[0];
+				var imgTb = document.getElementById('Editor_Images');
+
+				reader.onload = function(event) {
+					imgTb.insertRow().innerHTML = "<td><a href=\"javascript:void(0)\" onclick=\"this.parentNode.parentNode.remove()\">X</a></td><td><img width=50px height=50px src=\"" + event.target.result + "\"></td><td><input type=\"text\" onkeyup=\"rmIllChars(this)\" placeholder=\"Image Name\" value=\"" + file.name + "\"></input></td>"
+				}
+
+				reader.readAsDataURL(file);
+			}
+		}
+
+		function saveBtnClick() {
+			var data = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(ponydata));
+			console.log(data);
+			document.getElementById('SaveBox').innerHTML = "<center><table class=ffwin style=\"top: 30%; left: 45%; position: absolute;\"<tr><td><b><u>-Save Menu-</b></u><br/><br/><center><a href=\"" + data + "\" download=\"PoniarySave.json\" onclick=\"origponydata = Object.assign(ponydata); CloseSaveBox();\">Save</a><br/><span title=\"ESC\" onclick=\"CloseSaveBox()\"><a href=\"javascript:void(0)\">Return</a></span></center></td></tr></table></center>";
+			document.getElementById('SaveBox').id = "SaveBoxOn";
+		}
+
+		function loadBtnClick() {
+			var tableContent = "<center><table class=ffwin style=\"top: 30%; left: 45%; position: absolute;\"<tr><td><b><u><center>-Load Menu-</b></u><br/><br/>";
+			if ( JSON.stringify(ponydata) != JSON.stringify(origponydata) ) {
+				tableContent = tableContent.concat("<font color=red>There are unsaved changes!</font><br/><br/>");
+			}
+			tableContent = tableContent.concat("</center><form id=LoadFileMode><span class=\"lockable\"><input type=radio name=mode>Prepend</input><br/></span><input type=radio checked=true name=mode>Overwrite</input><br/><span class=\"lockable\"><input type=radio name=mode>Append</input></span></form><center>")
+			tableContent = tableContent.concat("<input id=LoadFileBox type=file accept=\"application/json, .json \"></input><br/><br/><span onclick=\"loadFile()\"><a href=\"javascript:void(0)\">Load</a></span></br><span title=\"ESC\" onclick=\"CloseLoadBox()\"><a href=\"javascript:void(0)\">Return</a></span></center></td></tr></table>");
+			document.getElementById('LoadBox').innerHTML = tableContent;
+			document.getElementById('LoadBox').id = "LoadBoxOn";
+		}
+
+		function delBtnClick() {
+
+			if (typeof viewing == "number") {
+				var pone = bbCodeStrip(ponydata.TableOfContents[viewing].name);
+				var msg = "You'd delete <b><i>" + pone + "?!</b></i><br/>" + pone + " looks scared.<br/>" + pone + " feels betrayed.<br/>" + pone + " trusted you.<br/>" + pone + " <b><u>LOVED</b></u> you!<br/>You Monster.<br/><br/><a href=\"javascript:void(0);\" onclick=\"delPony(); CloseMsgBox();\">I'm heartless. Do It.</a>"
+				msgBox(msg,"Delete Pony?");
+			} else {
+				msgBox("Select a pony to delete first!","Editor Error");
+			}
+		}
+
+		function delPony() {
+			if (typeof viewing == "number") {
+				var oldponyname = ponydata.TableOfContents[viewing].name
+				ponydata.TableOfContents.splice(viewing,1);
+				setStage();
+				msgBox("Looks like <b>" + oldponyname + "</b> may be gone forever...<br/>");
+			}
+		}
+
+		var editorPony = {}
+		function editBtnClick() {
+
+			if (typeof viewing == "number") {
+				//Prep Editor Window and make it visible
+				editorPony = JSON.parse(JSON.stringify(ponydata.TableOfContents[viewing]));
+				document.getElementById("Editor_Name").value = ponydata.TableOfContents[viewing].name;
+				document.getElementById("Editor_Subtitle").value = ponydata.TableOfContents[viewing].subtitle;
+
+				//Images
+				var imgTb = document.getElementById('Editor_Images');
+				imgTb.innerHTML = ""; //Clear Table
+				for(i = 0; i < ponydata.TableOfContents[viewing].img.length; i++) {
+					imgTb.insertRow().innerHTML = "<td><a href=\"javascript:void(0)\" onclick=\"this.parentNode.parentNode.remove()\">X</a></td><td><img width=50px height=50px src=\"" + ponydata.TableOfContents[viewing].img[i][1] + "\"></td><td><input type=\"text\" onkeyup=\"rmIllChars(this)\" placeholder=\"Image Name\" value=\"" + ponydata.TableOfContents[viewing].img[i][0] + "\"></input></td>"
+				}
+
+
+				document.getElementById("Editor_Bkg").value = ponydata.TableOfContents[viewing].bkg;
+				document.getElementById("Editor_Creator").value = ponydata.TableOfContents[viewing].creator;
+				document.getElementById("Editor_DOB").value = ponydata.TableOfContents[viewing].dob;
+				document.getElementById("Editor_BirthPlace").value = ponydata.TableOfContents[viewing].birth_place;
+				document.getElementById("Editor_Race").value = ponydata.TableOfContents[viewing].race;
+				document.getElementById("Editor_Gender").value = ponydata.TableOfContents[viewing].gender;
+				document.getElementById("Editor_Orientation").value = ponydata.TableOfContents[viewing].orientation;
+				document.getElementById("Editor_Occupation").value = ponydata.TableOfContents[viewing].occupation;
+				document.getElementById("Editor_Talent").value = ponydata.TableOfContents[viewing].special_talent;
+				document.getElementById("Editor_CutieMark").value = ponydata.TableOfContents[viewing].cutie_mark;
+				document.getElementById("Editor_Universe").value = ponydata.TableOfContents[viewing].universe;
+
+				//Custom Fields
+				var customFtb = document.getElementById('Editor_CustomFields');
+				customFtb.innerHTML = ""; //Clear Table
+				for(i = 0; i < ponydata.TableOfContents[viewing].customFields.length; i++) {
+					customFtb.insertRow().innerHTML = "<td><a href=\"javascript:void(0)\" onclick=\"this.parentNode.parentNode.remove()\">X</a></td><td><input type=\"text\" onkeyup=\"rmIllChars(this)\" placeholder=\"Field\" value=\"" + ponydata.TableOfContents[viewing].customFields[i][0] + "\"></input></td><td><input type=\"text\" onkeyup=\"rmIllChars(this)\" placeholder=\"Value\" value=\"" + ponydata.TableOfContents[viewing].customFields[i][1] + "\"></input></td>"
+				}
+
+				//Coloration
+				var colorTb = document.getElementById('Editor_Colors');
+				colorTb.innerHTML = ""; //Clear Table
+				for (i = 0; i < ponydata.TableOfContents[viewing].colors.length; i++) {
+					colorTb.insertRow().innerHTML = "<td><a href=\"javascript:void(0)\" onclick=\"this.parentNode.parentNode.remove()\">X</a></td><td><input type=\"color\" value=\"" + ponydata.TableOfContents[viewing].colors[i][0] + "\"></input></td><td><input type=\"text\" onkeyup=\"rmIllChars(this)\" placeholder=\"What holds this color?\" value=\"" + ponydata.TableOfContents[viewing].colors[i][1] + "\"></input></td>"
+				}
+
+				//Family
+				var familyTb = document.getElementById('Editor_Family');
+				familyTb.innerHTML = ""; //Clear Table
+				for (i = 0; i < ponydata.TableOfContents[viewing].family.length; i++) {
+					familyTb.insertRow().innerHTML = "<td><a href=\"javascript:void(0)\" onclick=\"this.parentNode.parentNode.remove()\">X</a></td><td><input type=\"text\" onkeyup=\"rmIllChars(this)\" placeholder=\"Relation\" value=\"" + ponydata.TableOfContents[viewing].family[i][0] + "\"></input></td><td><input type=\"text\" onkeyup=\"rmIllChars(this)\" placeholder=\"Family Member Name\" value=\"" + ponydata.TableOfContents[viewing].family[i][1] + "\"></input></td>"
+				}
+
+				document.getElementById("Editor_Description").value = ponydata.TableOfContents[viewing].bio;
+
+				//Abilities (This is the hard part :D)
+				var abilityTb = document.getElementById('Editor_Abilities');
+				abilityTb.innerHTML = ""; //Clear Table
+				for (i = 0; i < ponydata.TableOfContents[viewing].abilities.length; i++) {
+					abilityTb.insertRow().innerHTML = "<td><a href=\"javascript:void(0)\" onclick=\"this.parentNode.parentNode.remove()\">X</a></td><td><input type=\"text\" onkeyup=\"rmIllChars(this)\" placeholder=\"Type\" value=\"" + ponydata.TableOfContents[viewing].abilities[i][0] + "\"></input></td><td><input type=\"text\" onkeyup=\"rmIllChars(this)\" placeholder=\"Subtype\" value=\"" + ponydata.TableOfContents[viewing].abilities[i][1] + "\"></input></td><td><input type=\"text\" onkeyup=\"rmIllChars(this)\" placeholder=\"Name\" value=\"" + ponydata.TableOfContents[viewing].abilities[i][2] + "\"></input></td><td><input type=\"text\" onkeyup=\"rmIllChars(this)\" placeholder=\"Description\" value=\"" + ponydata.TableOfContents[viewing].abilities[i][3] + "\"></input></td>"
+				}
+
+
+				document.getElementById("editor").id = "editorOn";
+			} else {
+				msgBox("Select a pony to edit first!","Editor Error");
+			}
+		}
+
+		function unloadBtnClick(value) {
+			if (value == "y") {
+				location.reload();
+			} else {
+				//Prompt for unload
+				msgBox("Drop <i>everything</i> and start fresh?<br/><br/><a href=\"javascript:void(0)\" onclick=\"unloadBtnClick('y');\">Do It!</a>","Unload?");
+			}
+		}
+
+		function CloseSaveBox() {
+			document.getElementById('SaveBoxOn').id = "SaveBox";
+			document.getElementById('SaveBox').innerHTML = "";
+		}
+
+		function CloseLoadBox() {
+			document.getElementById('LoadBoxOn').id = "LoadBox";
+			document.getElementById('LoadBox').innerHTML = "";
+		}
+
+		var msgQ = []; //Q for MsgBox() and CloseMsgBox()
+		function msgBox(body, title) {
+			//Give Defaults for ungiven arguments
+			if ( title == null ) {
+				title = "Notice";
+			}
+			if ( body == null ) {
+				body = "Test Message.";
+ 			}
+			//If a msgbox is already open...
+			var element = document.getElementById("MsgBox");
+			if ( element === null ) {
+				//determine available slot in que
+				var slap = 1;
+				for (i = 1; msgQ[i] != undefined; i++) {
+					console.log("Slot: ", msgQ[i]);
+					slap++;
+				}
+				//Store Message to be displayed next
+				msgQ[slap] = [body, title];
+
+			} else {
+				//Message box wasn't already open, display message NOW
+				var tableContent = "<center><table class=ffwin style=\"top: 30%; left: 45%; position: absolute;\"><tr><td><b><u><center>-";
+				tableContent = tableContent.concat(title, "-</b></u><br/><br/>");
+				tableContent = tableContent.concat(body, "<br/><br/>");
+				tableContent = tableContent.concat("<span title=\"ESC\" onclick=\"CloseMsgBox()\"><a href=\"javascript:void(0)\">Return</a></span>")
+				document.getElementById('MsgBox').innerHTML = tableContent;
+				document.getElementById('MsgBox').id = "MsgBoxOn";
+			}
+		}
+
+		function CloseMsgBox() {
+			//Self explanitory
+			document.getElementById('MsgBoxOn').id = "MsgBox";
+			document.getElementById('MsgBox').innerHTML = "";
+			if ( msgQ[1] != undefined) {
+				//If there's another message in the Q, open the Message Box with that one.
+				msgBox(msgQ[1][0], msgQ[1][1]);
+				msgQ.shift();
+			}
+		}
+
+		function updateLock() {
+			if ( ponydata.MetaInf.lock == true) {
+				document.getElementById('autosave_status').innerHTML = ".lockable { display: none;}";
+			} else {
+				document.getElementById('autosave_status').innerHTML = "";
+			}
+
+			if ( document.getElementById('MetaAuthorBox') != null ) {
+				document.getElementById('MetaAuthorBox').disabled = ponydata.MetaInf.lock;
+			}
+
+		}
+
+		function getSizeEstimate(arg) {
+			var size = (JSON.stringify(arg).length);
+			var suffix = "Bytes"
+
+			if ( size > 1023) {
+				//Divide to Kilobytes
+				size = (size / 1024);
+				suffix = "Kilobytes"
+			}
+
+			if  ( size > 1023) {
+				//Divide to Megabytes
+				size = (size / 1024);
+				suffix = "Megabytes"
+			}
+
+			if  ( size > 1023) {
+				//Divide to Gigabytes
+				size = (size / 1024);
+				suffix = "Gigabytes"
+			}
+
+			if ( size.toString().includes(".") ) {
+				size = size.toString().substring(0, (size.toString().indexOf(".") + 2));
+			}
+
+			return size + " " + suffix;
+		}
+
+		function showPage(page) {
+			//Show non-pony page
+			if( page == "home" ) {
+				viewing = "home";
+
+				var tableContent = "<table class=ffwin><tr><td>Poniary<hr/>";
+				tableContent = tableContent.concat("<center>Welcome To The Poniary OC Manager<br/>by Christian \"Krissy\" Silvermoon<br/><br/>So... what is <i>Poniary?</i><br/>Poniary is an interactive tool to store details about characters you and maybe friends create. It was primarily created for storing MLP OCs, but can be used for others too. If you're like me an have like 50 characters, you probably like to document them to keep everything you do with them consistant!<br/><br/>Be careful not to refresh without saving!<br/>The page will try and catch you if you have unsaved changes, but that's not a guarantee!<br/><br/>Hopefully this Interactive OC Manager will help you keep track of your OCs as well as it does for me!<br/><br/>Happy Ponying!<br/><font size=0.5>(And yes, the UI Theme <b><i>is</b></i> Final Fantasy Inspired)</font></center>");
+				tableContent = tableContent.concat("</td></tr></table>");
+
+				document.getElementById("infocontainer").innerHTML = tableContent;
+			} else if (page == "meta") {
+				viewing = "meta";
+
+				var tableContent = "<table class=ffwin><tr><td>Meta Information<hr/>";
+				tableContent = tableContent.concat("Latest Poniary Save Version: " + poniarySaveVersion + "<br/><br/>")
+				tableContent = tableContent.concat("Poniary Save Version: ", ponydata.MetaInf.version, "<br/>");
+				tableContent = tableContent.concat("Estimated File Size: ", getSizeEstimate(ponydata), "<br/>");
+				tableContent = tableContent.concat("Number of Characters: ", ponydata.TableOfContents.length, "<br/>");
+				tableContent = tableContent.concat("Author Name: ", bbCodeDecode(ponydata.MetaInf.author), "<br/>");
+				tableContent = tableContent.concat("Locked: ", ponydata.MetaInf.lock, "<br/><br/>");
+
+				tableContent = tableContent.concat("<b><u>Changeable Settings</b></u><br/>");
+
+				tableContent = tableContent.concat("Author: <input id=\"MetaAuthorBox\" type=text style=\"width: 90%;\" onchange=\"ponydata.MetaInf.author = this.value; showPage('meta')\" placeholder=\"Author\"></input><br/>");
+				tableContent = tableContent.concat("Locked: <input type=checkbox onchange=\"ponydata.MetaInf.lock = this.checked; updateLock(); showPage('meta')\" ");
+				if ( ponydata.MetaInf.lock == true) {
+					tableContent = tableContent.concat("checked");
+				}
+				tableContent = tableContent.concat("></input><br/>");
+				tableContent = tableContent.concat("</td></tr></table>");
+
+				document.getElementById("infocontainer").innerHTML = tableContent;
+				document.getElementById("MetaAuthorBox").value = ponydata.MetaInf.author;
+			} else if (page == "license") {
+				viewing = "license";
+				var tableContent = "<table class=ffwin><tr><td>The Unlicense<hr/>";
+
+				tableContent = tableContent.concat("This is free and unencumbered software released into the public domain.<br/><br/>Anyone is free to copy, modify, publish, use, compile, sell, or distribute this software, either in source code form or as a compiled binary, for any purpose, commercial or non-commercial, and by any means.<br/><br/>In jurisdictions that recognize copyright laws, the author or authors of this software dedicate any and all copyright interest in the software to the public domain. We make this dedication for the benefit of the public at large and to the detriment of our heirs and successors. We intend this dedication to be an overt act of relinquishment in perpetuity of all present and future rights to this software under copyright law.<br/><br/><b>THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</b><br/><br/><center>For more information, please refer to<br/><a href=http://unlicense.org/>http://unlicense.org/</a></center>");
+				tableContent = tableContent.concat("</td></tr></table>");
+
+				document.getElementById("infocontainer").innerHTML = tableContent;
+			} else if (page == "help") {
+				viewing = "help";
+				var tableContent = document.getElementById("Page_Help").innerHTML;
+				document.getElementById("infocontainer").innerHTML = tableContent;
+			}
+			updateLock();
+
+		}
+
+		function bbCodeEncode(string) {
+			//Encode valid HTML to BBCode. Cut invalid HTML tags out.
+
+			//Italics
+			string = string.replace(/\<i\>/g,"[i]").replace(/\<\/i\>/g,"[/i]");
+			//Bold
+			string = string.replace(/\<b\>/g,"[b]").replace(/\<\/b\>/g,"[/b]");
+			//Underlined
+			string = string.replace(/\<u\>/g,"[u]").replace(/\<\/u\>/g,"[/u]");
+			//Strikethrough
+			string = string.replace(/\<s\>/g,"[s]").replace(/\<\/s\>/g,"[/s]");
+			//Subscript
+			string = string.replace(/\<sub\>/g,"[sub]").replace(/\<\/sub\>/g,"[/sub]");
+			//Superscript
+			string = string.replace(/\<sup\>/g,"[sup]").replace(/\<\/sup\>/g,"[/sup]");
+
+			//Return with illegals removed.
+			return string.replace(/\<br\/\>/g,"\n").replace(/\</g,"").replace(/\>/g,"");
+		}
+
+		function bbCodeDecode(string) {
+			//Decode BBCODE to HTML
+
+			//Italics
+			string = string.replace(/\[i\]/g,"<i>").replace(/\[\/i\]/g,"</i>");
+			//Bold
+			string = string.replace(/\[b\]/g,"<b>").replace(/\[\/b\]/g,"</b>");
+			//Underlined
+			string = string.replace(/\[u\]/g,"<u>").replace(/\[\/u\]/g,"</u>");
+			//Strikethrough
+			string = string.replace(/\[s\]/g,"<s>").replace(/\[\/s\]/g,"</s>");
+			//Subscript
+			string = string.replace(/\[sub\]/g,"<sub>").replace(/\[\/sub\]/g,"</sub>");
+			//Superscript
+			string = string.replace(/\[sup\]/g,"<sup>").replace(/\[\/sup\]/g,"</sup>");
+			//Newlines
+			string = string.replace(/\n/g,"<br/>");
+
+			//Return String
+			return string;
+		}
+
+		function bbCodeStrip(string) {
+			//Strip BBCODE from text
+
+			//Italics
+			string = string.replace(/\[i\]/g,"").replace(/\<\/i\>/g,"");
+			//Bold
+			string = string.replace(/\[b\]/g,"").replace(/\[\/b\]/g,"");
+			//Underlined
+			string = string.replace(/\[u\]/g,"").replace(/\[\/u\]/g,"");
+			//Strikethrough
+			string = string.replace(/\[s\]/g,"").replace(/\[\/s\]/g,"");
+			//Subscript
+			string = string.replace(/\[sub\]/g,"").replace(/\[\/sub\]/g,"");
+			//Superscript
+			string = string.replace(/\[sup\]/g,"").replace(/\[\/sup\]/g,"");
+			//Newlines
+			string = string.replace(/\n/g,"");
+
+			//Return String
+			return string;
+		}
+
+		function loadPon(pony) {
+			//Set Page to clicked pony
+			updateLock();
+			console.log("Loading pon:", pony);
+			viewing = pony;
+			//background: linear-gradient(135deg,  #003F8C 0%,#000000 100%);
+			var tableContent = "<tr><td style=\"background: linear-gradient(135deg, ";
+			tableContent = tableContent.concat(ponydata.TableOfContents[pony].bkg); //Horse BKG Color
+			tableContent = tableContent.concat(" 0%, #000000 100%)!important;\">");
+			tableContent = tableContent.concat(bbCodeDecode( ponydata.TableOfContents[pony].name ) ); //Horse Name
+			tableContent = tableContent.concat("<div style=\"float: right;\">" + bbCodeDecode(ponydata.TableOfContents[pony].subtitle) + "</div><hr/>"); //Subtitle
+			//Horse Pictures
+			if ( typeof ponydata.TableOfContents[pony].img[0] != "undefined" ){
+				tableContent = tableContent.concat("<table style=\"border: none;\" border=\"1px\"><tr>");
+				for(i = 0; ponydata.TableOfContents[pony].img[i] != undefined; i++) {
+					tableContent = tableContent.concat("<td width=\"100px\" height=\"100px\"><img width=100px height=100px src=\"" + ponydata.TableOfContents[pony].img[i][1] + "\"></td>");
+				}
+				tableContent = tableContent.concat("</tr><tr>")
+				for(i = 0; ponydata.TableOfContents[pony].img[i] != undefined; i++) {
+					tableContent = tableContent.concat("<td><center>" + bbCodeDecode(ponydata.TableOfContents[pony].img[i][0]) + "</center></td>");
+				}
+				tableContent = tableContent.concat("</table><br/>");
+			}
+
+			tableContent = tableContent.concat("Creator: " + bbCodeDecode(ponydata.TableOfContents[pony].creator) + "<br/>"); //Pon Maker
+			tableContent = tableContent.concat("Birth Date: " + bbCodeDecode(ponydata.TableOfContents[pony].dob) + "<br/>"); //Pon Day
+			tableContent = tableContent.concat("Birth Place: " + bbCodeDecode(ponydata.TableOfContents[pony].birth_place) + "<br/>"); //Pon Home
+			tableContent = tableContent.concat("Race: " + bbCodeDecode(ponydata.TableOfContents[pony].race) + "<br/>"); //Pon Type
+			tableContent = tableContent.concat("Gender: " + ponydata.TableOfContents[pony].gender + "<br/>"); //Girl Pon? Boy Pon?
+			tableContent = tableContent.concat("Orientation: " + bbCodeDecode(ponydata.TableOfContents[pony].orientation) + "<br/>"); //Pon likes what pons?
+			tableContent = tableContent.concat("Occupation: " + bbCodeDecode(ponydata.TableOfContents[pony].occupation) + "<br/>"); //What does pon do?
+			tableContent = tableContent.concat("Special Talent: " + bbCodeDecode(ponydata.TableOfContents[pony].special_talent) + "<br/>"); //Pon Talent
+			tableContent = tableContent.concat("Cutie Mark: " + bbCodeDecode(ponydata.TableOfContents[pony].cutie_mark) + "<br/>"); //Magic Pon Mark
+			tableContent = tableContent.concat("Universe: " + bbCodeDecode(ponydata.TableOfContents[pony].universe) + "<br/>"); //Pon Universe
+			/*Custom Fields*/
+			for(i = 0; ponydata.TableOfContents[pony].customFields[i] != undefined; i++) {
+				tableContent = tableContent.concat( bbCodeDecode(ponydata.TableOfContents[pony].customFields[i][0]), ": ", bbCodeDecode(ponydata.TableOfContents[pony].customFields[i][1]), "<br/>");
+			}
+			/*Pony Colors Table*/
+			tableContent = tableContent.concat("<br/>Coloration:<br/><table class=\"list_table\"><tr><td>Color</td><td>Item(s)</td></tr>");
+			for(i = 0; ponydata.TableOfContents[pony].colors[i] != undefined; i++) {
+				tableContent = tableContent.concat("<tr><td style=\"background: " + ponydata.TableOfContents[pony].colors[i][0] + ";\">" + ponydata.TableOfContents[pony].colors[i][0] + "</td><td>" + bbCodeDecode(ponydata.TableOfContents[pony].colors[i][1]) + "</td></tr>" );
+			}
+			tableContent = tableContent.concat("</table><br/>");
+
+			/*Family Table*/
+			tableContent = tableContent.concat("Family:<br/><table class=\"list_table\"><tr><td>Relation</td><td>Name</td></tr>");
+			for(i = 0; ponydata.TableOfContents[pony].family[i] != undefined; i++) {
+				tableContent = tableContent.concat("<tr><td>" + bbCodeDecode(ponydata.TableOfContents[pony].family[i][0]) + "</td><td>" + bbCodeDecode(ponydata.TableOfContents[pony].family[i][1]) + "</td></tr>" );
+			}
+			tableContent = tableContent.concat("</table><br/>");
+
+			//Bio
+			tableContent = tableContent.concat("Description:<br/><div class=\"indent presize\">" + bbCodeDecode(ponydata.TableOfContents[pony].bio) + "</div>");
+
+			/*Abillity Table*/
+			tableContent = tableContent.concat("<br/>Abilities:<br/><table class=\"list_table max_width\"><tr><td>Type</td><td>Subtype</td><td>Name</td><td>Description</td></tr>");
+			for(i = 0; ponydata.TableOfContents[pony].abilities[i] != undefined; i++) {
+				tableContent = tableContent.concat("<tr><td>" + bbCodeDecode(ponydata.TableOfContents[pony].abilities[i][0]) + "</td><td>" + bbCodeDecode(ponydata.TableOfContents[pony].abilities[i][1]) + "</td><td>" + bbCodeDecode(ponydata.TableOfContents[pony].abilities[i][2]) + "</td><td>" + bbCodeDecode(ponydata.TableOfContents[pony].abilities[i][3]) + "</td></tr>" );
+			}
+			tableContent = tableContent.concat("</table><br/>");
+
+
+			tableContent = tableContent.concat("</tr></td>"); //End Pon Deeets
+
+			document.getElementById("infocontainer").innerHTML = tableContent;
+		}
+
+		function setStage() {
+			//Init Table of Contents, loading from ponydata, set page to Home
+			var tocdata = "<table class=goldwin><tr><td>Table Of Contents</tr></tr></table><table class=ffwin><tr><td><a href=\"javascript:void(0)\" onclick=\"showPage('home')\">Home</a><br/><a href=\"javascript:void(0)\" onclick=\"showPage('help')\">Help Document</a><br/><a href=\"javascript:void(0)\" onclick=\"showPage('meta')\">Meta Information</a><br/><a href=\"javascript:void(0)\" onclick=\"showPage('license')\">Software License</a></td></tr><tr><td>Characters <span style=\"float: right;\">(<span class=\"lockable\"><a href=\"javascript:void(0)\" title=\"Add New Character\" onclick=\"newBtnClick()\">+</a>/</span><a href=\"javascript:void(0)\" title=\"Character Options\" onclick=\"ponyContextMenu()\">?</a>)</span><hr/>";
+			for( i = 0; ponydata.TableOfContents[i] !== undefined; i++ ) {
+				tocdata = tocdata.concat("<a title=\"Subtitle: ", bbCodeStrip(ponydata.TableOfContents[i].subtitle), "&#10;Estimated Size: ", getSizeEstimate(ponydata.TableOfContents[i]) ,"\" href=\"javascript:void(0)\" onclick=\"loadPon(", i, ")\" oncontextmenu=\"loadPon(", i, "); ponyContextMenu(); return false;\" style=\"border-left: 2px solid ", ponydata.TableOfContents[i].bkg, ";\">" , bbCodeDecode(ponydata.TableOfContents[i].name), "</a><br/>");
+			}
+
+			tocdata = tocdata.concat("</td></td><tr><td class=\"goldwin\"><a href=\"javascript:void(0)\" onclick=\"document.getElementById('TableOfContents').scrollTo(0,0)\">Back To Top</a></td>");
+			tocdata = tocdata.concat("</tr></table>");
+
+			document.getElementById("TableOfContents").innerHTML = tocdata;
+			showPage("home");
+			updateLock();
+		}
+
+		document.onkeypress = function(event) {
+			/*Key Listener*/
+			/*Escape Key, close any UI windows*/
+			if( (event.key == "Escape") && (document.getElementById('SaveBoxOn') != null) ) {
+				CloseSaveBox();
+			}
+			if( (event.key == "Escape") && (document.getElementById('LoadBoxOn') != null) ) {
+				CloseLoadBox();
+			}
+			if( (event.key == "Escape") && (document.getElementById('MsgBoxOn') != null) ) {
+				CloseMsgBox();
+			}
+			if( (event.key == "Escape") && (document.getElementById('editorOn') != null) ) {
+				editorSav('cancel');
+			}
+		}
+
+		window.onbeforeunload = function(event) {
+			if ( JSON.stringify(ponydata) !=  JSON.stringify(origponydata) ) {
+				return "Are you sure you wanna leave? You'll lose any unsaved changes!"
+			} else {
+				return;
+			}
+		}
+
+		var poniarySaveVersion = "18.2.2";
+
+		//Default Pony Data
+		var ponydata = {
+			TableOfContents:[],
+			MetaInf:{
+				"version":"18.2.2",
+				"app":"Poniary OC Manager",
+				"author":"unknown",
+				"lock":false
+			}
+		};
+
+		var origponydata = JSON.parse(JSON.stringify(ponydata));
+		var viewing = "home";
+
+		function loadFile() {
+			console.log("File Load Triggered...")
+			var mode = "0";
+			for ( i = 0; document.getElementById("LoadFileMode")[i].checked != true; i++) {
+				mode++
+			}
+
+			console.log("File Load Mode:", mode);
+
+			if ( mode == 0) {
+				mode = "Prepend";
+			} else if (mode == 1) {
+				mode = "Overwrite";
+			} else if (mode == 2 ) {
+				mode = "Append";
+			} else {
+				mode = "Overwrite"
+				console.error("Invalid FileLoadMode... defaulting to \"Overwrite\"");
+			}
+
+			console.log("File Load Mode:", mode);
+
+			var file = document.getElementById('LoadFileBox').files[0];
+			var reader = new FileReader();
+			reader.onload = function(event) {
+				if ( mode == "Overwrite") {
+					ponydata = JSON.parse(event.target.result);
+					origponydata = JSON.parse(event.target.result);
+					var ponecounter = ponydata.TableOfContents.length;
+					updateLock();
+
+				} else if ( mode == "Append" ) {
+					var lastempty = ponydata.TableOfContents.length;
+					var loadedPoneData = JSON.parse(event.target.result);
+					var ponecounter = loadedPoneData.TableOfContents.length; //Count # of pones loaded
+
+					for(i = 0; i < loadedPoneData.TableOfContents.length; i++) {
+						console.log("Loaded Ponies Iteration:", i)
+						ponydata.TableOfContents[lastempty] = loadedPoneData.TableOfContents[i];
+						console.log(loadedPoneData.TableOfContents[i]);
+						lastempty++;
+					}
+
+				} else if ( mode == "Prepend" ) {
+					var loadedPoneData = JSON.parse(event.target.result);
+					var lastempty = loadedPoneData.TableOfContents.length;
+					var ponecounter = loadedPoneData.TableOfContents.length; //Count # of pones loaded
+					for(i = 0; i < ponydata.TableOfContents.length; i++) {
+						loadedPoneData.TableOfContents[lastempty] = ponydata.TableOfContents[i];
+						lastempty++;
+					}
+				}
+				console.log(ponydata);
+				CloseLoadBox();
+				setStage();
+				msgBox(`Loaded <font color=#33FF99>${ponecounter}</font> characters.`,"Load Complete");
+			};
+			reader.readAsText(file);
+		}
+
+		setStage();
+		showPage("home");
+
+	</script>
+	<table class="top-button ffwin">
+		<tr>
+			<td class="goldwin"><a href="javascript:void(0)" onclick="window.scrollTo(0,0)">Back To Top</a></td>
+		</tr>
+	</table>
+</body>
+</html>

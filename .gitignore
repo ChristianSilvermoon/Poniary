@@ -1,0 +1,7 @@
+#Ignore useless things
+*
+
+#Pay attention to important things
+!LICENSE
+!Poniary.html
+!README.md
