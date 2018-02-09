@@ -591,7 +591,7 @@
 				tb.insertRow().innerHTML = "<td><a href=\"javascript:void(0)\" onclick=\"this.parentNode.parentNode.remove()\">X</a></td><td><input type=\"text\" onkeyup=\"rmIllChars(this)\" placeholder=\"Relation\"></input></td><td><input type=\"text\" onkeyup=\"rmIllChars(this)\" placeholder=\"Family Member Name\"></input></td>"
 			} else if (arg == "newAbility") {
 				var abilityTb = document.getElementById('Editor_Abilities');
-				abilityTb.insertRow().innerHTML = "<td><a href=\"javascript:void(0)\" onclick=\"this.parentNode.parentNode.remove()\">X</a></td><td><input type=\"text\" onkeyup=\"rmIllChars(this)\" placeholder=\"Type\"></input></td><td><input type=\"text\" onkeyup=\"rmIllChars(this)\" placeholder=\"Subtype\"></input></td><td><input type=\"text\" onkeyup=\"rmIllChars(this)\" placeholder=\"Name\"></input></td><td><input type=\"text\" onkeyup=\"rmIllChars(this)\" placeholder=\"Description\"></input></td>";
+				abilityTb.insertRow().innerHTML = "<td><a href=\"javascript:void(0)\" onclick=\"this.parentNode.parentNode.remove()\">X</a></td><td><input type=\"text\" onkeyup=\"rmIllChars(this)\" placeholder=\"Type\"></input></td><td><input type=\"text\" onkeyup=\"rmIllChars(this)\" placeholder=\"Subtype\"></input></td><td><input type=\"text\" onkeyup=\"rmIllChars(this)\" placeholder=\"Name\"></input></td><td style=\"width: 100%;\"><textarea rows=3 onkeyup=\"rmIllChars(this)\" placeholder=\"Description\"></textarea></td>";
 			} else if (arg == "newImg") {
 				var reader = new FileReader();
 				var file = document.getElementById('Editor_ImageSubmitter').files[0];
@@ -693,13 +693,14 @@
 					familyTb.insertRow().innerHTML = "<td><a href=\"javascript:void(0)\" onclick=\"this.parentNode.parentNode.remove()\">X</a></td><td><input type=\"text\" onkeyup=\"rmIllChars(this)\" placeholder=\"Relation\" value=\"" + ponydata.TableOfContents[viewing].family[i][0] + "\"></input></td><td><input type=\"text\" onkeyup=\"rmIllChars(this)\" placeholder=\"Family Member Name\" value=\"" + ponydata.TableOfContents[viewing].family[i][1] + "\"></input></td>"
 				}
 
+				//BIO
 				document.getElementById("Editor_Description").value = ponydata.TableOfContents[viewing].bio;
 
 				//Abilities (This is the hard part :D)
 				var abilityTb = document.getElementById('Editor_Abilities');
 				abilityTb.innerHTML = ""; //Clear Table
 				for (i = 0; i < ponydata.TableOfContents[viewing].abilities.length; i++) {
-					abilityTb.insertRow().innerHTML = "<td><a href=\"javascript:void(0)\" onclick=\"this.parentNode.parentNode.remove()\">X</a></td><td><input type=\"text\" onkeyup=\"rmIllChars(this)\" placeholder=\"Type\" value=\"" + ponydata.TableOfContents[viewing].abilities[i][0] + "\"></input></td><td><input type=\"text\" onkeyup=\"rmIllChars(this)\" placeholder=\"Subtype\" value=\"" + ponydata.TableOfContents[viewing].abilities[i][1] + "\"></input></td><td><input type=\"text\" onkeyup=\"rmIllChars(this)\" placeholder=\"Name\" value=\"" + ponydata.TableOfContents[viewing].abilities[i][2] + "\"></input></td><td><input type=\"text\" onkeyup=\"rmIllChars(this)\" placeholder=\"Description\" value=\"" + ponydata.TableOfContents[viewing].abilities[i][3] + "\"></input></td>"
+					abilityTb.insertRow().innerHTML = "<td><a href=\"javascript:void(0)\" onclick=\"this.parentNode.parentNode.remove()\">X</a></td><td><input type=\"text\" onkeyup=\"rmIllChars(this)\" placeholder=\"Type\" value=\"" + ponydata.TableOfContents[viewing].abilities[i][0] + "\"></input></td><td><input type=\"text\" onkeyup=\"rmIllChars(this)\" placeholder=\"Subtype\" value=\"" + ponydata.TableOfContents[viewing].abilities[i][1] + "\"></input></td><td><input type=\"text\" onkeyup=\"rmIllChars(this)\" placeholder=\"Name\" value=\"" + ponydata.TableOfContents[viewing].abilities[i][2] + "\"></input></td><td style=\"width: 100%;\"><textarea rows=3 onkeyup=\"rmIllChars(this)\" placeholder=\"Description\">" + ponydata.TableOfContents[viewing].abilities[i][3] + "</textarea></td>"
 				}
 
 
