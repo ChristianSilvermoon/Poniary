@@ -5,6 +5,124 @@
 	<meta charset="utf-8">
 </head>
 <style type="text/css">
+
+	@media(max-width: 1080px) {
+		/*Small Screens*/
+
+		html {
+			font-size: 3em;
+		}
+
+		input, textarea {
+			font-size: 0.8em;
+		}
+
+		.BigUI {
+			display: none;
+		}
+
+		input[type=color] {
+			height: 1.5em;
+			width: 4em;
+		}
+
+		select {
+			font-size: 0.7em;
+		}
+
+		#SmallNavBar {
+			width: 100%;
+			position: fixed;
+			top: 0px;
+			left: 0px;
+			background: #003F8C; /* Old browsers */
+			background: linear-gradient(135deg,  #003F8C 0%,#000000 100%);
+			border: 2px white outset;
+			border-radius: 4px;
+			color: white;
+			padding: 6px;
+		}
+
+		#SmallMenu {
+			display: none;
+		}
+
+		#SmallMenuOn {
+			background: rgba(0, 0, 0, 0.5);
+			z-index: 1000;
+			top: 0px;
+			left: 0px;
+			position: fixed;
+			width: 100%;
+			height: 100%;
+			overflow-y: scroll;
+		}
+
+		#SmallMenuContents {
+			width: 100%;
+		}
+
+		#SmallMenuContents > table, #miniTOC > table {
+			width: 100%;
+		}
+
+		#SmallNavBar > tbody > tr > td {
+			text-align: center;
+		}
+
+		#infocontainer {
+			padding-top: 2%;
+			width: 100%;
+		}
+
+		#LoadUIMenu, #SaveUIMenu, #MsgBoxUI {
+			position: absolute;
+			height: 100%;
+			width: 100%;
+		}
+
+		#editorcontainer {
+			height: 100%;
+			width: 100%;
+		}
+
+	}
+
+	@media(min-width: 1080px) {
+		/*Regular Size Screens*/
+		.SmallUI {
+			display: none;
+		}
+
+		#main {
+			/*Character Sheet table*/
+			padding-top: 40px;
+			top: 86px;
+			padding-left: 210px;
+			min-width: 200px;
+			max-width: 1212px;
+		}
+
+		#infocontainer {
+			width: 90%;
+		}
+
+		#LoadUIMenu, #SaveUIMenu, #MsgBoxUI {
+			position: absolute;
+  			top: 50%;
+  			left: 50%;
+  			transform: translate(-50%, -50%);
+		}
+
+		#editorcontainer {
+			margin: auto;
+			width: 80%;
+			padding-top: 5%;
+		}
+
+	}
+
+	/*Apploies to everything*/
 	html {
 		font-family: verdana;
 		text-shadow:
@@ -119,22 +237,19 @@
 		position: fixed;
 		top: 86px;
 		padding-left: 2px;
-		bottom: 16px;
+		bottom: 8px;
 		width: 200px;
 		overflow-y: auto;
 	}
 
-	#TableOfContents > table {
-		width: 100%;
+	.vOverflowScroll {
+		overflow-y: auto;
+		max-height: 56%
 	}
 
-	#main {
-		/*Character Sheet table*/
-		padding-top: 40px;
-		top: 86px;
-		padding-left: 210px;
-		min-width: 200px;
-		max-width: 1212px;
+	#TableOfContents > table {
+		width: 100%;
+		bottom: 2px;
 	}
 
 	#editor {
@@ -150,16 +265,6 @@
 		width: 100%;
 		height: 100%;
 		overflow-y: scroll;
-	}
-
-	#editorcontainer {
-		margin: auto;
-		width: 80%;
-		padding-top: 5%;
-	}
-
-	#infocontainer {
-		width: 90%;
 	}
 
 	#TopBar {
@@ -186,13 +291,20 @@
 	}
 
 </style>
-<style id=autosave_status type="text/css">
-	body {
-		background: radial-gradient(ellipse at center, #000000 0%,#00303f 100%) no-repeat center center fixed; /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-	}
-</style>
+<style id=autosave_status type="text/css"></style>
 <body>
-	<table id=TopBar class=ffwin>
+
+	<table id=SmallNavBar class="SmallUI ffwin goldwin">
+		<tr>
+			<td onclick="OpenSmallUIMenu()">
+				Menu
+			</td>
+			<td onclick="window.scrollTo(0,0)" title="Load Data from JSON file">
+				Top
+			</td>
+		</tr>
+	</table>
+	<table id=TopBar class="ffwin BigUI">
 		<tr>
 			<td class=goldwin><center>♥~Poniary~♥</center></td>
 		</tr>
@@ -210,7 +322,30 @@
 	</table>
 	<!--End of Top Bar-->
 
-	<div id=TableOfContents>Loading...<br/>Please Ensure JS is Enabled</div>
+	<div id=TableOfContents class="BigUI">Loading...<br/>Please Ensure JS is Enabled</div>
+	<div id=SmallMenu class="SmallUI">
+		<table class=ffwin id=SmallMenuContents>
+			<tr>
+				<td class=goldwin>
+					<center>♥~Poniary~♥</center>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<a href="javascript:void(0)" title="Close this Menu" onclick="CloseSmallUIMenu()">← Return</a>
+					<br/>
+					<a href="javascript:void(0)" title="Save Data to JSON file" onclick="saveBtnClick(); CloseSmallUIMenu();">▼ Save</a>
+					<br/>
+					<a href="javascript:void(0)" title="Load Data from JSON file" onclick="loadBtnClick(); CloseSmallUIMenu();">▲ Load</a>
+					<br/>
+					<a href="javascript:void(0)" title="Unload Everything/Refresh Page" onclick="unloadBtnClick(); CloseSmallUIMenu();">⟳ Unload</a>
+					<br/>
+					<a href="https://github.com/ChristianSilvermoon/Poniary" title="Open Github Repository in new tab." target="_blank">✶ GitHub</a>
+				</td>
+			</tr>
+		</table>
+		<div id=miniTOC>Ensure JS is enabled, please!</div>
+	</div>
 	<div id=main><br/><br/><table id=infocontainer class=ffwin></table></div>
 	<div id=editor>
 		<table id=editorcontainer class=ffwin><tr><td>
@@ -445,6 +580,28 @@
 			}
 		}
 
+		function TocSearch(query) {
+			query = query.toLowerCase();
+			var sresults = "";
+			var resultCount = 0;
+			if ( query.length != 0) {
+				for ( i = 0; i < ponydata.TableOfContents.length; i++ ) {
+					//find me
+					console.log("Iteration: " + i);
+					if ( (bbCodeStrip(ponydata.TableOfContents[i].name).toLowerCase().search(query) == 0 ) && ( resultCount < 5) ) {
+						sresults = sresults.concat("<a href=\"javascript:void(0)\" onclick=\"loadPon(" + i + "); CloseMsgBox(); CloseSmallUIMenu();\">" + bbCodeDecode(ponydata.TableOfContents[i].name) + "</a><br/>");
+						resultCount++
+					}
+				}
+			}
+			document.getElementById('TocMenuSearchResults').innerHTML = sresults
+		}
+
+		function TocMenu() {
+			var tdata = "Character Search:<br/><input id=TocMenuSearch type=text onkeyup=\"TocSearch(this.value);\" placeholder=\"RegExp Search\"></input><br/><div id=TocMenuSearchResults style=\"background: black; border-radius: 4px;\"></div>"
+			msgBox(tdata, "Table Of Contents Menu")
+		}
+
 		function copyPony() {
 			var newslot = ponydata.TableOfContents.length;
 			var current = viewing;
@@ -591,7 +748,7 @@
 				tb.insertRow().innerHTML = "<td><a href=\"javascript:void(0)\" onclick=\"this.parentNode.parentNode.remove()\">X</a></td><td><input type=\"text\" onkeyup=\"rmIllChars(this)\" placeholder=\"Relation\"></input></td><td><input type=\"text\" onkeyup=\"rmIllChars(this)\" placeholder=\"Family Member Name\"></input></td>"
 			} else if (arg == "newAbility") {
 				var abilityTb = document.getElementById('Editor_Abilities');
-				abilityTb.insertRow().innerHTML = "<td><a href=\"javascript:void(0)\" onclick=\"this.parentNode.parentNode.remove()\">X</a></td><td><input type=\"text\" onkeyup=\"rmIllChars(this)\" placeholder=\"Type\"></input></td><td><input type=\"text\" onkeyup=\"rmIllChars(this)\" placeholder=\"Subtype\"></input></td><td><input type=\"text\" onkeyup=\"rmIllChars(this)\" placeholder=\"Name\"></input></td><td style=\"width: 100%;\"><textarea rows=3 onkeyup=\"rmIllChars(this)\" placeholder=\"Description\"></textarea></td>";
+				abilityTb.insertRow().innerHTML = "<td><a href=\"javascript:void(0)\" onclick=\"this.parentNode.parentNode.remove()\">X</a></td><td><input type=\"text\" onkeyup=\"rmIllChars(this)\" placeholder=\"Type\"></input></td><td><input type=\"text\" onkeyup=\"rmIllChars(this)\" placeholder=\"Subtype\"></input></td><td><input type=\"text\" onkeyup=\"rmIllChars(this)\" placeholder=\"Name\"></input></td><td style=\"min-width: 400px;\"><textarea rows=3 onkeyup=\"rmIllChars(this)\" placeholder=\"Description\"></textarea></td>";
 			} else if (arg == "newImg") {
 				var reader = new FileReader();
 				var file = document.getElementById('Editor_ImageSubmitter').files[0];
@@ -608,12 +765,12 @@
 		function saveBtnClick() {
 			var data = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(ponydata));
 			console.log(data);
-			document.getElementById('SaveBox').innerHTML = "<center><table class=ffwin style=\"top: 30%; left: 45%; position: absolute;\"<tr><td><b><u>-Save Menu-</b></u><br/><br/><center><a href=\"" + data + "\" download=\"PoniarySave.json\" onclick=\"origponydata = Object.assign(ponydata); CloseSaveBox();\">Save</a><br/><span title=\"ESC\" onclick=\"CloseSaveBox()\"><a href=\"javascript:void(0)\">Return</a></span></center></td></tr></table></center>";
+			document.getElementById('SaveBox').innerHTML = "<table class=ffwin id=SaveUIMenu><tr><td><center><b><u>-Save Menu-</b></u><br/><br/><center><a href=\"" + data + "\" download=\"PoniarySave.json\" onclick=\"origponydata = Object.assign(ponydata); CloseSaveBox();\">Save</a><br/><span title=\"ESC\" onclick=\"CloseSaveBox()\"><a href=\"javascript:void(0)\">Return</a></span></center></td></tr></table></center>";
 			document.getElementById('SaveBox').id = "SaveBoxOn";
 		}
 
 		function loadBtnClick() {
-			var tableContent = "<center><table class=ffwin style=\"top: 30%; left: 45%; position: absolute;\"<tr><td><b><u><center>-Load Menu-</b></u><br/><br/>";
+			var tableContent = "<center><table class=ffwin id=LoadUIMenu><tr><td><b><u><center>-Load Menu-</b></u><br/><br/>";
 			if ( JSON.stringify(ponydata) != JSON.stringify(origponydata) ) {
 				tableContent = tableContent.concat("<font color=red>There are unsaved changes!</font><br/><br/>");
 			}
@@ -700,7 +857,7 @@
 				var abilityTb = document.getElementById('Editor_Abilities');
 				abilityTb.innerHTML = ""; //Clear Table
 				for (i = 0; i < ponydata.TableOfContents[viewing].abilities.length; i++) {
-					abilityTb.insertRow().innerHTML = "<td><a href=\"javascript:void(0)\" onclick=\"this.parentNode.parentNode.remove()\">X</a></td><td><input type=\"text\" onkeyup=\"rmIllChars(this)\" placeholder=\"Type\" value=\"" + ponydata.TableOfContents[viewing].abilities[i][0] + "\"></input></td><td><input type=\"text\" onkeyup=\"rmIllChars(this)\" placeholder=\"Subtype\" value=\"" + ponydata.TableOfContents[viewing].abilities[i][1] + "\"></input></td><td><input type=\"text\" onkeyup=\"rmIllChars(this)\" placeholder=\"Name\" value=\"" + ponydata.TableOfContents[viewing].abilities[i][2] + "\"></input></td><td style=\"width: 100%;\"><textarea rows=3 onkeyup=\"rmIllChars(this)\" placeholder=\"Description\">" + ponydata.TableOfContents[viewing].abilities[i][3] + "</textarea></td>"
+					abilityTb.insertRow().innerHTML = "<td><a href=\"javascript:void(0)\" onclick=\"this.parentNode.parentNode.remove()\">X</a></td><td><input type=\"text\" onkeyup=\"rmIllChars(this)\" placeholder=\"Type\" value=\"" + ponydata.TableOfContents[viewing].abilities[i][0] + "\"></input></td><td><input type=\"text\" onkeyup=\"rmIllChars(this)\" placeholder=\"Subtype\" value=\"" + ponydata.TableOfContents[viewing].abilities[i][1] + "\"></input></td><td><input type=\"text\" onkeyup=\"rmIllChars(this)\" placeholder=\"Name\" value=\"" + ponydata.TableOfContents[viewing].abilities[i][2] + "\"></input></td><td style=\"min-width: 400px;\"><textarea rows=3 onkeyup=\"rmIllChars(this)\" placeholder=\"Description\">" + ponydata.TableOfContents[viewing].abilities[i][3] + "</textarea></td>"
 				}
 
 
@@ -752,7 +909,7 @@
 
 			} else {
 				//Message box wasn't already open, display message NOW
-				var tableContent = "<center><table class=ffwin style=\"top: 30%; left: 45%; position: absolute;\"><tr><td><b><u><center>-";
+				var tableContent = "<table class=ffwin id=MsgBoxUI><tr><td><b><u><center>-";
 				tableContent = tableContent.concat(title, "-</b></u><br/><br/>");
 				tableContent = tableContent.concat(body, "<br/><br/>");
 				tableContent = tableContent.concat("<span title=\"ESC\" onclick=\"CloseMsgBox()\"><a href=\"javascript:void(0)\">Return</a></span>")
@@ -769,6 +926,26 @@
 				//If there's another message in the Q, open the Message Box with that one.
 				msgBox(msgQ[1][0], msgQ[1][1]);
 				msgQ.shift();
+			}
+		}
+
+		function OpenSmallUIMenu() {
+			document.getElementById('miniTOC').innerHTML = document.getElementById('TableOfContents').innerHTML;
+			document.getElementById('SmallMenu').id = "SmallMenuOn";
+
+		}
+
+		function CloseSmallUIMenu() {
+			if ( document.getElementById('SmallMenuOn') !== null ) {
+				document.getElementById('SmallMenuOn').id = "SmallMenu";
+			}
+
+		}
+
+		function scrollTOCTop() {
+			document.getElementById('TableOfContents').scrollTo(0,0)
+			if ( document.getElementById('SmallMenuOn') !== null ) {
+				document.getElementById('SmallMenuOn').scrollTo(0,0);
 			}
 		}
 
@@ -998,15 +1175,20 @@
 
 		function setStage() {
 			//Init Table of Contents, loading from ponydata, set page to Home
-			var tocdata = "<table class=goldwin><tr><td>Table Of Contents</tr></tr></table><table class=ffwin><tr><td><a href=\"javascript:void(0)\" onclick=\"showPage('home')\">Home</a><br/><a href=\"javascript:void(0)\" onclick=\"showPage('help')\">Help Document</a><br/><a href=\"javascript:void(0)\" onclick=\"showPage('meta')\">Meta Information</a><br/><a href=\"javascript:void(0)\" onclick=\"showPage('license')\">Software License</a></td></tr><tr><td>Characters <span style=\"float: right;\">(<span class=\"lockable\"><a href=\"javascript:void(0)\" title=\"Add New Character\" onclick=\"newBtnClick()\">+</a>/</span><a href=\"javascript:void(0)\" title=\"Character Options\" onclick=\"ponyContextMenu()\">?</a>)</span><hr/>";
-			for( i = 0; ponydata.TableOfContents[i] !== undefined; i++ ) {
-				tocdata = tocdata.concat("<a title=\"Subtitle: ", bbCodeStrip(ponydata.TableOfContents[i].subtitle), "&#10;Estimated Size: ", getSizeEstimate(ponydata.TableOfContents[i]) ,"\" href=\"javascript:void(0)\" onclick=\"loadPon(", i, ")\" oncontextmenu=\"loadPon(", i, "); ponyContextMenu(); return false;\" style=\"border-left: 2px solid ", ponydata.TableOfContents[i].bkg, ";\">" , bbCodeDecode(ponydata.TableOfContents[i].name), "</a><br/>");
+			var tocdata = "<table class=goldwin><tr><td>Table Of Contents</tr></tr></table><table class=ffwin><tr><td><a href=\"javascript:void(0)\" onclick=\"showPage('home'); CloseSmallUIMenu();\">Home</a><br/><a href=\"javascript:void(0)\" onclick=\"showPage('help'); CloseSmallUIMenu();\">Help Document</a><br/><a href=\"javascript:void(0)\" onclick=\"showPage('meta'); CloseSmallUIMenu();\">Meta Information</a><br/><a href=\"javascript:void(0)\" onclick=\"showPage('license'); CloseSmallUIMenu();\">Software License</a></td></tr></table><table class=goldwin><tr><td>Characters <span style=\"float: right;\">(<span class=\"lockable\"><a href=\"javascript:void(0)\" title=\"Add New Character\" onclick=\"newBtnClick()\">+</a>/</span><a href=\"javascript:void(0)\" title=\"Character Options\" onclick=\"ponyContextMenu()\">?</a>/<a href=\"javascript:void(0)\" title=\"Table Of Contents Menu\" onclick=\"TocMenu()\">M</a>)</span></td></tr></table>";
+
+			if ( ponydata.TableOfContents.length > 0) {
+				tocdata = tocdata.concat("<div class=vOverflowScroll><table class=ffwin width=100%><tr><td>");
+				for( i = 0; ponydata.TableOfContents[i] !== undefined; i++ ) {
+					tocdata = tocdata.concat("<a title=\"Subtitle: ", bbCodeStrip(ponydata.TableOfContents[i].subtitle), "&#10;Estimated Size: ", getSizeEstimate(ponydata.TableOfContents[i]) ,"\" href=\"javascript:void(0)\" onclick=\"loadPon(", i, "); CloseSmallUIMenu();\" oncontextmenu=\"loadPon(", i, "); ponyContextMenu(); return false;\" style=\"border-left: 2px solid ", ponydata.TableOfContents[i].bkg, ";\">" , bbCodeDecode(ponydata.TableOfContents[i].name), "</a><br/>");
+				}
+
+				tocdata = tocdata.concat("</td></td></table></div><table><tr><td class=\"goldwin\"><a href=\"javascript:void(0)\" onclick=\"scrollTOCTop()\">Back To Top</a></td>");
+				tocdata = tocdata.concat("</tr></table>");
 			}
 
-			tocdata = tocdata.concat("</td></td><tr><td class=\"goldwin\"><a href=\"javascript:void(0)\" onclick=\"document.getElementById('TableOfContents').scrollTo(0,0)\">Back To Top</a></td>");
-			tocdata = tocdata.concat("</tr></table>");
-
 			document.getElementById("TableOfContents").innerHTML = tocdata;
+			document.getElementById("miniTOC").innerHTML = tocdata;
 			showPage("home");
 			updateLock();
 		}
@@ -1116,7 +1298,7 @@
 		showPage("home");
 
 	</script>
-	<table class="top-button ffwin">
+	<table class="top-button ffwin BigUI">
 		<tr>
 			<td class="goldwin"><a href="javascript:void(0)" onclick="window.scrollTo(0,0)">Back To Top</a></td>
 		</tr>
