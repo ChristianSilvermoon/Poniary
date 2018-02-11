@@ -119,13 +119,19 @@
 		position: fixed;
 		top: 86px;
 		padding-left: 2px;
-		bottom: 16px;
+		bottom: 8px;
 		width: 200px;
 		overflow-y: auto;
 	}
 
+	.vOverflowScroll {
+		overflow-y: auto;
+		max-height: 56%
+	}
+
 	#TableOfContents > table {
 		width: 100%;
+		bottom: 2px;
 	}
 
 	#main {
@@ -186,11 +192,7 @@
 	}
 
 </style>
-<style id=autosave_status type="text/css">
-	body {
-		background: radial-gradient(ellipse at center, #000000 0%,#00303f 100%) no-repeat center center fixed; /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-	}
-</style>
+<style id=autosave_status type="text/css"></style>
 <body>
 	<table id=TopBar class=ffwin>
 		<tr>
@@ -998,13 +1000,17 @@
 
 		function setStage() {
 			//Init Table of Contents, loading from ponydata, set page to Home
-			var tocdata = "<table class=goldwin><tr><td>Table Of Contents</tr></tr></table><table class=ffwin><tr><td><a href=\"javascript:void(0)\" onclick=\"showPage('home')\">Home</a><br/><a href=\"javascript:void(0)\" onclick=\"showPage('help')\">Help Document</a><br/><a href=\"javascript:void(0)\" onclick=\"showPage('meta')\">Meta Information</a><br/><a href=\"javascript:void(0)\" onclick=\"showPage('license')\">Software License</a></td></tr><tr><td>Characters <span style=\"float: right;\">(<span class=\"lockable\"><a href=\"javascript:void(0)\" title=\"Add New Character\" onclick=\"newBtnClick()\">+</a>/</span><a href=\"javascript:void(0)\" title=\"Character Options\" onclick=\"ponyContextMenu()\">?</a>)</span><hr/>";
-			for( i = 0; ponydata.TableOfContents[i] !== undefined; i++ ) {
-				tocdata = tocdata.concat("<a title=\"Subtitle: ", bbCodeStrip(ponydata.TableOfContents[i].subtitle), "&#10;Estimated Size: ", getSizeEstimate(ponydata.TableOfContents[i]) ,"\" href=\"javascript:void(0)\" onclick=\"loadPon(", i, ")\" oncontextmenu=\"loadPon(", i, "); ponyContextMenu(); return false;\" style=\"border-left: 2px solid ", ponydata.TableOfContents[i].bkg, ";\">" , bbCodeDecode(ponydata.TableOfContents[i].name), "</a><br/>");
-			}
+			var tocdata = "<table class=goldwin><tr><td>Table Of Contents</tr></tr></table><table class=ffwin><tr><td><a href=\"javascript:void(0)\" onclick=\"showPage('home')\">Home</a><br/><a href=\"javascript:void(0)\" onclick=\"showPage('help')\">Help Document</a><br/><a href=\"javascript:void(0)\" onclick=\"showPage('meta')\">Meta Information</a><br/><a href=\"javascript:void(0)\" onclick=\"showPage('license')\">Software License</a></td></tr></table><table class=goldwin><tr><td>Characters <span style=\"float: right;\">(<span class=\"lockable\"><a href=\"javascript:void(0)\" title=\"Add New Character\" onclick=\"newBtnClick()\">+</a>/</span><a href=\"javascript:void(0)\" title=\"Character Options\" onclick=\"ponyContextMenu()\">?</a>)</span></td></tr></table>";
 
-			tocdata = tocdata.concat("</td></td><tr><td class=\"goldwin\"><a href=\"javascript:void(0)\" onclick=\"document.getElementById('TableOfContents').scrollTo(0,0)\">Back To Top</a></td>");
-			tocdata = tocdata.concat("</tr></table>");
+			if ( ponydata.TableOfContents.length > 0) {
+				tocdata = tocdata.concat("<div class=vOverflowScroll><table class=ffwin width=100%><tr><td>");
+				for( i = 0; ponydata.TableOfContents[i] !== undefined; i++ ) {
+					tocdata = tocdata.concat("<a title=\"Subtitle: ", bbCodeStrip(ponydata.TableOfContents[i].subtitle), "&#10;Estimated Size: ", getSizeEstimate(ponydata.TableOfContents[i]) ,"\" href=\"javascript:void(0)\" onclick=\"loadPon(", i, ")\" oncontextmenu=\"loadPon(", i, "); ponyContextMenu(); return false;\" style=\"border-left: 2px solid ", ponydata.TableOfContents[i].bkg, ";\">" , bbCodeDecode(ponydata.TableOfContents[i].name), "</a><br/>");
+				}
+
+				tocdata = tocdata.concat("</td></td></table></div><table><tr><td class=\"goldwin\"><a href=\"javascript:void(0)\" onclick=\"document.getElementById('TableOfContents').scrollTo(0,0)\">Back To Top</a></td>");
+				tocdata = tocdata.concat("</tr></table>");
+			}
 
 			document.getElementById("TableOfContents").innerHTML = tocdata;
 			showPage("home");
