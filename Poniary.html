@@ -570,7 +570,7 @@
 		function rmIllChars(element) {
 			//Remove Illegal Characters from passed in element value.
 			//Should be used with onkeyup="rmIllChars(this)"
-			element.value = element.value.replace(/</g,"").replace(/>/g,"");
+			//element.value = element.value.replace(/</g,"").replace(/>/g,"");
 		}
 
 		function ponyContextMenu() {
@@ -1079,6 +1079,9 @@
 		function bbCodeDecode(string) {
 			//Decode BBCODE to HTML
 
+			//Replace < and > with &lt; and &gt;
+			string = string.replace(/\</g,"&lt;").replace(/\>/g,"&gt;");
+
 			//Italics
 			string = string.replace(/\[i\]/g,"<i>").replace(/\[\/i\]/g,"</i>");
 			//Bold
@@ -1144,43 +1147,122 @@
 				tableContent = tableContent.concat("</table><br/>");
 			}
 
-			tableContent = tableContent.concat("Creator: " + bbCodeDecode(ponydata.TableOfContents[pony].creator) + "<br/>"); //Pon Maker
-			tableContent = tableContent.concat("Birth Date: " + bbCodeDecode(ponydata.TableOfContents[pony].dob) + "<br/>"); //Pon Day
-			tableContent = tableContent.concat("Birth Place: " + bbCodeDecode(ponydata.TableOfContents[pony].birth_place) + "<br/>"); //Pon Home
-			tableContent = tableContent.concat("Race: " + bbCodeDecode(ponydata.TableOfContents[pony].race) + "<br/>"); //Pon Type
-			tableContent = tableContent.concat("Gender: " + ponydata.TableOfContents[pony].gender + "<br/>"); //Girl Pon? Boy Pon?
-			tableContent = tableContent.concat("Orientation: " + bbCodeDecode(ponydata.TableOfContents[pony].orientation) + "<br/>"); //Pon likes what pons?
-			tableContent = tableContent.concat("Occupation: " + bbCodeDecode(ponydata.TableOfContents[pony].occupation) + "<br/>"); //What does pon do?
-			tableContent = tableContent.concat("Special Talent: " + bbCodeDecode(ponydata.TableOfContents[pony].special_talent) + "<br/>"); //Pon Talent
-			tableContent = tableContent.concat("Cutie Mark: " + bbCodeDecode(ponydata.TableOfContents[pony].cutie_mark) + "<br/>"); //Magic Pon Mark
-			tableContent = tableContent.concat("Universe: " + bbCodeDecode(ponydata.TableOfContents[pony].universe) + "<br/>"); //Pon Universe
+			//Pon Maker
+			if ( ponydata.TableOfContents[pony].creator.toLowerCase() != "unknown" && ponydata.TableOfContents[pony].creator.length != 0) {
+				tableContent = tableContent.concat("Creator: " + bbCodeDecode(ponydata.TableOfContents[pony].creator) + "<br/>");
+
+			} else if ( ponydata.TableOfContents[pony].creator.toLowerCase() == "unknown" ) {
+				tableContent = tableContent.concat("Creator: <font color=gray><i>" + bbCodeDecode(ponydata.TableOfContents[pony].creator) + "</i></font><br/>");
+			}
+
+			//Pon Day!
+			if ( ponydata.TableOfContents[pony].dob.toLowerCase() != "unknown" && ponydata.TableOfContents[pony].dob.length != 0 ) {
+				tableContent = tableContent.concat("Birth Date: " + bbCodeDecode(ponydata.TableOfContents[pony].dob) + "<br/>");
+
+			} else if ( ponydata.TableOfContents[pony].dob.toLowerCase() == "unknown" ) {
+				tableContent = tableContent.concat("Birth Date: <font color=gray><i>" + bbCodeDecode(ponydata.TableOfContents[pony].dob) + "</i></font><br/>");
+			}
+
+			//Pon Home
+			if ( ponydata.TableOfContents[pony].birth_place.toLowerCase() != "unknown" && ponydata.TableOfContents[pony].birth_place.length != 0 ) {
+				tableContent = tableContent.concat("Birth Place: " + bbCodeDecode(ponydata.TableOfContents[pony].birth_place) + "<br/>");
+
+			} else if ( ponydata.TableOfContents[pony].birth_place.toLowerCase() == "unknown" ) {
+				tableContent = tableContent.concat("Birth Place: <font color=gray><i>" + bbCodeDecode(ponydata.TableOfContents[pony].birth_place) + "</i></font><br/>");
+			}
+
+			//Pon Type
+			if ( ponydata.TableOfContents[pony].race.toLowerCase() != "unknown" && ponydata.TableOfContents[pony].race.length != 0 ) {
+				tableContent = tableContent.concat("Race: " + bbCodeDecode(ponydata.TableOfContents[pony].race) + "<br/>");
+
+			} else if ( ponydata.TableOfContents[pony].race.toLowerCase() == "unknown" ) {
+				tableContent = tableContent.concat("Race: <font color=gray><i>" + bbCodeDecode(ponydata.TableOfContents[pony].race) + "</i></font><br/>");
+			}
+
+			//Girl Pon? Boy Pon? ~ Professor Oak
+			if ( ponydata.TableOfContents[pony].gender.toLowerCase() != "undefined" && ponydata.TableOfContents[pony].gender != "N/a" ) {
+				tableContent = tableContent.concat("Gender: " + bbCodeDecode(ponydata.TableOfContents[pony].gender) + "<br/>");
+
+			} else if ( ponydata.TableOfContents[pony].gender.toLowerCase() == "undefined" ) {
+				tableContent = tableContent.concat("Gender: <font color=gray><i>" + bbCodeDecode(ponydata.TableOfContents[pony].gender) + "</i></font><br/>");
+			}
+
+			//Pon likes what pons?
+			if ( ponydata.TableOfContents[pony].orientation.toLowerCase() != "unknown" && ponydata.TableOfContents[pony].orientation.length != 0 ) {
+				tableContent = tableContent.concat("Orientation: " + bbCodeDecode(ponydata.TableOfContents[pony].orientation) + "<br/>");
+
+			} else if ( ponydata.TableOfContents[pony].orientation.toLowerCase() == "unknown" ) {
+				tableContent = tableContent.concat("Orientation: <font color=gray><i>" + bbCodeDecode(ponydata.TableOfContents[pony].orientation) + "</i></font><br/>");
+			}
+
+			//What does pon do?
+			if ( ponydata.TableOfContents[pony].occupation.toLowerCase() != "unknown" && ponydata.TableOfContents[pony].occupation.length != 0 ) {
+				tableContent = tableContent.concat("Occupation: " + bbCodeDecode(ponydata.TableOfContents[pony].occupation) + "<br/>");
+
+			} else if ( ponydata.TableOfContents[pony].occupation.toLowerCase() == "unknown" ) {
+				tableContent = tableContent.concat("Occupation: <font color=gray><i>" + bbCodeDecode(ponydata.TableOfContents[pony].occupation) + "</i></font><br/>");
+			}
+
+			if ( ponydata.TableOfContents[pony].special_talent.toLowerCase() != "unknown" && ponydata.TableOfContents[pony].special_talent.length != 0 ) {
+				tableContent = tableContent.concat("Special Talent: " + bbCodeDecode(ponydata.TableOfContents[pony].special_talent) + "<br/>");
+
+			} else if ( ponydata.TableOfContents[pony].special_talent.toLowerCase() == "unknown" ) {
+				tableContent = tableContent.concat("Special Talent: <font color=gray><i>" + bbCodeDecode(ponydata.TableOfContents[pony].special_talent) + "</i></font><br/>");
+			}
+
+			//Magic Pon Mark
+			if ( ponydata.TableOfContents[pony].cutie_mark.toLowerCase() != "unknown" && ponydata.TableOfContents[pony].cutie_mark != 0 ) {
+				tableContent = tableContent.concat("Cutie Mark: " + bbCodeDecode(ponydata.TableOfContents[pony].cutie_mark) + "<br/>");
+
+			} else if ( ponydata.TableOfContents[pony].cutie_mark.toLowerCase() == "unknown" ) {
+				tableContent = tableContent.concat("Cutie Mark: <font color=gray><i>" + bbCodeDecode(ponydata.TableOfContents[pony].cutie_mark) + "</i></font><br/>");
+			}
+
+			//Pon Universe
+			if ( ponydata.TableOfContents[pony].universe.toLowerCase() != "unknown" && ponydata.TableOfContents[pony].universe != 0 ) {
+				tableContent = tableContent.concat("Universe: " + bbCodeDecode(ponydata.TableOfContents[pony].universe) + "<br/>");
+
+			} else if ( ponydata.TableOfContents[pony].universe.toLowerCase() == "unknown" ) {
+				tableContent = tableContent.concat("Universe: <font color=gray><i>" + bbCodeDecode(ponydata.TableOfContents[pony].universe) + "</i></font><br/>");
+			}
+
+
 			/*Custom Fields*/
 			for(i = 0; ponydata.TableOfContents[pony].customFields[i] != undefined; i++) {
 				tableContent = tableContent.concat( bbCodeDecode(ponydata.TableOfContents[pony].customFields[i][0]), ": ", bbCodeDecode(ponydata.TableOfContents[pony].customFields[i][1]), "<br/>");
 			}
+
 			/*Pony Colors Table*/
-			tableContent = tableContent.concat("<br/>Coloration:<br/><table class=\"list_table\"><tr><td>Color</td><td>Item(s)</td></tr>");
-			for(i = 0; ponydata.TableOfContents[pony].colors[i] != undefined; i++) {
-				tableContent = tableContent.concat("<tr><td style=\"background: " + ponydata.TableOfContents[pony].colors[i][0] + ";\">" + ponydata.TableOfContents[pony].colors[i][0] + "</td><td>" + bbCodeDecode(ponydata.TableOfContents[pony].colors[i][1]) + "</td></tr>" );
+			if ( ponydata.TableOfContents[pony].colors.length > 0 ) {
+				tableContent = tableContent.concat("<br/>Coloration:<br/><table class=\"list_table\"><tr><td>Color</td><td>Item(s)</td></tr>");
+				for(i = 0; ponydata.TableOfContents[pony].colors[i] != undefined; i++) {
+					tableContent = tableContent.concat("<tr><td style=\"background: " + ponydata.TableOfContents[pony].colors[i][0] + ";\">" + ponydata.TableOfContents[pony].colors[i][0] + "</td><td>" + bbCodeDecode(ponydata.TableOfContents[pony].colors[i][1]) + "</td></tr>" );
+				}
+				tableContent = tableContent.concat("</table><br/>");
 			}
-			tableContent = tableContent.concat("</table><br/>");
 
 			/*Family Table*/
-			tableContent = tableContent.concat("Family:<br/><table class=\"list_table\"><tr><td>Relation</td><td>Name</td></tr>");
-			for(i = 0; ponydata.TableOfContents[pony].family[i] != undefined; i++) {
-				tableContent = tableContent.concat("<tr><td>" + bbCodeDecode(ponydata.TableOfContents[pony].family[i][0]) + "</td><td>" + bbCodeDecode(ponydata.TableOfContents[pony].family[i][1]) + "</td></tr>" );
+			if ( ponydata.TableOfContents[pony].family.length > 0 ) {
+				tableContent = tableContent.concat("Family:<br/><table class=\"list_table\"><tr><td>Relation</td><td>Name</td></tr>");
+				for(i = 0; ponydata.TableOfContents[pony].family[i] != undefined; i++) {
+					tableContent = tableContent.concat("<tr><td>" + bbCodeDecode(ponydata.TableOfContents[pony].family[i][0]) + "</td><td>" + bbCodeDecode(ponydata.TableOfContents[pony].family[i][1]) + "</td></tr>" );
+				}
+				tableContent = tableContent.concat("</table><br/>");
 			}
-			tableContent = tableContent.concat("</table><br/>");
 
 			//Bio
-			tableContent = tableContent.concat("Description:<br/><div class=\"indent presize\">" + bbCodeDecode(ponydata.TableOfContents[pony].bio) + "</div>");
+			if ( ponydata.TableOfContents[pony].bio.length > 0 ) {
+				tableContent = tableContent.concat("Description:<br/><div class=\"indent presize\">" + bbCodeDecode(ponydata.TableOfContents[pony].bio) + "</div>");
+			}
 
 			/*Abillity Table*/
-			tableContent = tableContent.concat("<br/>Abilities:<br/><table class=\"list_table max_width\"><tr><td>Type</td><td>Subtype</td><td>Name</td><td>Description</td></tr>");
-			for(i = 0; ponydata.TableOfContents[pony].abilities[i] != undefined; i++) {
-				tableContent = tableContent.concat("<tr><td>" + bbCodeDecode(ponydata.TableOfContents[pony].abilities[i][0]) + "</td><td>" + bbCodeDecode(ponydata.TableOfContents[pony].abilities[i][1]) + "</td><td>" + bbCodeDecode(ponydata.TableOfContents[pony].abilities[i][2]) + "</td><td>" + bbCodeDecode(ponydata.TableOfContents[pony].abilities[i][3]) + "</td></tr>" );
+			if ( ponydata.TableOfContents[pony].abilities.length > 0) {
+				tableContent = tableContent.concat("<br/>Abilities:<br/><table class=\"list_table max_width\"><tr><td>Type</td><td>Subtype</td><td>Name</td><td>Description</td></tr>");
+				for(i = 0; ponydata.TableOfContents[pony].abilities[i] != undefined; i++) {
+					tableContent = tableContent.concat("<tr><td>" + bbCodeDecode(ponydata.TableOfContents[pony].abilities[i][0]) + "</td><td>" + bbCodeDecode(ponydata.TableOfContents[pony].abilities[i][1]) + "</td><td>" + bbCodeDecode(ponydata.TableOfContents[pony].abilities[i][2]) + "</td><td>" + bbCodeDecode(ponydata.TableOfContents[pony].abilities[i][3]) + "</td></tr>" );
+				}
+				tableContent = tableContent.concat("</table><br/>");
 			}
-			tableContent = tableContent.concat("</table><br/>");
 
 
 			tableContent = tableContent.concat("</tr></td>"); //End Pon Deeets
