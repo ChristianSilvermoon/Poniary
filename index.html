@@ -542,9 +542,9 @@
 	</div>
 
 	<script>
-
 		var bugReportURL = "https://github.com/ChristianSilvermoon/Poniary/issues/new?labels=bug&title=New+bug+report&template=bug_report.md";
 		var featureRequestURL = "https://github.com/ChristianSilvermoon/Poniary/issues/new?labels=Feature+Request&title=New+Feature+Request&template=feature_request.md";
+
 		function getURLParams() {
 				var currentURL = window.location.href;
 				var params = currentURL.split("?");
@@ -1055,6 +1055,7 @@
 				tableContent = tableContent.concat("<a href=\"javascript:void(0)\" onclick=\"showPage('meta'); CloseSmallUIMenu();\">Meta Information Editor</a><br/>");
 				tableContent = tableContent.concat("<a href=\"", bugReportURL, "\" target=\"_blank\">Report a Bug</a><br/>");
 				tableContent = tableContent.concat("<a href=\"", featureRequestURL, "\" target=\"_blank\">Request a Feature</a>");
+
 
 				tableContent = tableContent.concat("</td></tr></table>");
 
