@@ -3,6 +3,7 @@
 <head>
 	<title id=page_title>Poniary</title>
 	<meta charset="utf-8">
+	<link rel="shortcut icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8%2F9hAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz%0AAAAOxAAADsQBlSsOGwAAAKxJREFUOI2Vk10NxDAMg%2B2pXEqhB2JoDsfQFMRKYWi8l0uVTf07vyVq%0AnC9VwkwJi9pF%2BjhTCj6ZKV0qXYNM6W2yXGyKTJUmUwq%2B%2BKtPt%2FDgCQC4VKoJAGzTlj9580sF9neh%0AhW7dWsXeJDKtE%2FQUZrgzLRO8xxoS9B4vGwDPMQ6eNTbzyIRd5GbBCok3ehDYVo0ovKw7AND22wxm%0A6%2BxXuRL4xOgmfGcTWxf2z4nfJjdq4y7K3UQAAAAASUVORK5CYII%3D%0A">
 </head>
 <style type="text/css">
 
@@ -235,21 +236,19 @@
 
 	#TableOfContents {
 		position: fixed;
-		top: 86px;
 		padding-left: 2px;
-		bottom: 8px;
+		height: 100%;
 		width: 200px;
 		overflow-y: auto;
 	}
 
 	.vOverflowScroll {
 		overflow-y: auto;
-		max-height: 56%
+		max-height: 80%
 	}
 
 	#TableOfContents > table {
 		width: 100%;
-		bottom: 2px;
 	}
 
 	#editor {
@@ -270,6 +269,7 @@
 	#TopBar {
 		position: fixed;
 		width: 100%;
+		padding-left: 210px;
 	}
 
 	#SaveBox, #LoadBox, #MsgBox, #PonyContextMenu {
@@ -290,6 +290,16 @@
 		background: rgba(0, 0, 0, 0.5);
 	}
 
+	#MainLogo {
+		background-image: url(data:image/gif;base64,R0lGODlhSgA2APMAAEYdAHMwAFhAMXJTP35cRppxVqx%2BYMKObNGZdP%2B7jgAAAAAAAAAAAAAAAAAA%0AAAAAACH5BAA8AAAAIf8LTkVUU0NBUEUyLjADAQAAACwAAAAASgA2AAAE%2FhDISae4OOtbu90g5nlB%0AaZpYoq5sq16ndF5uzWJnLucY4icC4OaV8sECu8vPZvMhcDrATHCoPhHAlzYb5CKqAqSUelimzluB%0As3o4lpICg6GXSZ%2FP38NcEgd3g4BcgURkenNhYiVxF2BXWY9%2FQitqYIdySlhCgZtdCU4YcnNvUgFx%0Ah0pqkGlcKk%2BVF3NWmZ2bW54%2BbLCISZdsV0N%2FND1PuouytmiPt3l6i6OKvaiZTC4YhrrH1C5rVXOi%0AiaXRakvaLEbXxmWzwuw0rbjdzuCmhU7lLfCX6eSRg53czb7xkuOL3L1b3SyR4UdI0z94AXeRMmWg%0A4LSD%2BRRmU1VrBUBv%2FhKhEZRFLASIjNjaBKsViRAbkM%2FCjVTZ6SAjdLHGHfR4LmJMinTWaWhCTF9O%0AIybdvfgUT%2BDEQ7meAGFDNcUkeIuM6XwRquucqz1hzvMW1RWIXH%2BwatxK0as%2BIEx9ju3TiBhVtGSG%0AvdL6o63bS3DDyuNFd5zdu1WpBFGLTWccJ5C9YnIll3DFNo6EIE6MsM1aI3IgR%2B5qmIxYy41SEbLm%0Ah%2Bfeo09CI%2BjqQ3Lc008L26sxlN1rxaAN1A41PFTppiHD9REwYKuNtJQVK8RkSrQT20gXOYW2fEAB%0A1c%2BXYvXcOLj12dijD85dkfl3LICsKhvX5jfm2MLR%2F710ez339t59%2FmfLfGlRQh5f%2BNV2XXGLCbad%0AcgAWIGA50Nk3DiwKCqcheg1Shtt%2FbQTYCVU3KMMYgoAomOFsXfT3oHYhfldTFQNWeCBs8e13yDse%0A%2BgdhjGrUdENL9N0InFRcuVWTi8nB6J5Sz0VyIo5DJsXkT2RdIGFLQ5Y45ZE78WiajzC2seUkQ6H5%0Ajn0qqdkClKxVxl4uE06izZcbQUmEORB9%2BKMfQgq5TR5ZxaKOm13yxIyfZRpWDTV4Hrrnm0v2SSZZ%0A95WUVAaR8gMnlB9dmlUdYd5U6EIXWSUfjy%2BJWk9fdcSHRnYaSYomqXwueulMQYapmZGysIRGIKG%2B%0AaNxkwmgiCLGusxiFqrKTQltsk72k5isjxRianTvc1jEtlvqoc9E95zh7jHxKWfXtWIaK62ukwz7K%0ASSGMhmLRu3k4iwm%2BJdU70yebaoDSPpoGbBhaxvJ6AQEMN%2BzwwwzfZNRlC0NsccNxGgfuKQ3ruF%2FE%0A9ITMsMd%2FYQzLJVhWTEAoF7csR8QKjWxAyxezDPKLArhMss0OZwDxzjxDfAQcBhdt9NEhxJTD0kw3%0AzfQOTkcttQkjVG311VhnjXUEACH5BAA8AAAALAAAAABKADYAhEYdAHMwAFhAMTAARH5cRmVMU2xr%0AUX9gaax%2BYMKObNGZdLyPnLSzh7CQq7Ono%2F%2B7jv%2FikMHesv%2F9v9zNyP%2FC093%2FzP%2FJ7f%2FR%2BAAAAAAA%0AAAAAAAAAAAAAAAAAAAAAAAAAAAX%2BICCO5CicaKqeZWuuMOq6QW3b6KPvfK%2BfN9Ht5CvyULekMIlS%0AOB8C6OqXcwIDy9PTaHQqkErAUJAofxXQnzodZSvKAqyYnNjm7muBt5y41rICCAhNKXl3d28JgyKB%0AcG1RkGyRVHSKg3FyNYEncGdpn49SO3pwl4JaaFKRq20PXiiCg39iAYGXWnqgeWw6X6Ung2apratr%0Ark58wJhZp3xnU49ETV%2FKm8LGeJ%2FHiYqbs5rNuKlcPiiWytfkPntlg7KZteF6W%2Bo8VufWdcPS%2FES9%0AyO28wbNVyUu9HgBP5aMXalIrdt3eMRPkjN7BY%2B1M0WFISdVDgBGX0bKFoOK4iwn%2BNabTVWwHRHci%0AwVEURi0GjJTo%2BkQrFooSH5jf4s3UKYCC0aNIkxrlhC%2FYvIsu74UMShLFAgELlq5QanTBVYLW5g0Y%0AS7bsWB4DXgWUOPLSgbcCIhQVMKGu3QkokGJdAFflUx0DuFIYsCOtVKADBxV4eyCuXLwr7J5Y6rUv%0Aur%2BBBQ8mbNjX1MQCFsONIFeAhNOoJaCoa5VvY79PMmse%2FKAzHcTMQo8mfSK1b9V0i1Z%2BfTk2BQjI%0Ak0NIOlbt59yi48atUKH3b9STh28K6ySzcuXMneNuq7ux3AjUq6vAXrSr6%2B1OuxtFjpQ%2BUttrY8Yr%0A7xh9%2Bv8qUDDZCZZxp4B3yx3%2BZd9R%2BD1H3mICGODYfxRWt9QFFwjQQAMCELedWPN9t6BRtinDFji6%0ARejAdBWm154AGF6wYYfwkQHicSIq1aAyVCnWmAEroieAeie4eBSMMnboYXwHhjjbYOIJBN2PDjAw%0AZHUAuvhihu%2FB1iSOOC63IGFRnrgfhEBa2WKFL2rn5VhginncnLSVqd8maFZ5ZQUW9GlBlu1R4GZx%0AB9ZGX3JzLkfYNrdJ%2BSCVRabXJ3V7WijgoAZyJpuOi9rZY4pASrdmpG12SeiitXGFKqP5fZpnpGuq%0At5SgpmaKllm4egoahALoSSmbgQpIa4FMQvWPZ%2BOhGJ2vlAZ4ZHuYBqPTKK3%2BUHsEUw4qy5gAagL4%0AZLQbjePPtfaAlOyZ28JK6be1SstQtVSUy825eO7mn7eagbvSuNZGNa%2Bj2prHm00w6KsPtdXm4O9P%0AAJ85hbEELhnutTshZG7D25nkESt4WFGNuydtDO82DJtJUjJfGCvFLwulzDFPJLeamELzUCMJx2nc%0AoxDIqvTbc8zZClWJHiOrw8nH4aoQ78ZA0xsLJwYZq7NKByssSkdNY9wMTSoDVKMjLR3BizkyT1QS%0A11InsvM0XXu8icmxmETwTWpT7fbc03DD48xnE0XA34AHLvjfTO189gmDJx442ZbATTPgsUQuueSE%0Ag6XQ35NnHjngsJzyqQA%2FkAui%2BOiiE1Aj5giMrngsnGMM%2BuqaTz54CoPHLrviVwCC9%2B689453UEkE%0AL%2Fzwwi9B%2FPHI2zDD8sw37%2FzzzocAACH5BAA8AAAALAAAAABKADYAhAAAAEYdAHMwAFhAMX5cRqx%2B%0AYDavfP%2F%2FAMKObNGZdFpatGtr1nR06IwAx7MB%2F819yFPP0f%2B7joCA%2F%2F%2Bb%2BZr%2F4q%2Fo5%2F%2F%2F%2FwAAAAAA%0AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAX%2BYCCO5DicaKqeZWuuMOq6Qm3baKTvfK%2BfN9Ht5CvyULek%0AMIlKOCMD6OqXcwIFy9PTaHQmkMrAcIAofxPQnzodZSfKA6yYjNjm7uuBt4y41rIDBQVNKXl3d28I%0AgyKBcG1RkGyRVHSKg3FyNYEncGdpn49SO3pwl4JaaFKRq20RXiiCg39iAoGXWnqgeWw6X6Ung2ap%0Aratrrk58wJhZp3xnU49ETV%2FKm8LGeJ%2FHiYqbs5rNuKlcPiiWytfkPntlg7KZteF6W%2Bo8VufWdcPS%0A%2FES9yO28wbNVyUu9HgBP5aMXalIrdt3eMRPkjN7BY%2B1M0WFISdVDgBGX0bJVoOK4iwn%2BNabTVWwH%0ARHciwVEURi0GjJTo%2BkQrFooSH5jf4s3UOUCC0aNIkxrlhC%2FYvIsu74UMShIFAwMMjELYyhWCUqMM%0AGABTOc%2BB2bNozfJw8CqgxJGXFsg1QMGABAgW8uq1wBUphLByN1l7qsNBg8OIDzvYwVYq0IGDFMhd%0AQLcu365b9W7VCniBYKdbDCcerbaxr6mQB0ieS6EuhAqwY1fgmpdr589knooeTTqCaTqPmalm3Xqr%0A7OOz8Xq9TfaJ4QPQox8g%2FdttzHjDKddtTcE48tibmaMre1i6dNJtUQtfTbdycczgvYJlELh5AtHQ%0AE%2BdPXF093OwQcCeggJhJ8MADBj7%2BUN94TuA3HWL7IdZfcP9J9lqAA2Zol4ETTPBAhwrihoqD5j0o%0A4SvKvAXOcK%2FxleGAG37YIYie2UfieehJpQxVkS3QIoYAUADAkEG2tiGHNNbI4H3lmcibYulRuKKF%0AFVgwW2tFYsmdATF6SJ%2BSgzXYZAPRkWniYlEKtJ6PVV75IoxGPSBemPc9N92dZObZAJqOqVkhm1Zi%0ASMGMEwjY3lFzgnafb%2FmViedi2wDn55SAbiVgh0YaGmeiuTXo2268qRWpdTyyWGWAgsJYWYyc9uFp%0AYU9C%2Bs9pUmJH5WVvbhmjBK2WtVZawKapoq0%2B4uWme7oihWCvFh0k7HWbrGasoFz%2BVntkgvMtmI8%2F%0AovTArSo%2FTUqsXBfC%2BRWiX%2BK20rdU2ANSrdFOxpW55%2FKarkr6jNKKvu5yA2%2BP2r15rVKt5tuut%2Fu%2B%0AJG68AVNgUwwFM%2FRtDlH5u3BkU0AlhbbBGNyRKgi9ezFT%2BqChgiR4WFFNx81m3G%2B4w5KUzBcaS%2FHL%0AQjSzIg0vCsccyzTUoCx0FPcoxLLJ3CbtT8%2FQNtPJvgdxsvJGNfljdSFM86hQyTUXje8TFHcL8jYw%0AN90x1xoDpC5RvHjLizmkQjaUQWknYvQ0Xau8ic9z6%2F1wCjjh%2FPcKEO0od0mODEDA4ow37vjiTBmN%0A%2BAmPV9443JbwfQvjsXTuuedNkBMk%2BuKfl94547CcUqripAti%2BeuuE4Bb669bHgvqC7NeuemlP57C%0A47x%2F%2FvoVgAxu%2FPHIDx5UEsw373zzSzwv%2FfQ2zGD99dhnr332IQAAIfkEADwAAAAsAAAAAEoANgCE%0ARh0AczAAWEAxMABEflxGZUxTbGtRf2BprH5gwo5s0Zl0vI%2BctLOHsJCrs6ej%2F7uO%2F%2BKQwd6y%2F%2F2%2F%0A3M3I%2F8LT3f%2FM%2F8nt%2F9H4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABf4gII7kKJxoqp5la64w6rpB%0Abdvoo%2B98r5830e3kK%2FJQt6QwiVI4HwLo6pdzAgPL09NodCqQSsBQkCh%2FFdCfOh1lK8oCrJic2Obu%0Aa4G3nLjWsgIICE0peXd3bwmDIoFwbVGQbJFUdIqDcXI1gSdwZ2mfj1I7enCXglpoUpGrbQ9eKIKD%0Af2IBgZdaeqB5bDpfpSeDZqmtq2uuTnzAmFmnfGdTj0RNX8qbwsZ4n8eJipuzms24qVw%2BKJbK1%2BQ%2B%0Ae2WDspm14Xpb6jxW59Z1w9L8RL3I7bzBs1XJS70eAE%2FloxdqUit23d4xE%2BSM3sFj7UzRYUhJ1UOA%0AEZfRsoWg4riLCf41ptNVbAdEdyLBURRGLQaMlOj6RCsWihIfmN%2FizdQpgILRo0iTGuWEL9i8iy7v%0AhQxKEsUCAQuWrlBqdMFVgtbmDRhLtuxYHgNeBZQ48tKBtwIiFBUwoa7dCSiQYl0AV%2BVTHQO4Uhiw%0AI61UoAMHFXh7IK5cvCvsnljqtS%2B6v4EFDyZs2NfUxAIWw40gV4CE06gloKhrlW9jv08yax78oDMd%0AxMxCjyZ9IrVv1XSLVn59OTYFCMiTQ0g6Vu3n3KLjxq1Qofdv1JOHbwrrJLNy5cyd426ru7HcCNSr%0Aq8BetKvr7U67G0WOlD5S22tjxivvGH36%2FypQMNkJlnGngHfLHf5l31H4PUfeYgIY4Nh%2FFFa31AUX%0ACNBAAwIQt51Y8323oFG2KcMWOLpF6MB0FabXngAYXrBhh%2FCRAeJxIirVoDJUKdaYASuiJ4B6J7h4%0AFIwyduhhfAeGONtg4gkE3Y8OMDBkdQC6%2BGKG78HWJI44LrcgYVGeuB%2BEQFrZYoUvauflWGCKedyc%0AtJWp3yZoVnllBRb0aUGW7VHgZnEH1kZfcnMuR9g2t0n5IJVFptcndXtaKOCgBnImm46L2tljikBK%0At2akbXZJ6KK1cYUqo%2Fl9mmeka6q3lKCmZoqWWbh6ChqEAuhJKZuBCkhrgUxC9Y9n46EYna%2BUBnhk%0Ae5gGo9Morf5QewRTDirLmABqAvhktBuN48%2B19oCU7Jnbwkrpt7VKy1C1VJTLzbl47uaft5qBu9K4%0A1kY1r6PamsebTTDoqw%2B11ebg708AnzmFsQQuGe61OyFkbsPbmeQRK3hYUY27J20M7zYMm0lSMl8Y%0AK8UvC6XMMU8kt5qYQvNQIwnHadyjEMiq9NtzzNkKVYkeI6vDycfhqhDvxkDTGwsnBhmrs0oHKyxK%0AR01j3AxNKgNUoyMtHcGLOTJPVBLXUiey8zRde7yJybGYRPBNalPt9tzTcMPjzGcTRcDfgAcu%2BN9M%0A7Xz2CYMnHjjZlsBNM%2BCxRC655ISDpdDfk2ceOeCwnPKpAD%2BQC6L46KITUCPmCIyueCycYwz66ppP%0APngKg8cuu%2BJXAIL37rz3jndQSQQv%2FPDCL0H88cjbMMPyzDfv%2FPPOhwAAOw%3D%3D%0A);
+		background-size: 100%;
+		background-repeat: no-repeat;
+		min-height: 108px;
+		max-height: 108px;
+		max-width: 148px;
+		max-width: 148px;
+	}
+
 </style>
 <style id=autosave_status type="text/css"></style>
 <body>
@@ -304,17 +314,18 @@
 			</td>
 		</tr>
 	</table>
+
 	<table id=TopBar class="ffwin BigUI">
 		<tr>
 			<td class=goldwin><center>♥~Poniary~♥</center></td>
 		</tr>
 		<tr>
 			<td>
+				<a href="javascript:void(0)" title="Return to Table Of Contents" onclick="showPage('Contents')">★ Home</a>
+				<span style="padding-left: 15px;"></span>
 				<a href="javascript:void(0)" title="Save Data to JSON file" onclick="saveBtnClick()">▼ Save</a>
 				<span style="padding-left: 15px;"></span>
 				<a href="javascript:void(0)" title="Load Data from JSON file" onclick="loadBtnClick()">▲ Load</a>
-				<span style="padding-left: 15px;"></span>
-				<a href="javascript:void(0)" title="Unload Everything/Refresh Page" onclick="unloadBtnClick()">⟳ Unload</a>
 				<span style="padding-left: 15px;"></span>
 				<a href="https://github.com/ChristianSilvermoon/Poniary" title="Open Github Repository in new tab." target="_blank">✶ GitHub</a>
 			</td>
@@ -334,13 +345,13 @@
 				<td>
 					<a href="javascript:void(0)" title="Close this Menu" onclick="CloseSmallUIMenu()">← Return</a>
 					<br/>
+					<a href="javascript:void(0)" title="Return to Table Of Contents" onclick="CloseSmallUIMenu(); showPage('Contents');">★ Home</a>
+					<br/>
 					<a href="javascript:void(0)" title="Save Data to JSON file" onclick="saveBtnClick(); CloseSmallUIMenu();">▼ Save</a>
 					<br/>
 					<a href="javascript:void(0)" title="Load Data from JSON file" onclick="loadBtnClick(); CloseSmallUIMenu();">▲ Load</a>
 					<br/>
-					<a href="javascript:void(0)" title="Unload Everything/Refresh Page" onclick="unloadBtnClick(); CloseSmallUIMenu();">⟳ Unload</a>
-					<br/>
-					<a href="https://github.com/ChristianSilvermoon/Poniary" title="Open Github Repository in new tab." target="_blank">✶ GitHub</a>
+					<a href="https://github.com/ChristianSilvermoon/Poniary" title="Open Github Repository in new tab." onclick="CloseSmallUIMenu();" target="_blank">✶ GitHub</a>
 				</td>
 			</tr>
 		</table>
@@ -513,6 +524,7 @@
 					<b><u>-Pony Menu-</b></u><br/>
 					<br/>
 					</center>
+					Position: <span style="color: #26FF6A;" id="PonyContextMenuPos"></span><br/>
 					Pony: <span style="color: #26FF6A;" id="PonyContextMenuName"></span><br/>
 					<span title="Estimated, not exact">Size</span>: <span style="color: #26FF6A;" id="PonyContextMenuSize"></span><br/>
 					<center>
@@ -558,7 +570,7 @@
 		function rmIllChars(element) {
 			//Remove Illegal Characters from passed in element value.
 			//Should be used with onkeyup="rmIllChars(this)"
-			element.value = element.value.replace(/</g,"").replace(/>/g,"");
+			//element.value = element.value.replace(/</g,"").replace(/>/g,"");
 		}
 
 		function ponyContextMenu() {
@@ -573,6 +585,8 @@
 
 				document.getElementById('PonyContextMenuName').innerHTML = bbCodeDecode(ponydata.TableOfContents[viewing].name);
 				document.getElementById('PonyContextMenuSize').innerHTML = getSizeEstimate(ponydata.TableOfContents[viewing]);
+				document.getElementById('PonyContextMenuPos').innerHTML = (viewing + 1) + "/" + ponydata.TableOfContents.length;
+
 
 				document.getElementById('PonyContextMenu').id = "PonyContextMenuOn";
 			} else {
@@ -598,7 +612,7 @@
 		}
 
 		function TocMenu() {
-			var tdata = "Character Search:<br/><input id=TocMenuSearch type=text onkeyup=\"TocSearch(this.value);\" placeholder=\"RegExp Search\"></input><br/><div id=TocMenuSearchResults style=\"background: black; border-radius: 4px;\"></div>"
+			var tdata = "Sort: <a href=\"javascript:void(0)\" onclick=\"sortPons('AZ'); CloseMsgBox()\" title=\"Sort Alphabetically\">[A-Z]</a> <a href=\"javascript:void(0)\" onclick=\"sortPons('ZA'); CloseMsgBox()\" title=\"Sort Reverse Alphabetically\">[Z-A]</a> <a href=\"javascript:void(0)\" onclick=\"sortPons('REV'); CloseMsgBox()\" title=\"Reverse List\">[REV]</a><br/><br/>Character Search:<br/><input id=TocMenuSearch type=text onkeyup=\"TocSearch(this.value);\" placeholder=\"RegExp Search\"></input><br/><div id=TocMenuSearchResults style=\"background: black; border-radius: 4px;\"></div>"
 			msgBox(tdata, "Table Of Contents Menu")
 		}
 
@@ -632,6 +646,30 @@
 				document.getElementById('PonyContextMenuOn').id = "PonyContextMenu";
 				ponyContextMenu();
 			}
+		}
+
+		function sortPons(method) {
+			if ( method == "AZ" || method == "ZA" ) {
+				var ponlist = JSON.parse( JSON.stringify(ponydata.TableOfContents) );
+				var sortinglist = [];
+				for ( i = 0; i < ponlist.length; i++ ) {
+					sortinglist[i] = [ bbCodeStrip(ponlist[i].name), i ];
+				}
+				sortinglist = sortinglist.sort();
+
+				console.log(sortinglist);
+				for ( i = 0; i != ponlist.length; i++ ) {
+					console.log(i, ":", sortinglist[i], ponlist[sortinglist[i][1]]);
+					ponydata.TableOfContents[i] = ponlist[sortinglist[i][1]];
+				}
+
+				if ( method == "ZA" ) {
+					ponydata.TableOfContents.reverse();
+				}
+			} else if ( method == "REV" ) {
+				ponydata.TableOfContents.reverse();
+			}
+			setStage();
 		}
 
 		function newBtnClick() {
@@ -944,6 +982,7 @@
 
 		function scrollTOCTop() {
 			document.getElementById('TableOfContents').scrollTo(0,0)
+			document.getElementById('TableOfContentsCharList').scrollTo(0,0)
 			if ( document.getElementById('SmallMenuOn') !== null ) {
 				document.getElementById('SmallMenuOn').scrollTo(0,0);
 			}
@@ -997,7 +1036,21 @@
 				viewing = "home";
 
 				var tableContent = "<table class=ffwin><tr><td>Poniary<hr/>";
-				tableContent = tableContent.concat("<center>Welcome To The Poniary OC Manager<br/>by Christian \"Krissy\" Silvermoon<br/><br/>So... what is <i>Poniary?</i><br/>Poniary is an interactive tool to store details about characters you and maybe friends create. It was primarily created for storing MLP OCs, but can be used for others too. If you're like me an have like 50 characters, you probably like to document them to keep everything you do with them consistant!<br/><br/>Be careful not to refresh without saving!<br/>The page will try and catch you if you have unsaved changes, but that's not a guarantee!<br/><br/>Hopefully this Interactive OC Manager will help you keep track of your OCs as well as it does for me!<br/><br/>Happy Ponying!<br/><font size=0.5>(And yes, the UI Theme <b><i>is</b></i> Final Fantasy Inspired)</font></center>");
+				tableContent = tableContent.concat("<center>Welcome To The Poniary OC Manager<br/><div id=MainLogo></div>");
+				tableContent = tableContent.concat(poniaryVersion, "<br/><font size=1>by Christian \"Krissy\" Silvermoon</font><br/><br/>So... what is <i>Poniary?</i><br/>Poniary is an interactive tool to store details about characters you and maybe friends create. It was primarily created for storing MLP OCs, but can be used for others too. If you're like me an have like 50 characters, you probably like to document them to keep everything you do with them consistant!<br/><br/>Be careful not to refresh without saving!<br/>The page will try and catch you if you have unsaved changes, but that's not a guarantee!<br/><br/>Hopefully this Interactive OC Manager will help you keep track of your OCs as well as it does for me!<br/><br/>Happy Ponying!<br/><font size=0.5>(And yes, the UI Theme <b><i>is</b></i> Final Fantasy Inspired)</font></center>");
+				tableContent = tableContent.concat("</td></tr></table>");
+
+				document.getElementById("infocontainer").innerHTML = tableContent;
+			} else if (page == "Contents") {
+				//Contents Page
+				viewing == "Contents";
+				var tableContent = "<table class=ffwin><tr><td>Tools and Toys<hr/>";
+				tableContent = tableContent.concat("<a href=\"javascript:void(0)\" onclick=\"showPage('home'); CloseSmallUIMenu();\">Welcome Page</a><br/>");
+				tableContent = tableContent.concat("<a href=\"javascript:void(0)\" onclick=\"showPage('toys'); CloseSmallUIMenu();\">Tools & Toys</a><br/>");
+				tableContent = tableContent.concat("<a href=\"javascript:void(0)\" onclick=\"showPage('help'); CloseSmallUIMenu();\">Help Document</a><br/>");
+				tableContent = tableContent.concat("<a href=\"javascript:void(0)\" onclick=\"showPage('license'); CloseSmallUIMenu();\">Software License</a><br/>");
+				tableContent = tableContent.concat("<a href=\"javascript:void(0)\" onclick=\"showPage('meta'); CloseSmallUIMenu();\">Meta Information</a>");
+
 				tableContent = tableContent.concat("</td></tr></table>");
 
 				document.getElementById("infocontainer").innerHTML = tableContent;
@@ -1011,6 +1064,8 @@
 				tableContent = tableContent.concat("Number of Characters: ", ponydata.TableOfContents.length, "<br/>");
 				tableContent = tableContent.concat("Author Name: ", bbCodeDecode(ponydata.MetaInf.author), "<br/>");
 				tableContent = tableContent.concat("Locked: ", ponydata.MetaInf.lock, "<br/><br/>");
+				tableContent = tableContent.concat("Locked: ", ponydata.MetaInf.pretty, "<br/><br/>");
+
 
 				tableContent = tableContent.concat("<b><u>Changeable Settings</b></u><br/>");
 
@@ -1064,6 +1119,9 @@
 		function bbCodeDecode(string) {
 			//Decode BBCODE to HTML
 
+			//Replace < and > with &lt; and &gt;
+			string = string.replace(/\</g,"&lt;").replace(/\>/g,"&gt;");
+
 			//Italics
 			string = string.replace(/\[i\]/g,"<i>").replace(/\[\/i\]/g,"</i>");
 			//Bold
@@ -1114,6 +1172,7 @@
 			var tableContent = "<tr><td style=\"background: linear-gradient(135deg, ";
 			tableContent = tableContent.concat(ponydata.TableOfContents[pony].bkg); //Horse BKG Color
 			tableContent = tableContent.concat(" 0%, #000000 100%)!important;\">");
+			tableContent = tableContent.concat("<sup><font size=1 color=#26FF6A;>", (viewing + 1), "/", ponydata.TableOfContents.length, "</font></sup> " );
 			tableContent = tableContent.concat(bbCodeDecode( ponydata.TableOfContents[pony].name ) ); //Horse Name
 			tableContent = tableContent.concat("<div style=\"float: right;\">" + bbCodeDecode(ponydata.TableOfContents[pony].subtitle) + "</div><hr/>"); //Subtitle
 			//Horse Pictures
@@ -1129,43 +1188,122 @@
 				tableContent = tableContent.concat("</table><br/>");
 			}
 
-			tableContent = tableContent.concat("Creator: " + bbCodeDecode(ponydata.TableOfContents[pony].creator) + "<br/>"); //Pon Maker
-			tableContent = tableContent.concat("Birth Date: " + bbCodeDecode(ponydata.TableOfContents[pony].dob) + "<br/>"); //Pon Day
-			tableContent = tableContent.concat("Birth Place: " + bbCodeDecode(ponydata.TableOfContents[pony].birth_place) + "<br/>"); //Pon Home
-			tableContent = tableContent.concat("Race: " + bbCodeDecode(ponydata.TableOfContents[pony].race) + "<br/>"); //Pon Type
-			tableContent = tableContent.concat("Gender: " + ponydata.TableOfContents[pony].gender + "<br/>"); //Girl Pon? Boy Pon?
-			tableContent = tableContent.concat("Orientation: " + bbCodeDecode(ponydata.TableOfContents[pony].orientation) + "<br/>"); //Pon likes what pons?
-			tableContent = tableContent.concat("Occupation: " + bbCodeDecode(ponydata.TableOfContents[pony].occupation) + "<br/>"); //What does pon do?
-			tableContent = tableContent.concat("Special Talent: " + bbCodeDecode(ponydata.TableOfContents[pony].special_talent) + "<br/>"); //Pon Talent
-			tableContent = tableContent.concat("Cutie Mark: " + bbCodeDecode(ponydata.TableOfContents[pony].cutie_mark) + "<br/>"); //Magic Pon Mark
-			tableContent = tableContent.concat("Universe: " + bbCodeDecode(ponydata.TableOfContents[pony].universe) + "<br/>"); //Pon Universe
+			//Pon Maker
+			if ( ponydata.TableOfContents[pony].creator.toLowerCase() != "unknown" && ponydata.TableOfContents[pony].creator.length != 0) {
+				tableContent = tableContent.concat("Creator: " + bbCodeDecode(ponydata.TableOfContents[pony].creator) + "<br/>");
+
+			} else if ( ponydata.TableOfContents[pony].creator.toLowerCase() == "unknown" ) {
+				tableContent = tableContent.concat("Creator: <font color=gray><i>" + bbCodeDecode(ponydata.TableOfContents[pony].creator) + "</i></font><br/>");
+			}
+
+			//Pon Day!
+			if ( ponydata.TableOfContents[pony].dob.toLowerCase() != "unknown" && ponydata.TableOfContents[pony].dob.length != 0 ) {
+				tableContent = tableContent.concat("Birth Date: " + bbCodeDecode(ponydata.TableOfContents[pony].dob) + "<br/>");
+
+			} else if ( ponydata.TableOfContents[pony].dob.toLowerCase() == "unknown" ) {
+				tableContent = tableContent.concat("Birth Date: <font color=gray><i>" + bbCodeDecode(ponydata.TableOfContents[pony].dob) + "</i></font><br/>");
+			}
+
+			//Pon Home
+			if ( ponydata.TableOfContents[pony].birth_place.toLowerCase() != "unknown" && ponydata.TableOfContents[pony].birth_place.length != 0 ) {
+				tableContent = tableContent.concat("Birth Place: " + bbCodeDecode(ponydata.TableOfContents[pony].birth_place) + "<br/>");
+
+			} else if ( ponydata.TableOfContents[pony].birth_place.toLowerCase() == "unknown" ) {
+				tableContent = tableContent.concat("Birth Place: <font color=gray><i>" + bbCodeDecode(ponydata.TableOfContents[pony].birth_place) + "</i></font><br/>");
+			}
+
+			//Pon Type
+			if ( ponydata.TableOfContents[pony].race.toLowerCase() != "unknown" && ponydata.TableOfContents[pony].race.length != 0 ) {
+				tableContent = tableContent.concat("Race: " + bbCodeDecode(ponydata.TableOfContents[pony].race) + "<br/>");
+
+			} else if ( ponydata.TableOfContents[pony].race.toLowerCase() == "unknown" ) {
+				tableContent = tableContent.concat("Race: <font color=gray><i>" + bbCodeDecode(ponydata.TableOfContents[pony].race) + "</i></font><br/>");
+			}
+
+			//Girl Pon? Boy Pon? ~ Professor Oak
+			if ( ponydata.TableOfContents[pony].gender.toLowerCase() != "undefined" && ponydata.TableOfContents[pony].gender != "N/a" ) {
+				tableContent = tableContent.concat("Gender: " + bbCodeDecode(ponydata.TableOfContents[pony].gender) + "<br/>");
+
+			} else if ( ponydata.TableOfContents[pony].gender.toLowerCase() == "undefined" ) {
+				tableContent = tableContent.concat("Gender: <font color=gray><i>" + bbCodeDecode(ponydata.TableOfContents[pony].gender) + "</i></font><br/>");
+			}
+
+			//Pon likes what pons?
+			if ( ponydata.TableOfContents[pony].orientation.toLowerCase() != "unknown" && ponydata.TableOfContents[pony].orientation.length != 0 ) {
+				tableContent = tableContent.concat("Orientation: " + bbCodeDecode(ponydata.TableOfContents[pony].orientation) + "<br/>");
+
+			} else if ( ponydata.TableOfContents[pony].orientation.toLowerCase() == "unknown" ) {
+				tableContent = tableContent.concat("Orientation: <font color=gray><i>" + bbCodeDecode(ponydata.TableOfContents[pony].orientation) + "</i></font><br/>");
+			}
+
+			//What does pon do?
+			if ( ponydata.TableOfContents[pony].occupation.toLowerCase() != "unknown" && ponydata.TableOfContents[pony].occupation.length != 0 ) {
+				tableContent = tableContent.concat("Occupation: " + bbCodeDecode(ponydata.TableOfContents[pony].occupation) + "<br/>");
+
+			} else if ( ponydata.TableOfContents[pony].occupation.toLowerCase() == "unknown" ) {
+				tableContent = tableContent.concat("Occupation: <font color=gray><i>" + bbCodeDecode(ponydata.TableOfContents[pony].occupation) + "</i></font><br/>");
+			}
+
+			if ( ponydata.TableOfContents[pony].special_talent.toLowerCase() != "unknown" && ponydata.TableOfContents[pony].special_talent.length != 0 ) {
+				tableContent = tableContent.concat("Special Talent: " + bbCodeDecode(ponydata.TableOfContents[pony].special_talent) + "<br/>");
+
+			} else if ( ponydata.TableOfContents[pony].special_talent.toLowerCase() == "unknown" ) {
+				tableContent = tableContent.concat("Special Talent: <font color=gray><i>" + bbCodeDecode(ponydata.TableOfContents[pony].special_talent) + "</i></font><br/>");
+			}
+
+			//Magic Pon Mark
+			if ( ponydata.TableOfContents[pony].cutie_mark.toLowerCase() != "unknown" && ponydata.TableOfContents[pony].cutie_mark != 0 ) {
+				tableContent = tableContent.concat("Cutie Mark: " + bbCodeDecode(ponydata.TableOfContents[pony].cutie_mark) + "<br/>");
+
+			} else if ( ponydata.TableOfContents[pony].cutie_mark.toLowerCase() == "unknown" ) {
+				tableContent = tableContent.concat("Cutie Mark: <font color=gray><i>" + bbCodeDecode(ponydata.TableOfContents[pony].cutie_mark) + "</i></font><br/>");
+			}
+
+			//Pon Universe
+			if ( ponydata.TableOfContents[pony].universe.toLowerCase() != "unknown" && ponydata.TableOfContents[pony].universe != 0 ) {
+				tableContent = tableContent.concat("Universe: " + bbCodeDecode(ponydata.TableOfContents[pony].universe) + "<br/>");
+
+			} else if ( ponydata.TableOfContents[pony].universe.toLowerCase() == "unknown" ) {
+				tableContent = tableContent.concat("Universe: <font color=gray><i>" + bbCodeDecode(ponydata.TableOfContents[pony].universe) + "</i></font><br/>");
+			}
+
+
 			/*Custom Fields*/
 			for(i = 0; ponydata.TableOfContents[pony].customFields[i] != undefined; i++) {
 				tableContent = tableContent.concat( bbCodeDecode(ponydata.TableOfContents[pony].customFields[i][0]), ": ", bbCodeDecode(ponydata.TableOfContents[pony].customFields[i][1]), "<br/>");
 			}
+
 			/*Pony Colors Table*/
-			tableContent = tableContent.concat("<br/>Coloration:<br/><table class=\"list_table\"><tr><td>Color</td><td>Item(s)</td></tr>");
-			for(i = 0; ponydata.TableOfContents[pony].colors[i] != undefined; i++) {
-				tableContent = tableContent.concat("<tr><td style=\"background: " + ponydata.TableOfContents[pony].colors[i][0] + ";\">" + ponydata.TableOfContents[pony].colors[i][0] + "</td><td>" + bbCodeDecode(ponydata.TableOfContents[pony].colors[i][1]) + "</td></tr>" );
+			if ( ponydata.TableOfContents[pony].colors.length > 0 ) {
+				tableContent = tableContent.concat("<br/>Coloration:<br/><table class=\"list_table\"><tr><td>Color</td><td>Item(s)</td></tr>");
+				for(i = 0; ponydata.TableOfContents[pony].colors[i] != undefined; i++) {
+					tableContent = tableContent.concat("<tr><td style=\"background: " + ponydata.TableOfContents[pony].colors[i][0] + ";\">" + ponydata.TableOfContents[pony].colors[i][0] + "</td><td>" + bbCodeDecode(ponydata.TableOfContents[pony].colors[i][1]) + "</td></tr>" );
+				}
+				tableContent = tableContent.concat("</table><br/>");
 			}
-			tableContent = tableContent.concat("</table><br/>");
 
 			/*Family Table*/
-			tableContent = tableContent.concat("Family:<br/><table class=\"list_table\"><tr><td>Relation</td><td>Name</td></tr>");
-			for(i = 0; ponydata.TableOfContents[pony].family[i] != undefined; i++) {
-				tableContent = tableContent.concat("<tr><td>" + bbCodeDecode(ponydata.TableOfContents[pony].family[i][0]) + "</td><td>" + bbCodeDecode(ponydata.TableOfContents[pony].family[i][1]) + "</td></tr>" );
+			if ( ponydata.TableOfContents[pony].family.length > 0 ) {
+				tableContent = tableContent.concat("Family:<br/><table class=\"list_table\"><tr><td>Relation</td><td>Name</td></tr>");
+				for(i = 0; ponydata.TableOfContents[pony].family[i] != undefined; i++) {
+					tableContent = tableContent.concat("<tr><td>" + bbCodeDecode(ponydata.TableOfContents[pony].family[i][0]) + "</td><td>" + bbCodeDecode(ponydata.TableOfContents[pony].family[i][1]) + "</td></tr>" );
+				}
+				tableContent = tableContent.concat("</table><br/>");
 			}
-			tableContent = tableContent.concat("</table><br/>");
 
 			//Bio
-			tableContent = tableContent.concat("Description:<br/><div class=\"indent presize\">" + bbCodeDecode(ponydata.TableOfContents[pony].bio) + "</div>");
+			if ( ponydata.TableOfContents[pony].bio.length > 0 ) {
+				tableContent = tableContent.concat("Description:<br/><div class=\"indent presize\">" + bbCodeDecode(ponydata.TableOfContents[pony].bio) + "</div>");
+			}
 
 			/*Abillity Table*/
-			tableContent = tableContent.concat("<br/>Abilities:<br/><table class=\"list_table max_width\"><tr><td>Type</td><td>Subtype</td><td>Name</td><td>Description</td></tr>");
-			for(i = 0; ponydata.TableOfContents[pony].abilities[i] != undefined; i++) {
-				tableContent = tableContent.concat("<tr><td>" + bbCodeDecode(ponydata.TableOfContents[pony].abilities[i][0]) + "</td><td>" + bbCodeDecode(ponydata.TableOfContents[pony].abilities[i][1]) + "</td><td>" + bbCodeDecode(ponydata.TableOfContents[pony].abilities[i][2]) + "</td><td>" + bbCodeDecode(ponydata.TableOfContents[pony].abilities[i][3]) + "</td></tr>" );
+			if ( ponydata.TableOfContents[pony].abilities.length > 0) {
+				tableContent = tableContent.concat("<br/>Abilities:<br/><table class=\"list_table max_width\"><tr><td>Type</td><td>Subtype</td><td>Name</td><td>Description</td></tr>");
+				for(i = 0; ponydata.TableOfContents[pony].abilities[i] != undefined; i++) {
+					tableContent = tableContent.concat("<tr><td>" + bbCodeDecode(ponydata.TableOfContents[pony].abilities[i][0]) + "</td><td>" + bbCodeDecode(ponydata.TableOfContents[pony].abilities[i][1]) + "</td><td>" + bbCodeDecode(ponydata.TableOfContents[pony].abilities[i][2]) + "</td><td>" + bbCodeDecode(ponydata.TableOfContents[pony].abilities[i][3]) + "</td></tr>" );
+				}
+				tableContent = tableContent.concat("</table><br/>");
 			}
-			tableContent = tableContent.concat("</table><br/>");
 
 
 			tableContent = tableContent.concat("</tr></td>"); //End Pon Deeets
@@ -1175,12 +1313,12 @@
 
 		function setStage() {
 			//Init Table of Contents, loading from ponydata, set page to Home
-			var tocdata = "<table class=goldwin><tr><td>Table Of Contents</tr></tr></table><table class=ffwin><tr><td><a href=\"javascript:void(0)\" onclick=\"showPage('home'); CloseSmallUIMenu();\">Home</a><br/><a href=\"javascript:void(0)\" onclick=\"showPage('help'); CloseSmallUIMenu();\">Help Document</a><br/><a href=\"javascript:void(0)\" onclick=\"showPage('meta'); CloseSmallUIMenu();\">Meta Information</a><br/><a href=\"javascript:void(0)\" onclick=\"showPage('license'); CloseSmallUIMenu();\">Software License</a></td></tr></table><table class=goldwin><tr><td>Characters <span style=\"float: right;\">(<span class=\"lockable\"><a href=\"javascript:void(0)\" title=\"Add New Character\" onclick=\"newBtnClick()\">+</a>/</span><a href=\"javascript:void(0)\" title=\"Character Options\" onclick=\"ponyContextMenu()\">?</a>/<a href=\"javascript:void(0)\" title=\"Table Of Contents Menu\" onclick=\"TocMenu()\">M</a>)</span></td></tr></table>";
+			var tocdata = "<table class=goldwin><tr><td>Characters <span style=\"float: right;\">(<span class=\"lockable\"><a href=\"javascript:void(0)\" title=\"Add New Character\" onclick=\"newBtnClick()\">+</a>/</span><a href=\"javascript:void(0)\" title=\"Character Options\" onclick=\"ponyContextMenu()\">?</a>/<a href=\"javascript:void(0)\" title=\"Character Context Menu\" onclick=\"TocMenu()\">M</a>)</span></td></tr></table>";
 
 			if ( ponydata.TableOfContents.length > 0) {
-				tocdata = tocdata.concat("<div class=vOverflowScroll><table class=ffwin width=100%><tr><td>");
+				tocdata = tocdata.concat("<div class=vOverflowScroll id=TableOfContentsCharList><table class=ffwin width=100%><tr><td>");
 				for( i = 0; ponydata.TableOfContents[i] !== undefined; i++ ) {
-					tocdata = tocdata.concat("<a title=\"Subtitle: ", bbCodeStrip(ponydata.TableOfContents[i].subtitle), "&#10;Estimated Size: ", getSizeEstimate(ponydata.TableOfContents[i]) ,"\" href=\"javascript:void(0)\" onclick=\"loadPon(", i, "); CloseSmallUIMenu();\" oncontextmenu=\"loadPon(", i, "); ponyContextMenu(); return false;\" style=\"border-left: 2px solid ", ponydata.TableOfContents[i].bkg, ";\">" , bbCodeDecode(ponydata.TableOfContents[i].name), "</a><br/>");
+					tocdata = tocdata.concat("<a title=\"Position: ", (i + 1), "/", ponydata.TableOfContents.length, "&#10;", "Subtitle: ", bbCodeStrip(ponydata.TableOfContents[i].subtitle), "&#10;Estimated Size: ", getSizeEstimate(ponydata.TableOfContents[i]) ,"\" href=\"javascript:void(0)\" onclick=\"loadPon(", i, "); CloseSmallUIMenu();\" oncontextmenu=\"loadPon(", i, "); ponyContextMenu(); return false;\" style=\"border-left: 2px solid ", ponydata.TableOfContents[i].bkg, ";\">" , bbCodeDecode(ponydata.TableOfContents[i].name), "</a><br/>");
 				}
 
 				tocdata = tocdata.concat("</td></td></table></div><table><tr><td class=\"goldwin\"><a href=\"javascript:void(0)\" onclick=\"scrollTOCTop()\">Back To Top</a></td>");
@@ -1193,20 +1331,47 @@
 			updateLock();
 		}
 
-		document.onkeypress = function(event) {
+		document.onkeydown = function(event) {
 			/*Key Listener*/
 			/*Escape Key, close any UI windows*/
-			if( (event.key == "Escape") && (document.getElementById('SaveBoxOn') != null) ) {
+			//console.log(event.key, " | ", event.keyCode)
+			if( (event.key == "Escape" || event.keyCode === 27) && (document.getElementById('SaveBoxOn') != null) ) {
 				CloseSaveBox();
 			}
-			if( (event.key == "Escape") && (document.getElementById('LoadBoxOn') != null) ) {
+			if( (event.key == "Escape" || event.keyCode === 27) && (document.getElementById('LoadBoxOn') != null) ) {
 				CloseLoadBox();
 			}
-			if( (event.key == "Escape") && (document.getElementById('MsgBoxOn') != null) ) {
+			if( (event.key == "Escape" || event.keyCode === 27) && (document.getElementById('MsgBoxOn') != null) ) {
 				CloseMsgBox();
 			}
-			if( (event.key == "Escape") && (document.getElementById('editorOn') != null) ) {
+			if( (event.key == "Escape" || event.keyCode === 27) && (document.getElementById('editorOn') != null) ) {
 				editorSav('cancel');
+			}
+			if ( (event.key == "Escape" || event.keyCode === 27) && (document.getElementById('PonyContextMenuOn')) ) {
+				document.getElementById('PonyContextMenuOn').id = 'PonyContextMenu'
+			}
+
+			if ( (document.getElementById('editorOn') == null) && (document.getElementById('MsgBoxOn') == null) && (document.getElementById('PonyContextMenuOn') == null) && (document.getElementById('SaveBoxOn') == null) && (document.getElementById('LoadBoxOn') == null) ) {
+
+				if ( (event.key == ">" || event.key == ".") && (typeof viewing == "number" ) && ( viewing < ponydata.TableOfContents.length) ) {
+					loadPon(viewing + 1);
+				}
+
+				if ( (event.key == "<" || event.key == "," ) && (typeof viewing == "number" ) && ( viewing > 0) ) {
+					loadPon(viewing - 1);
+				}
+
+				if ( (event.key == "?") && (typeof viewing == "number" )) {
+					ponyContextMenu();
+				}
+
+				if ( (event.key == "m" || event.key == "M") && (typeof viewing == "number" )) {
+					TocMenu();
+				}
+
+				if ( (event.key == "+") && (typeof viewing == "number" )) {
+					newBtnClick();
+				}
 			}
 		}
 
@@ -1218,21 +1383,50 @@
 			}
 		}
 
+		function rand(min, max) {
+    		return Math.floor(Math.random() * (max - min + 1) + min)
+		}
+
+		function dice(dice) {
+		    total = 0;
+		    if ( dice.toString().indexOf('d') != -1 ) {
+		        //Rolling Something d Something
+		        for ( i = 0; i < dice.split('d')[0]; i++ ) {
+		            total = total + rand( 1, dice.split('d')[1] );
+		        }
+		    } else {
+		        //Just a static number
+		        total = rand( 1, dice)
+		    }
+		    return total;
+		}
+
+		//Initialization
 		var poniarySaveVersion = "18.2.2";
+		var poniaryVersion = "The Ponies & Palaces Update (WIP)"
 
 		//Default Pony Data
 		var ponydata = {
 			TableOfContents:[],
 			MetaInf:{
-				"version":"18.2.2",
+				"version":"",
 				"app":"Poniary OC Manager",
 				"author":"unknown",
 				"lock":false
 			}
 		};
 
+		ponydata.MetaInf.version = poniarySaveVersion;
+
 		var origponydata = JSON.parse(JSON.stringify(ponydata));
 		var viewing = "home";
+
+		function fileUpdater(mode, data) {
+			//Updates PonyiarySave.JSON to latest format.
+			if ( data.MetaInf.version == "18.2.2" ) {
+				//Upgrade path to latest.
+			}
+		}
 
 		function loadFile() {
 			console.log("File Load Triggered...")
