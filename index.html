@@ -207,6 +207,62 @@
 		width: 100%;
 	}
 
+	.codeblock {
+		background: rgba(0, 0, 0, 0.5);
+		border: 1px solid white;
+		border-radius: 2px;
+		padding: 4px;
+	}
+
+
+	.blockquote {
+		background: rgba(0, 0, 0, 0.3);
+		border: 2px dashed gray;
+		border-radius: 2px;
+		padding: 4px;
+	}
+
+	.quoteAuthor {
+		background: rgba(0, 0, 0, 0.3);
+		display: inline-block;
+		font-size: 1.2em;
+		border-bottom: 1px dashed gray;
+		padding: 0px;
+		width: 100%;
+	}
+
+	.prisma {
+		animation: prisma 2s linear 0s infinite alternate;
+	}
+
+	@keyframes prisma {
+		0%, 100% { color: red }
+		16% { color: orange}
+		32% { color: yellow}
+		48% { color: green }
+		64% { color: blue}
+		80% { color: violet}
+	}
+
+	.spoiler {
+		color: darkred;
+		background: darkred;
+		border-radius: 6px;
+		text-shadow: none;
+		transition: ease-in-out 0.5s;
+	}
+
+	.spoiler:hover {
+		color: unset;
+		background: rgba(139, 0, 0, 0.5);
+		text-shadow:
+			-1px -1px 0 #000,
+			1px -1px 0 #000,
+			-1px 1px 0 #000,
+			1px 1px 0 #000;
+		transition: ease-in-out 1s;
+	}
+
 	::-moz-selection {
 		background: #C228ED;
 	}
@@ -405,69 +461,16 @@
 			<a href="javascript:void(0)" onclick="editorSav('cancel')">Discard</center><br/>
 		</td></tr></table>
 	</div>
-	<div id="Page_Help" class="refElement">
+	<div id="BBCode_Ref" class="refElement">
 		<table id="infocontainer" class=ffwin>
 			<tr>
 				<td>
-					Help<hr/>
-					<center>
-						Finding yourself confused? Not sure what to do? <br/>No worries! This help page is here to help you get started!<br/>
-					</center>
-					<br>
-					<b><u>Understanding The Interface</b></u><br/>
-					The interface is designed with <i>Ease of Use</i> in mind. So hopefull it should be easy to jump right in.<br/>
-					<br/>
-					<u>The Blue Bar at The Top</u><br/>
-					Contains three options that deal with your <b><u>SAVE DATA</u></b>.<br/>
-					You might call this the "Data Bar"</br>
-					<br/>
-					The first option "Save" will pull up a window allowing you to save entirety of your work!
-					You will be prompted to save "<code style='background: rgba(0,0,0,0.2);'>PoniarySave.json</code>". It is <b>Imparitive</b> that you do <b>NOT</b> lose this file. It contains the details
-					of all the characters in the Table Of Contents on the left, including image content and will be needed in the future to continue viewing and editing those same characters!<br/>
-					<br/>
-					The second option "Load" will pull up a window allowing you to select a "<code style='background: rgba(0,0,0,0.2);'>PoniarySave.json</code>" file. The file can be called anything, but it must be a JSON file.
-					You can load files in three different <i>modes</i>. If you're unfamiliar with the terms "prepend" and "append" you might be a tad confused here, but we'll clear that up. To <u>prepend</u> something is to
-					<i>add something to the begining of it</i>. Loading files in <u>Prepend Mode</u> will cause the ponies it contains to be added to the beginning of the Character List. Similarly, <u>append</u> means
-					adding to the end of something. In this case, adding the characters from your loaded file to the end of the Character List. <u>Overwrite Mode</u> is the basic behavior you're most likely familiar with from
-					most computer applications: Replacing current data with the contents of the selected file entirely. It's worth noting that loading files at any point will Overwrite the current <i>Meta Information</i> with
-					the data contained in the file. We'll get to Meta Information Later.<br/>
-					<br/>
-					Unload is just the same as clicking "Refresh" or hitting F5 in your browser, but with a cautionary prompt... and if you have unsaved changes, possibly a double prompt.<br/>
-					<br/>
-					<u>Table Of Contents</u><br/>
-					This contains the <i>built-in pages</i>, like this one, and the <i>Character List</i>.<br/>
-					<br/>
-					Home a page you initally start up to. It's just a nice welcome page, nothing more.<br/>
-					<br/>
-					Help Document... well, that's what you're viewing right now :P<br/>
-					<br/>
-					Meta Infromation. This is a somewhat important feature! What is Meta Information? Meta Information is <i>information that describes other information</i>. In this case, it contains some helpful Information
-					and controls related to the current <i>Save Data</i>. This information includes the <i>Save Version</i>, which may be different if your data comes from a different version of Poniary. Next is an estimated
-					file size of your save. This is <b>NOT</b> 100% accurate, but can really help you out. In messenger programs like <a href=https://discordapp.com/ target="_blank">Discord</a>, you just might run into a
-					file size limit when trying to share your "<code style='background: rgba(0,0,0,0.2);'>PoniarySave.json</code>" with your friends. There's ways of reducing your Save size in a later section. It will also
-					show you a character count, which can be pretty neat if you like keeping track of just how many characters you actually have. The <i>Author</i> box should contain your name, the sole purpose of this is
-					to help identify the save as <i>yours</i>. Finally, there's <i>Locked</i>... what's that do? That disables features that have to do with modifying the current Save. This can be used to prevent accidental
-					modifications.<br/>
-					<br/>
-					Software License. What's this? This is the License that Poniary is released under: <a href="http://unlicense.org/">The Unlicense</a>. In short, Poniary is Public Domain and comes with <b>NO</b> warranty.<br/>
-					<br/>
-					The Character List! One of the most imporant parts, if not these most important part, of Poniary! This list contains all characters in the current Save Data. This gets it's own section!<br/>
-					<br/><br/>
-					<b><u>Character List</b></u><br/>
-					Clicking the "+" link to the right of "Characters" in the Table Of Contents to the left will create a <i>Brand New</i> character and pull them up in the <u>Character Editor</u>, where you can fill out
-					details on said character, such as their name, color scheme, and more.<br/>
-					<br/>
-					Clicking the "?" will pull up a menu related to the currently selected character that will allow you to: See their estimated contribution to the file size, move them up or down in the list, edit them,
-					make a copy of them at the end of the list, save them to an individual "<code style='background: rgba(0,0,0,0.2);'>PoniarySave.json</code>" all by themsevles, or delete them!<br/>
-					<br/>
-					The Context menu, activated by the "?" can also be accessed by <b>Right Clicking</b> on a charcter, or <b>Long Pressing</b> them, in the case of Android.<br/>
-					<br/>
-					Lastly, hovering over characters with your cursor will present you some information about them, such as their <i>Subtitle</i> and <i>Estimated File Size</i>.
-					<br/><br/>
-					<b><u>Tip: BBCode</u></b><br/>
+					BBCode Reference<hr/>
 					Bulletin Board Code is pretty common place on the Internet today... and you can use it here too!<br/>
 					<br/>
-					The <b>Character Editor</b> supports BBCode in <i>ALL</i> Fields. Go nuts!<br/>
+					<center>
+					BBCode is supported in <i>nearly</i> all feilds! Feel free to experiment!<br/>
+					<span class=prisma>Go nuts!</span>
 					<br/>
 
 					<table class=list_table>
@@ -495,9 +498,116 @@
 						<tr>
 							<td>This is [sub]Subscript[/sup]</td><td>This is <sub>Subscript</sub></td>
 						</tr>
+						<tr>
+							<td>This is a [url=http://example.com]Named Link[/url]</td><td>This is a <a href="http://example.com" target="_blank" title="Link to:&#10;http://example.com">Named Link</a></td>
+						</tr>
+						<tr>
+							<td>This is a regular link: [url]http://example.com[/url]</td><td>This is a regular link: <a href="http://example.com" target="_blank" title="Link to:&#10;http://example.com">http://example.com</a></td>
+						</tr>
+						<tr>
+							<td>This text is [color=orange]Colored[/color]</td><td>This text is <font color=orange>Colored</font></td>
+						</tr>
+						<tr>
+							<td>[code]This is a codeblock[/code]</td><td><div class=codeblock>This is a codeblock</div></td>
+						</tr>
+						<tr>
+							<td>[quote=Author says]Authored Quote[/quote]</td><td><div class=blockquote><div class=quoteAuthor>Author says</div>Authored Quote</div></td>
+						</tr>
+						<tr>
+							<td>[quote]Unauthored Quote[/quote]</td><td><div class=blockquote>Unauthored Quote</div></td>
+						</tr>
+						<tr>
+							<td>[prisma]Prismatic/Rainbow Text[/prisma]</td><td><span class=prisma>Prismatic/Rainbow Text<span></td>
+						</tr>
+						<tr>
+							<td>[spoiler]Spoiered Text[/spoiler]</td><td><span class=spoiler>Spoilered Text</span></td>
+						</tr>
+						<tr>
+							<td>[highlight=yellow]Highlighted Text[/highlight]</td><td><span style="background: yellow; padding: 2px; border-radius 6px;">Highlighted Text</span></td>
+						</tr>
 					</table>
+					</center>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div id="Page_Help" class="refElement">
+		<table id="infocontainer" class=ffwin>
+			<tr>
+				<td>
+					Help<hr/>
+					<center>
+						Finding yourself confused? Not sure what to do? <br/>No worries! This help page is here to help you get started!<br/>
+					</center>
+					<br/>
+					<b>Standard Interface</b><br/>
+					On a large screen, you'll see the standard interface. <br/>
+					<br/>
+					The side bar on the left is called the <u>Character List</u>.<br/>
+					The character list is where all of your characters will be displayed. To create a new one, simply click the <b>+</b>, doing so will
+					create your new character and pull them up in the Character Editor. When your satisfied with your changes, click Save.<br/>
+					<br/>
+					The <b>?</b> pulls up the context menu of the character your currently viewing. You can also do this by Right Clicking (or <i>Long Pressing</i>, on a touch screen).
+					This menu will show you the character's position in your list, their name, and their estimated contribution to the file size of your save.
+					You can move the character up or down in the list, edit them, copy them, save them to their own seperate save file, or delete them through this menu.<br/>
+					<br/>
+					The <b>M</b> pulls up the Character List Menu. This powerful screen allows you to re-organize your list using alphabetical sorting, reverse alphabetical sorting, or
+					flipping the list backwards altogether. It also allows you to search through your characters (which is useful if you have many of them) using <a href=https://en.wikipedia.org/wiki/Regular_expression target="_blank" title="Wikipedia Artical on Regular Expressions">Regular Expressions</a> or
+					"RegExp" for short. RegExp may seem daunting to beginners, but it's quite easy and many cheatsheets are available online. If you can't be bothered with the more complex features of RegExp, just start typing a character's name and you'll be okay!<br/>
+					<br/>
+					The <b>Top Bar</b> contains a variety of useful clickable links that do stuff!<br/>
+					<br/>
+					<b>Home</b> takes you to the table of contents, where all the less important things (IE not your characters) are.<br/>
+					<br/>
+					<b>Save</b> will allow you to save all of your data to a file we'll call "<code style='background: rgba(0,0,0,0.2);'>PoniarySave.json</code>".
 
+					<b>Load</b> has some very interesting and to some, probably unusual options inside. There are <i>three</i> modes of loading files. The default is <u>Overwrite</u>, which works just like the standard file loading you're already accustomed to.
+					<u>Prepend</u> will load the characters from the loaded file onto the start of your list. <u>Append</u> will load the characters from the loaded file onto the end of your list.<br/>
+					<br/>
+					Loaded files are <i>u</i> automatically updated to comply with the current version of Poniary, so it should be hassle free... if you happen to load a newer save file in an older version, you'll get a spooky warning!<br/>
+					<br/>
+					Whenever you load a file a sort of "Restore Point" is created. You can use <u>Restore</u> from the load menu to revert back to before you loaded the last file at any time. Be careful however, after you use your Restore Point
+					it will dissapear! This was added to protect against data loss from loading incompatible saves and for the sake of general convenience.<br/>
+					<br/>
+					Lastly, the GitHub link will take you to Poniary's GitHub Repository.<br/>
+					<br/>
+					<b>Compact Interface</b><br/>
+					If you're on a smaller (or zoomed in enough) screen, you're gonna see this one.<br/>
+					<br/>
+					This interface is basically the same, but the Character List and Top Bar are now located inside of a menu to save on screen space and certain things will show in fullscreen instead of smaller windows.<br/>
+					<br/>
+					<b>Meta Information</b><br/>
+					Meta Information is Information ABOUT your save! This includes things like who made it (likely yourself), whether or not it's locked (changes prevented), and whether or not you want your save to be Pretty Printed.<br/>
+					<br/>
+					Pretty Printing makes the save files more easily readable to humans, so it's a good option if you wanna take a look at how the file's laid out.
 					<br/><br/>
+					<b><u>Tip: Keyboard Shortcuts</u></b><br/>
+					Hotkeys make life a lot easier. Here are some you can use here! How hot are your hotkey skills?<br/>
+					<br/>
+					<table class="list_table">
+						<tr>
+							<td>Key</td><td>Function</td>
+						</tr>
+						<tr>
+							<td>ESC</td><td>Close/dismiss most dialog boxes.</td>
+						</tr>
+						<tr>
+							<td>&lt;</td><td>Go up one character in the character list. While viewing a character only.</td>
+						</tr>
+						<tr>
+							<td>&gt;</td><td>Go down one character in the character list. While viewing a character only.</td>
+						</tr>
+						<tr>
+							<td>M</td><td>Open Table of Contents Menu. While viewing a character page only.</td>
+						</tr>
+						<tr>
+							<td>?</td><td>View character context menu. While viewing a character page only.</td>
+						</tr>
+						<tr>
+							<td>+</td><td>Create new character. While viewing a character page only.</td>
+						</tr>
+					</table>
+					<br/>
 					<b><u>Tip: Reducing Save File Size</u></b><br/>
 					Bumping into a limit on sharing files over a messenger? Just want your Save Data smaller? Here are some easy solutions!<br/>
 					<br/>
@@ -582,10 +692,16 @@
 				singlePoneData.TableOfContents = [];
 				singlePoneData.TableOfContents[0] = JSON.parse(JSON.stringify(ponydata.TableOfContents[viewing]));
 
-				var data = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(singlePoneData));
+				if ( singlePoneData.MetaInf.pretty == true ) {
+					var data = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(singlePoneData, null, 3));
+
+				} else {
+					var data = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(singlePoneData));
+				}
+
 				document.getElementById('PonyContextMenuSave').innerHTML = "<a href=\"" + data + "\" download=\"PoniarySave.json\" onclick=\"origponydata = Object.assign(ponydata); CloseSaveBox();\">Save Character</a>";
 
-				document.getElementById('PonyContextMenuName').innerHTML = bbCodeDecode(ponydata.TableOfContents[viewing].name);
+				document.getElementById('PonyContextMenuName').innerHTML = bbCodeDecode( bbCodeStrip(ponydata.TableOfContents[viewing].name, [ "quote", "code", "authoredQuote"]));
 				document.getElementById('PonyContextMenuSize').innerHTML = getSizeEstimate(ponydata.TableOfContents[viewing]);
 				document.getElementById('PonyContextMenuPos').innerHTML = (viewing + 1) + "/" + ponydata.TableOfContents.length;
 
@@ -605,7 +721,7 @@
 					//find me
 					console.log("Iteration: " + i);
 					if ( (bbCodeStrip(ponydata.TableOfContents[i].name).toLowerCase().search(query) == 0 ) && ( resultCount < 5) ) {
-						sresults = sresults.concat("<a href=\"javascript:void(0)\" onclick=\"loadPon(" + i + "); CloseMsgBox(); CloseSmallUIMenu();\">" + bbCodeDecode(ponydata.TableOfContents[i].name) + "</a><br/>");
+						sresults = sresults.concat("<a href=\"javascript:void(0)\" onclick=\"loadPon(" + i + "); CloseMsgBox(); CloseSmallUIMenu();\">" + bbCodeDecode( bbCodeStrip( ponydata.TableOfContents[i].name, [ "quote", "url", "namedURL", "code", "authoredQuote"])) + "</a><br/>");
 						resultCount++
 					}
 				}
@@ -614,7 +730,7 @@
 		}
 
 		function TocMenu() {
-			var tdata = "Sort: <a href=\"javascript:void(0)\" onclick=\"sortPons('AZ'); CloseMsgBox()\" title=\"Sort Alphabetically\">[A-Z]</a> <a href=\"javascript:void(0)\" onclick=\"sortPons('ZA'); CloseMsgBox()\" title=\"Sort Reverse Alphabetically\">[Z-A]</a> <a href=\"javascript:void(0)\" onclick=\"sortPons('REV'); CloseMsgBox()\" title=\"Reverse List\">[REV]</a><br/><br/>Character Search:<br/><input id=TocMenuSearch type=text onkeyup=\"TocSearch(this.value);\" placeholder=\"RegExp Search\"></input><br/><div id=TocMenuSearchResults style=\"background: black; border-radius: 4px;\"></div>"
+			var tdata = "<span class=lockable>Sort: <a href=\"javascript:void(0)\" onclick=\"sortPons('AZ'); CloseMsgBox()\" title=\"Sort Alphabetically\">[A-Z]</a> <a href=\"javascript:void(0)\" onclick=\"sortPons('ZA'); CloseMsgBox()\" title=\"Sort Reverse Alphabetically\">[Z-A]</a> <a href=\"javascript:void(0)\" onclick=\"sortPons('REV'); CloseMsgBox()\" title=\"Reverse List\">[REV]</a><br/></span><br/>Character Search:<br/><input id=TocMenuSearch type=text onkeyup=\"TocSearch(this.value);\" placeholder=\"RegExp Search\"></input><br/><div id=TocMenuSearchResults style=\"background: black; border-radius: 4px;\"></div>"
 			msgBox(tdata, "Table Of Contents Menu")
 		}
 
@@ -803,7 +919,11 @@
 		}
 
 		function saveBtnClick() {
-			var data = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(ponydata));
+			if ( ponydata.MetaInf.pretty == true) {
+				var data = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(ponydata, null, 3));
+			} else {
+				var data = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(ponydata));
+			}
 			console.log(data);
 			document.getElementById('SaveBox').innerHTML = "<table class=ffwin id=SaveUIMenu><tr><td><center><b><u>-Save Menu-</b></u><br/><br/><center><a href=\"" + data + "\" download=\"PoniarySave.json\" onclick=\"origponydata = Object.assign(ponydata); CloseSaveBox();\">Save</a><br/><span title=\"ESC\" onclick=\"CloseSaveBox()\"><a href=\"javascript:void(0)\">Return</a></span></center></td></tr></table></center>";
 			document.getElementById('SaveBox').id = "SaveBoxOn";
@@ -814,8 +934,13 @@
 			if ( JSON.stringify(ponydata) != JSON.stringify(origponydata) ) {
 				tableContent = tableContent.concat("<font color=red>There are unsaved changes!</font><br/><br/>");
 			}
+
 			tableContent = tableContent.concat("</center><form id=LoadFileMode><span class=\"lockable\"><input type=radio name=mode>Prepend</input><br/></span><input type=radio checked=true name=mode>Overwrite</input><br/><span class=\"lockable\"><input type=radio name=mode>Append</input></span></form><center>")
-			tableContent = tableContent.concat("<input id=LoadFileBox type=file accept=\"application/json, .json \"></input><br/><br/><span onclick=\"loadFile()\"><a href=\"javascript:void(0)\">Load</a></span></br><span title=\"ESC\" onclick=\"CloseLoadBox()\"><a href=\"javascript:void(0)\">Return</a></span></center></td></tr></table>");
+			tableContent = tableContent.concat("<input id=LoadFileBox type=file accept=\"application/json, .json \"></input><br/><br/><span onclick=\"loadFile()\"><a href=\"javascript:void(0)\">Load</a></span></br>");
+			if ( JSON.stringify(undoLoad) != "{}" ) {
+				tableContent = tableContent.concat("<span onclick=\"undoLoadFile()\"><a href=\"javascript:void(0)\">Restore</a></span><br/>")
+			}
+			tableContent = tableContent.concat("<span title=\"ESC\" onclick=\"CloseLoadBox()\"><a href=\"javascript:void(0)\">Return</a></span></center></td></tr></table>");
 			document.getElementById('LoadBox').innerHTML = tableContent;
 			document.getElementById('LoadBox').id = "LoadBoxOn";
 		}
@@ -1049,7 +1174,10 @@
 				var tableContent = "<table class=ffwin><tr><td>Table Of Contents<hr/>";
 				tableContent = tableContent.concat("<b><u>Information</b></u><br/>");
 				tableContent = tableContent.concat("<a href=\"javascript:void(0)\" onclick=\"showPage('home'); CloseSmallUIMenu();\">Welcome Page</a><br/>");
+
 				tableContent = tableContent.concat("<a href=\"javascript:void(0)\" onclick=\"showPage('help'); CloseSmallUIMenu();\">Help Document</a><br/>");
+				tableContent = tableContent.concat("<a href=\"javascript:void(0)\" onclick=\"showPage('BBCodeRef'); CloseSmallUIMenu();\">BBCode Reference Guide</a><br/>");
+
 				tableContent = tableContent.concat("<a href=\"javascript:void(0)\" onclick=\"showPage('license'); CloseSmallUIMenu();\">Software License</a><br/>");
 				tableContent = tableContent.concat("<br/><b><u>Tools</b></u><br/>");
 				tableContent = tableContent.concat("<a href=\"javascript:void(0)\" onclick=\"showPage('meta'); CloseSmallUIMenu();\">Meta Information Editor</a><br/>");
@@ -1068,18 +1196,24 @@
 				tableContent = tableContent.concat("Estimated File Size: ", getSizeEstimate(ponydata), "<br/>");
 				tableContent = tableContent.concat("Number of Characters: ", ponydata.TableOfContents.length, "<br/>");
 				tableContent = tableContent.concat("Author Name: ", bbCodeDecode(ponydata.MetaInf.author), "<br/>");
-				tableContent = tableContent.concat("Locked: ", ponydata.MetaInf.lock, "<br/><br/>");
-				tableContent = tableContent.concat("Locked: ", ponydata.MetaInf.pretty, "<br/><br/>");
+				tableContent = tableContent.concat("Locked: ", ponydata.MetaInf.lock, "<br/>");
+				tableContent = tableContent.concat("Pretty JSON: ", ponydata.MetaInf.pretty, "<br/><br/>");
 
 
 				tableContent = tableContent.concat("<b><u>Changeable Settings</b></u><br/>");
 
 				tableContent = tableContent.concat("Author: <input id=\"MetaAuthorBox\" type=text style=\"width: 90%;\" onchange=\"ponydata.MetaInf.author = this.value; showPage('meta')\" placeholder=\"Author\"></input><br/>");
-				tableContent = tableContent.concat("Locked: <input type=checkbox onchange=\"ponydata.MetaInf.lock = this.checked; updateLock(); showPage('meta')\" ");
+				tableContent = tableContent.concat("<input type=checkbox onchange=\"ponydata.MetaInf.lock = this.checked; updateLock(); showPage('meta')\" ");
 				if ( ponydata.MetaInf.lock == true) {
 					tableContent = tableContent.concat("checked");
 				}
-				tableContent = tableContent.concat("></input><br/>");
+				tableContent = tableContent.concat("></input>Locked (Prevents Changes)<br/>");
+				tableContent = tableContent.concat("<input type=checkbox onchange=\"ponydata.MetaInf.pretty = this.checked; updateLock(); showPage('meta')\" ");
+				if ( ponydata.MetaInf.pretty == true) {
+					tableContent = tableContent.concat("checked");
+				}
+				tableContent = tableContent.concat("></input>Pretty JSON (Spaces in exported JSON Files)<br/>");
+
 				tableContent = tableContent.concat("</td></tr></table>");
 
 				document.getElementById("infocontainer").innerHTML = tableContent;
@@ -1096,30 +1230,34 @@
 				viewing = "help";
 				var tableContent = document.getElementById("Page_Help").innerHTML;
 				document.getElementById("infocontainer").innerHTML = tableContent;
+			} else if ( page == "BBCodeRef") {
+				viewing = "bbcoderef";
+				var tableContent = document.getElementById("BBCode_Ref").innerHTML;
+				document.getElementById("infocontainer").innerHTML = tableContent;
 			}
 			updateLock();
 
 		}
 
-		function bbCodeEncode(string) {
-			//Encode valid HTML to BBCode. Cut invalid HTML tags out.
-
-			//Italics
-			string = string.replace(/\<i\>/g,"[i]").replace(/\<\/i\>/g,"[/i]");
-			//Bold
-			string = string.replace(/\<b\>/g,"[b]").replace(/\<\/b\>/g,"[/b]");
-			//Underlined
-			string = string.replace(/\<u\>/g,"[u]").replace(/\<\/u\>/g,"[/u]");
-			//Strikethrough
-			string = string.replace(/\<s\>/g,"[s]").replace(/\<\/s\>/g,"[/s]");
-			//Subscript
-			string = string.replace(/\<sub\>/g,"[sub]").replace(/\<\/sub\>/g,"[/sub]");
-			//Superscript
-			string = string.replace(/\<sup\>/g,"[sup]").replace(/\<\/sup\>/g,"[/sup]");
-
-			//Return with illegals removed.
-			return string.replace(/\<br\/\>/g,"\n").replace(/\</g,"").replace(/\>/g,"");
-		}
+		// function bbCodeEncode(string) {
+		// 	//Encode valid HTML to BBCode. Cut invalid HTML tags out.
+		//
+		// 	//Italics
+		// 	string = string.replace(/\<i\>/g,"[i]").replace(/\<\/i\>/g,"[/i]");
+		// 	//Bold
+		// 	string = string.replace(/\<b\>/g,"[b]").replace(/\<\/b\>/g,"[/b]");
+		// 	//Underlined
+		// 	string = string.replace(/\<u\>/g,"[u]").replace(/\<\/u\>/g,"[/u]");
+		// 	//Strikethrough
+		// 	string = string.replace(/\<s\>/g,"[s]").replace(/\<\/s\>/g,"[/s]");
+		// 	//Subscript
+		// 	string = string.replace(/\<sub\>/g,"[sub]").replace(/\<\/sub\>/g,"[/sub]");
+		// 	//Superscript
+		// 	string = string.replace(/\<sup\>/g,"[sup]").replace(/\<\/sup\>/g,"[/sup]");
+		//
+		// 	//Return with illegals removed.
+		// 	return string.replace(/\<br\/\>/g,"\n").replace(/\</g,"").replace(/\>/g,"");
+		// }
 
 		function bbCodeDecode(string) {
 			//Decode BBCODE to HTML
@@ -1128,17 +1266,35 @@
 			string = string.replace(/\</g,"&lt;").replace(/\>/g,"&gt;");
 
 			//Italics
-			string = string.replace(/\[i\]/g,"<i>").replace(/\[\/i\]/g,"</i>");
+			string = string.replace(/\[i]((?:.|\t|\n|\r)*?)\[\/i\]/g, "<i>$1</i>");
 			//Bold
-			string = string.replace(/\[b\]/g,"<b>").replace(/\[\/b\]/g,"</b>");
+			string = string.replace(/\[b]((?:.|\t|\n|\r)*?)\[\/b\]/g, "<b>$1</b>");
 			//Underlined
-			string = string.replace(/\[u\]/g,"<u>").replace(/\[\/u\]/g,"</u>");
+			string = string.replace(/\[u]((?:.|\t|\n|\r)*?)\[\/u\]/g, "<u>$1</u>");
 			//Strikethrough
-			string = string.replace(/\[s\]/g,"<s>").replace(/\[\/s\]/g,"</s>");
+			string = string.replace(/\[s]((?:.|\t|\n|\r)*?)\[\/s\]/g, "<s>$1</s>");
 			//Subscript
-			string = string.replace(/\[sub\]/g,"<sub>").replace(/\[\/sub\]/g,"</sub>");
+			string = string.replace(/\[sub]((?:.|\t|\n|\r)*?)\[\/sub\]/g, "<sub>$1</sub>");
 			//Superscript
-			string = string.replace(/\[sup\]/g,"<sup>").replace(/\[\/sup\]/g,"</sup>");
+			string = string.replace(/\[sup]((?:.|\t|\n|\r)*?)\[\/sup\]/g, "<sup>$1</sup>");
+			//Colour
+			string = string.replace(/\[colo(u|)r=((?:.|\t|\n|\r)*?)\]((?:.|\t|\n|\r)*?)\[\/colo(u|)r\]/g,"<font color=$2>$3</font>");
+			//URLs
+			string = string.replace(/\[url=((?:.|\t|\n|\r)*?)\]((?:.|\t|\n|\r)*?)\[\/url\]/g, "<a href=\"$1\" target=\"_blank\" title=\"Link to:&#10;$1\">$2</a>");
+			string = string.replace(/\[url]((?:.|\t|\n|\r)*?)\[\/url\]/g, "<a href=\"$1\" target=\"_blank\" title=\"Link to:&#10;$1\">$1</a>");
+
+			//Code
+			string = string.replace(/\[code]((?:.|\t|\n|\r)*?)\[\/code\]/g, "<br/><div class=\"codeblock\"><code>$1</code></div><br/>");
+
+			//Quotes
+			string = string.replace(/\[quote]((?:.|\t|\n|\r)*?)\[\/quote\]/g, "<div class=\"blockquote\">$1</div>")
+			string = string.replace(/\[quote=((?:.|\t|\n|\r)*?)]((?:.|\t|\n|\r)*?)\[\/quote\]/g, "<div class=\"blockquote\"><div class=\"quoteAuthor\">$1</div>$2</div>")
+
+			//Special
+			string = string.replace(/\[prisma]((?:.|\t|\n|\r)*?)\[\/prisma\]/g, "<span class=\"prisma\">$1</span>");
+			string = string.replace(/\[spoiler]((?:.|\t|\n|\r)*?)\[\/spoiler\]/g, "<span class=\"spoiler\">$1</span>");
+			string = string.replace(/\[highlight=((?:.|\t|\n|\r)*?)\]((?:.|\t|\n|\r)*?)\[\/highlight\]/g,"<span style=\"background: $1; padding: 2px; border-radius 6px;\">$2</span>");
+
 			//Newlines
 			string = string.replace(/\n/g,"<br/>");
 
@@ -1146,23 +1302,75 @@
 			return string;
 		}
 
-		function bbCodeStrip(string) {
+		function bbCodeStrip(string, toStrip = [ "i", "b", "u", "s", "url", "namedURL", "sub", "sup", "spoiler", "quote", "authoredQuote", "color", "highlight", "prisma", "code"]) {
 			//Strip BBCODE from text
 
-			//Italics
-			string = string.replace(/\[i\]/g,"").replace(/\<\/i\>/g,"");
-			//Bold
-			string = string.replace(/\[b\]/g,"").replace(/\[\/b\]/g,"");
-			//Underlined
-			string = string.replace(/\[u\]/g,"").replace(/\[\/u\]/g,"");
-			//Strikethrough
-			string = string.replace(/\[s\]/g,"").replace(/\[\/s\]/g,"");
-			//Subscript
-			string = string.replace(/\[sub\]/g,"").replace(/\[\/sub\]/g,"");
-			//Superscript
-			string = string.replace(/\[sup\]/g,"").replace(/\[\/sup\]/g,"");
-			//Newlines
-			string = string.replace(/\n/g,"");
+
+			for ( var i = 0; i < toStrip.length; i++ ) {
+
+				switch(toStrip[i]) {
+
+					case "i":
+						//Italics
+						string = string.replace(/\[i]((?:.|\t|\n|\r)*?)\[\/i\]/g, "$1");
+						break;
+					case "b":
+						//Bold
+						string = string.replace(/\[b]((?:.|\t|\n|\r)*?)\[\/b\]/g, "$1");
+						break;
+					case "u":
+						//Underlined
+						string = string.replace(/\[u]((?:.|\t|\n|\r)*?)\[\/u\]/g, "$1");
+						break;
+					case "s":
+						//Strikethrough
+						string = string.replace(/\[s]((?:.|\t|\n|\r)*?)\[\/s\]/g, "$1");
+						break;
+					case "sub":
+						//Subscript
+						string = string.replace(/\[sub]((?:.|\t|\n|\r)*?)\[\/sub\]/g, "$1");
+						break;
+					case "sup":
+						//Superscript
+						string = string.replace(/\[sup]((?:.|\t|\n|\r)*?)\[\/sup\]/g, "$1");
+						break;
+					case "color":
+						//Colour
+						string = string.replace(/\[colo(u|)r=((?:.|\t|\n|\r)*?)\]((?:.|\t|\n|\r)*?)\[\/colo(u|)r\]/g,"$3");
+						break;
+					case "namedURL":
+						//URLs
+						string = string.replace(/\[url=((?:.|\t|\n|\r)*?)\]((?:.|\t|\n|\r)*?)\[\/url\]/g, "$2");
+						break;
+					case "url":
+						string = string.replace(/\[url]((?:.|\t|\n|\r)*?)\[\/url\]/g, "$1");
+						break;
+					case "code":
+						//Code
+						string = string.replace(/\[code]((?:.|\t|\n|\r)*?)\[\/code\]/g, "$1");
+						break;
+					case "authoredQuote":
+						//Quotes
+						string = string.replace(/\[quote]((?:.|\t|\n|\r)*?)\[\/quote\]/g, "$1");
+						break;
+					case "quote":
+						string = string.replace(/\[quote=((?:.|\t|\n|\r)*?)]((?:.|\t|\n|\r)*?)\[\/quote\]/g, "$2");
+						break;
+					case "prisma":
+						//Special
+						string = string.replace(/\[prisma]((?:.|\t|\n|\r)*?)\[\/prisma\]/g, "$1");
+						break;
+					case "spoiler":
+						string = string.replace(/\[spoiler]((?:.|\t|\n|\r)*?)\[\/spoiler\]/g, "$1");
+						break;
+					case "highlight":
+						string = string.replace(/\[highlight=((?:.|\t|\n|\r)*?)\]((?:.|\t|\n|\r)*?)\[\/highlight\]/g,"$2");
+						break;
+					default:
+						console.warn("Invalid Parameters Given to BBCodeStrip!");
+						break;
+				}
+			}
 
 			//Return String
 			return string;
@@ -1178,8 +1386,8 @@
 			tableContent = tableContent.concat(ponydata.TableOfContents[pony].bkg); //Horse BKG Color
 			tableContent = tableContent.concat(" 0%, #000000 100%)!important;\">");
 			tableContent = tableContent.concat("<sup><font size=1 color=#26FF6A;>", (viewing + 1), "/", ponydata.TableOfContents.length, "</font></sup> " );
-			tableContent = tableContent.concat(bbCodeDecode( ponydata.TableOfContents[pony].name ) ); //Horse Name
-			tableContent = tableContent.concat("<div style=\"float: right;\">" + bbCodeDecode(ponydata.TableOfContents[pony].subtitle) + "</div><hr/>"); //Subtitle
+			tableContent = tableContent.concat(bbCodeDecode( bbCodeStrip(ponydata.TableOfContents[pony].name, [ "quote", "code", "authoredQuote"]) ) ); //Horse Name
+			tableContent = tableContent.concat("<div style=\"float: right;\">" + bbCodeDecode( bbCodeStrip(ponydata.TableOfContents[pony].subtitle, [ "quote", "code", "authoredQuote"])) + "</div><hr/>"); //Subtitle
 			//Horse Pictures
 			if ( typeof ponydata.TableOfContents[pony].img[0] != "undefined" ){
 				tableContent = tableContent.concat("<table style=\"border: none;\" border=\"1px\"><tr>");
@@ -1188,88 +1396,87 @@
 				}
 				tableContent = tableContent.concat("</tr><tr>")
 				for(i = 0; ponydata.TableOfContents[pony].img[i] != undefined; i++) {
-					tableContent = tableContent.concat("<td><center>" + bbCodeDecode(ponydata.TableOfContents[pony].img[i][0]) + "</center></td>");
+					tableContent = tableContent.concat("<td><center>" + bbCodeDecode( bbCodeStrip(ponydata.TableOfContents[pony].img[i][0], [ "quote", "code", "authoredQuote"])) + "</center></td>");
 				}
 				tableContent = tableContent.concat("</table><br/>");
 			}
 
 			//Pon Maker
 			if ( ponydata.TableOfContents[pony].creator.toLowerCase() != "unknown" && ponydata.TableOfContents[pony].creator.length != 0) {
-				tableContent = tableContent.concat("Creator: " + bbCodeDecode(ponydata.TableOfContents[pony].creator) + "<br/>");
+				tableContent = tableContent.concat("Creator: " + bbCodeDecode(bbCodeStrip(ponydata.TableOfContents[pony].creator, [ "quote", "code", "authoredQuote"])) + "<br/>");
 
 			} else if ( ponydata.TableOfContents[pony].creator.toLowerCase() == "unknown" ) {
-				tableContent = tableContent.concat("Creator: <font color=gray><i>" + bbCodeDecode(ponydata.TableOfContents[pony].creator) + "</i></font><br/>");
+				tableContent = tableContent.concat("Creator: <font color=gray><i>" + bbCodeDecode( bbCodeStrip(ponydata.TableOfContents[pony].creator, [ "quote", "code", "authoredQuote"])) + "</i></font><br/>");
 			}
 
 			//Pon Day!
 			if ( ponydata.TableOfContents[pony].dob.toLowerCase() != "unknown" && ponydata.TableOfContents[pony].dob.length != 0 ) {
-				tableContent = tableContent.concat("Birth Date: " + bbCodeDecode(ponydata.TableOfContents[pony].dob) + "<br/>");
+				tableContent = tableContent.concat("Birth Date: " + bbCodeDecode(bbCodeStrip(ponydata.TableOfContents[pony].dob, [ "quote", "code", "authoredQuote"])) + "<br/>");
 
 			} else if ( ponydata.TableOfContents[pony].dob.toLowerCase() == "unknown" ) {
-				tableContent = tableContent.concat("Birth Date: <font color=gray><i>" + bbCodeDecode(ponydata.TableOfContents[pony].dob) + "</i></font><br/>");
+				tableContent = tableContent.concat("Birth Date: <font color=gray><i>" + bbCodeDecode(bbCodeStrip(ponydata.TableOfContents[pony].dob, [ "quote", "code", "authoredQuote"])) + "</i></font><br/>");
 			}
 
 			//Pon Home
 			if ( ponydata.TableOfContents[pony].birth_place.toLowerCase() != "unknown" && ponydata.TableOfContents[pony].birth_place.length != 0 ) {
-				tableContent = tableContent.concat("Birth Place: " + bbCodeDecode(ponydata.TableOfContents[pony].birth_place) + "<br/>");
-
+				tableContent = tableContent.concat("Birth Place: " + bbCodeDecode(bbCodeStrip(ponydata.TableOfContents[pony].birth_place, [ "quote", "code", "authoredQuote"])) + "<br/>");
 			} else if ( ponydata.TableOfContents[pony].birth_place.toLowerCase() == "unknown" ) {
-				tableContent = tableContent.concat("Birth Place: <font color=gray><i>" + bbCodeDecode(ponydata.TableOfContents[pony].birth_place) + "</i></font><br/>");
+				tableContent = tableContent.concat("Birth Place: <font color=gray><i>" + bbCodeDecode(bbCodeStrip(ponydata.TableOfContents[pony].birth_place, [ "quote", "code", "authoredQuote"])) + "</i></font><br/>");
 			}
 
 			//Pon Type
 			if ( ponydata.TableOfContents[pony].race.toLowerCase() != "unknown" && ponydata.TableOfContents[pony].race.length != 0 ) {
-				tableContent = tableContent.concat("Race: " + bbCodeDecode(ponydata.TableOfContents[pony].race) + "<br/>");
+				tableContent = tableContent.concat("Race: " + bbCodeDecode(bbCodeStrip(ponydata.TableOfContents[pony].race, [ "quote", "code", "authoredQuote"])) + "<br/>");
 
 			} else if ( ponydata.TableOfContents[pony].race.toLowerCase() == "unknown" ) {
-				tableContent = tableContent.concat("Race: <font color=gray><i>" + bbCodeDecode(ponydata.TableOfContents[pony].race) + "</i></font><br/>");
+				tableContent = tableContent.concat("Race: <font color=gray><i>" + bbCodeDecode(bbCodeStrip(ponydata.TableOfContents[pony].race, [ "quote", "code", "authoredQuote"])) + "</i></font><br/>");
 			}
 
 			//Girl Pon? Boy Pon? ~ Professor Oak
 			if ( ponydata.TableOfContents[pony].gender.toLowerCase() != "undefined" && ponydata.TableOfContents[pony].gender != "N/a" ) {
-				tableContent = tableContent.concat("Gender: " + bbCodeDecode(ponydata.TableOfContents[pony].gender) + "<br/>");
+				tableContent = tableContent.concat("Gender: " + bbCodeDecode(bbCodeStrip(ponydata.TableOfContents[pony].gender, [ "quote", "code", "authoredQuote"])) + "<br/>");
 
 			} else if ( ponydata.TableOfContents[pony].gender.toLowerCase() == "undefined" ) {
-				tableContent = tableContent.concat("Gender: <font color=gray><i>" + bbCodeDecode(ponydata.TableOfContents[pony].gender) + "</i></font><br/>");
+				tableContent = tableContent.concat("Gender: <font color=gray><i>" + bbCodeDecode(bbCodeStrip(ponydata.TableOfContents[pony].gender, [ "quote", "code", "authoredQuote"])) + "</i></font><br/>");
 			}
 
 			//Pon likes what pons?
 			if ( ponydata.TableOfContents[pony].orientation.toLowerCase() != "unknown" && ponydata.TableOfContents[pony].orientation.length != 0 ) {
-				tableContent = tableContent.concat("Orientation: " + bbCodeDecode(ponydata.TableOfContents[pony].orientation) + "<br/>");
+				tableContent = tableContent.concat("Orientation: " + bbCodeDecode(bbCodeStrip(ponydata.TableOfContents[pony].orientation, [ "quote", "code", "authoredQuote"])) + "<br/>");
 
 			} else if ( ponydata.TableOfContents[pony].orientation.toLowerCase() == "unknown" ) {
-				tableContent = tableContent.concat("Orientation: <font color=gray><i>" + bbCodeDecode(ponydata.TableOfContents[pony].orientation) + "</i></font><br/>");
+				tableContent = tableContent.concat("Orientation: <font color=gray><i>" + bbCodeDecode(bbCodeStrip(ponydata.TableOfContents[pony].orientation, [ "quote", "code", "authoredQuote"])) + "</i></font><br/>");
 			}
 
 			//What does pon do?
 			if ( ponydata.TableOfContents[pony].occupation.toLowerCase() != "unknown" && ponydata.TableOfContents[pony].occupation.length != 0 ) {
-				tableContent = tableContent.concat("Occupation: " + bbCodeDecode(ponydata.TableOfContents[pony].occupation) + "<br/>");
+				tableContent = tableContent.concat("Occupation: " + bbCodeDecode(bbCodeStrip(ponydata.TableOfContents[pony].occupation, [ "quote", "code", "authoredQuote"])) + "<br/>");
 
 			} else if ( ponydata.TableOfContents[pony].occupation.toLowerCase() == "unknown" ) {
-				tableContent = tableContent.concat("Occupation: <font color=gray><i>" + bbCodeDecode(ponydata.TableOfContents[pony].occupation) + "</i></font><br/>");
+				tableContent = tableContent.concat("Occupation: <font color=gray><i>" + bbCodeDecode(bbCodeStrip(ponydata.TableOfContents[pony].occupation, [ "quote", "code", "authoredQuote"])) + "</i></font><br/>");
 			}
 
 			if ( ponydata.TableOfContents[pony].special_talent.toLowerCase() != "unknown" && ponydata.TableOfContents[pony].special_talent.length != 0 ) {
-				tableContent = tableContent.concat("Special Talent: " + bbCodeDecode(ponydata.TableOfContents[pony].special_talent) + "<br/>");
+				tableContent = tableContent.concat("Special Talent: " + bbCodeDecode(bbCodeStrip(ponydata.TableOfContents[pony].special_talent, [ "quote", "code", "authoredQuote"])) + "<br/>");
 
 			} else if ( ponydata.TableOfContents[pony].special_talent.toLowerCase() == "unknown" ) {
-				tableContent = tableContent.concat("Special Talent: <font color=gray><i>" + bbCodeDecode(ponydata.TableOfContents[pony].special_talent) + "</i></font><br/>");
+				tableContent = tableContent.concat("Special Talent: <font color=gray><i>" + bbCodeDecode(bbCodeStrip(ponydata.TableOfContents[pony].special_talent, [ "quote", "code", "authoredQuote"])) + "</i></font><br/>");
 			}
 
 			//Magic Pon Mark
 			if ( ponydata.TableOfContents[pony].cutie_mark.toLowerCase() != "unknown" && ponydata.TableOfContents[pony].cutie_mark != 0 ) {
-				tableContent = tableContent.concat("Cutie Mark: " + bbCodeDecode(ponydata.TableOfContents[pony].cutie_mark) + "<br/>");
+				tableContent = tableContent.concat("Cutie Mark: " + bbCodeDecode(bbCodeStrip(ponydata.TableOfContents[pony].cutie_mark,[ "quote", "code", "authoredQuote"])) + "<br/>");
 
 			} else if ( ponydata.TableOfContents[pony].cutie_mark.toLowerCase() == "unknown" ) {
-				tableContent = tableContent.concat("Cutie Mark: <font color=gray><i>" + bbCodeDecode(ponydata.TableOfContents[pony].cutie_mark) + "</i></font><br/>");
+				tableContent = tableContent.concat("Cutie Mark: <font color=gray><i>" + bbCodeDecode(bbCodeStrip(ponydata.TableOfContents[pony].cutie_mark, [ "quote", "code", "authoredQuote"])) + "</i></font><br/>");
 			}
 
 			//Pon Universe
 			if ( ponydata.TableOfContents[pony].universe.toLowerCase() != "unknown" && ponydata.TableOfContents[pony].universe != 0 ) {
-				tableContent = tableContent.concat("Universe: " + bbCodeDecode(ponydata.TableOfContents[pony].universe) + "<br/>");
+				tableContent = tableContent.concat("Universe: " + bbCodeDecode(bbCodeStrip(ponydata.TableOfContents[pony].universe, [ "quote", "code", "authoredQuote"])) + "<br/>");
 
 			} else if ( ponydata.TableOfContents[pony].universe.toLowerCase() == "unknown" ) {
-				tableContent = tableContent.concat("Universe: <font color=gray><i>" + bbCodeDecode(ponydata.TableOfContents[pony].universe) + "</i></font><br/>");
+				tableContent = tableContent.concat("Universe: <font color=gray><i>" + bbCodeDecode(bbCodeStrip(ponydata.TableOfContents[pony].universe, [ "quote", "code", "authoredQuote"])) + "</i></font><br/>");
 			}
 
 
@@ -1282,7 +1489,7 @@
 			if ( ponydata.TableOfContents[pony].colors.length > 0 ) {
 				tableContent = tableContent.concat("<br/>Coloration:<br/><table class=\"list_table\"><tr><td>Color</td><td>Item(s)</td></tr>");
 				for(i = 0; ponydata.TableOfContents[pony].colors[i] != undefined; i++) {
-					tableContent = tableContent.concat("<tr><td style=\"background: " + ponydata.TableOfContents[pony].colors[i][0] + ";\">" + ponydata.TableOfContents[pony].colors[i][0] + "</td><td>" + bbCodeDecode(ponydata.TableOfContents[pony].colors[i][1]) + "</td></tr>" );
+					tableContent = tableContent.concat("<tr><td style=\"background: " + ponydata.TableOfContents[pony].colors[i][0] + ";\">" + ponydata.TableOfContents[pony].colors[i][0] + "</td><td>" + bbCodeDecode( bbCodeStrip(ponydata.TableOfContents[pony].colors[i][1], [ "quote", "code", "authoredQuote"])) + "</td></tr>" );
 				}
 				tableContent = tableContent.concat("</table><br/>");
 			}
@@ -1291,7 +1498,7 @@
 			if ( ponydata.TableOfContents[pony].family.length > 0 ) {
 				tableContent = tableContent.concat("Family:<br/><table class=\"list_table\"><tr><td>Relation</td><td>Name</td></tr>");
 				for(i = 0; ponydata.TableOfContents[pony].family[i] != undefined; i++) {
-					tableContent = tableContent.concat("<tr><td>" + bbCodeDecode(ponydata.TableOfContents[pony].family[i][0]) + "</td><td>" + bbCodeDecode(ponydata.TableOfContents[pony].family[i][1]) + "</td></tr>" );
+					tableContent = tableContent.concat("<tr><td>" + bbCodeDecode(bbCodeStrip(ponydata.TableOfContents[pony].family[i][0], [ "quote", "code", "authoredQuote"])) + "</td><td>" + bbCodeDecode(bbCodeStrip(ponydata.TableOfContents[pony].family[i][1], [ "quote", "code", "authoredQuote"])) + "</td></tr>" );
 				}
 				tableContent = tableContent.concat("</table><br/>");
 			}
@@ -1305,7 +1512,7 @@
 			if ( ponydata.TableOfContents[pony].abilities.length > 0) {
 				tableContent = tableContent.concat("<br/>Abilities:<br/><table class=\"list_table max_width\"><tr><td>Type</td><td>Subtype</td><td>Name</td><td>Description</td></tr>");
 				for(i = 0; ponydata.TableOfContents[pony].abilities[i] != undefined; i++) {
-					tableContent = tableContent.concat("<tr><td>" + bbCodeDecode(ponydata.TableOfContents[pony].abilities[i][0]) + "</td><td>" + bbCodeDecode(ponydata.TableOfContents[pony].abilities[i][1]) + "</td><td>" + bbCodeDecode(ponydata.TableOfContents[pony].abilities[i][2]) + "</td><td>" + bbCodeDecode(ponydata.TableOfContents[pony].abilities[i][3]) + "</td></tr>" );
+					tableContent = tableContent.concat("<tr><td>" + bbCodeDecode(bbCodeStrip(ponydata.TableOfContents[pony].abilities[i][0],[ "quote", "code", "authoredQuote"])) + "</td><td>" + bbCodeDecode(bbCodeStrip(ponydata.TableOfContents[pony].abilities[i][1], [ "quote", "code", "authoredQuote"])) + "</td><td>" + bbCodeDecode(bbCodeStrip(ponydata.TableOfContents[pony].abilities[i][2], [ "quote", "code", "authoredQuote"])) + "</td><td>" + bbCodeDecode(ponydata.TableOfContents[pony].abilities[i][3]) + "</td></tr>" );
 				}
 				tableContent = tableContent.concat("</table><br/>");
 			}
@@ -1323,7 +1530,7 @@
 			if ( ponydata.TableOfContents.length > 0) {
 				tocdata = tocdata.concat("<div class=vOverflowScroll id=TableOfContentsCharList><table class=ffwin width=100%><tr><td>");
 				for( i = 0; ponydata.TableOfContents[i] !== undefined; i++ ) {
-					tocdata = tocdata.concat("<a title=\"Position: ", (i + 1), "/", ponydata.TableOfContents.length, "&#10;", "Subtitle: ", bbCodeStrip(ponydata.TableOfContents[i].subtitle), "&#10;Estimated Size: ", getSizeEstimate(ponydata.TableOfContents[i]) ,"\" href=\"javascript:void(0)\" onclick=\"loadPon(", i, "); CloseSmallUIMenu();\" oncontextmenu=\"loadPon(", i, "); ponyContextMenu(); return false;\" style=\"border-left: 2px solid ", ponydata.TableOfContents[i].bkg, ";\">" , bbCodeDecode(ponydata.TableOfContents[i].name), "</a><br/>");
+					tocdata = tocdata.concat("<a title=\"Position: ", (i + 1), "/", ponydata.TableOfContents.length, "&#10;", "Subtitle: ", bbCodeStrip(ponydata.TableOfContents[i].subtitle), "&#10;Estimated Size: ", getSizeEstimate(ponydata.TableOfContents[i]) ,"\" href=\"javascript:void(0)\" onclick=\"loadPon(", i, "); CloseSmallUIMenu();\" oncontextmenu=\"loadPon(", i, "); ponyContextMenu(); return false;\" style=\"border-left: 2px solid ", ponydata.TableOfContents[i].bkg, ";\">" , bbCodeDecode(bbCodeStrip(ponydata.TableOfContents[i].name, ["code", "quote", "authoredQuote", "url", "namedURL"])), "</a><br/>");
 				}
 
 				tocdata = tocdata.concat("</td></td></table></div><table><tr><td class=\"goldwin\"><a href=\"javascript:void(0)\" onclick=\"scrollTOCTop()\">Back To Top</a></td>");
@@ -1375,13 +1582,17 @@
 				}
 
 				if ( (event.key == "+") && (typeof viewing == "number" )) {
-					newBtnClick();
+					if ( ponydata.MetaInf.lock == false) {
+						newBtnClick();
+					} else {
+						msgBox("You need to unlock your Poniary Save before you can preform this action!", "Locked!");
+					}
 				}
 			}
 		}
 
 		window.onbeforeunload = function(event) {
-			if ( JSON.stringify(ponydata) !=  JSON.stringify(origponydata) ) {
+			if ( JSON.stringify(ponydata) != JSON.stringify(origponydata) ) {
 				return "Are you sure you wanna leave? You'll lose any unsaved changes!"
 			} else {
 				return;
@@ -1406,32 +1617,72 @@
 		    return total;
 		}
 
+		function ponSaveUpdater(obj) {
+			switch(obj.MetaInf.version) {
+				case "18.2.2":
+					console.info("Save Version is Old (18.2.2/Original)");
+					obj.MetaInf.pretty = false;
+					obj.MetaInf.version = poniarySaveVersion;
+					msgBox(`Save version updated<br/>18.2.2 <b><font color=#26FF6A>→</font></b> ${poniarySaveVersion}`, "Save Updater");
+					break;
+				case poniarySaveVersion:
+					console.info("Save Version is Up To Date");
+					break;
+				default:
+					msgBox(`<b><font color=red>WARNING</b></font><br/>Save Version \"<u><span style=\"background: black; padding: 1px; border-radius: 6px;\">${obj.MetaInf.version}</span></u>\" is unknown!<br/>Loading newer saves in older versions can result in data loss!<br/><b><u>Continue at your own risk</u></b>`, "Save Updater");
+					console.error("SAVE VERSION IS NEW!");
+					break;
+			}
+
+			return obj;
+
+		}
+
+		function undoLoadFile(mode = "prompt") {
+			if ( mode == "prompt" ) {
+				msgBox("Revert Changes to before the last file load?<br/><br/><span onclick=\"undoLoadFile('confirm'); CloseMsgBox()\"><a href=\"javascript:void(0)\">Restore</a></span>", "Restore Previous File")
+			} else if (mode == "confirm") {
+				ponydata = JSON.parse(JSON.stringify(undoLoad));
+				msgBox("Reverted changes to before last File Load.", "File Restored");
+				undoLoad = {};
+				showPage('home');
+				updateLock();
+				setStage();
+				CloseLoadBox();
+			}
+		}
+
 		//Initialization
-		var poniarySaveVersion = "18.2.2";
+		var poniarySaveVersion = "18.4.27";
 		var poniaryVersion = "The Ponies & Palaces Update (WIP)"
 
 		//Default Pony Data
-		var ponydata = {
-			TableOfContents:[],
+		var defaultPonydata = {
 			MetaInf:{
-				"version":"",
+				"version": poniarySaveVersion,
 				"app":"Poniary OC Manager",
 				"author":"unknown",
-				"lock":false
-			}
+				"lock":false,
+				"pretty": false
+			},
+			TableOfContents:[]
 		};
+		//
+		// RaceIcons: {
+		// 	Default: {
+		// 		icon: "iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8%2F9hAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz%0AAAAOxAAADsQBlSsOGwAAAL1JREFUOI3Nk7sNwzAMRO8S9wJcuHavJTyaMoo34RIuVXoATcA0liLI%0A9CdIk6sEkvdIAiJhSw%2FivAooAKjafrKUl0dXm7NxWRZ7rC1PUjOk%2B%2BS0GJ1zJiDnVbVAHm3Rkfko%0Ax7r7mblWSgnee5DEboJv9TPgCSCQxDAM6Pv%2BlmldV8zzDBH5kxVeIhLGcYRz7nKNGCNEBCEEwPoH%0AMcZTc6v6FnSjYpomEyAiAFC6twBgO6YMalXF91dlgQzt6t%2FiWkpzPMvIzgAAAABJRU5ErkJggg%3D%3D%0A",
+		// 		regexp: "."
+		// 	}
+		// }
+
+		var ponydata = JSON.parse(JSON.stringify(defaultPonydata));
 
 		ponydata.MetaInf.version = poniarySaveVersion;
 
+		var loadedPonyData = {};
+		var undoLoad = {};
 		var origponydata = JSON.parse(JSON.stringify(ponydata));
 		var viewing = "home";
-
-		function fileUpdater(mode, data) {
-			//Updates PonyiarySave.JSON to latest format.
-			if ( data.MetaInf.version == "18.2.2" ) {
-				//Upgrade path to latest.
-			}
-		}
 
 		function loadFile() {
 			console.log("File Load Triggered...")
@@ -1458,15 +1709,16 @@
 			var file = document.getElementById('LoadFileBox').files[0];
 			var reader = new FileReader();
 			reader.onload = function(event) {
+				undoLoad = JSON.parse(JSON.stringify(ponydata));
 				if ( mode == "Overwrite") {
-					ponydata = JSON.parse(event.target.result);
+					ponydata = ponSaveUpdater(JSON.parse(event.target.result))
 					origponydata = JSON.parse(event.target.result);
 					var ponecounter = ponydata.TableOfContents.length;
 					updateLock();
 
 				} else if ( mode == "Append" ) {
 					var lastempty = ponydata.TableOfContents.length;
-					var loadedPoneData = JSON.parse(event.target.result);
+					var loadedPoneData = ponSaveUpdater(JSON.parse(event.target.result));
 					var ponecounter = loadedPoneData.TableOfContents.length; //Count # of pones loaded
 
 					for(i = 0; i < loadedPoneData.TableOfContents.length; i++) {
@@ -1477,7 +1729,7 @@
 					}
 
 				} else if ( mode == "Prepend" ) {
-					var loadedPoneData = JSON.parse(event.target.result);
+					var loadedPoneData = ponSaveUpdater(JSON.parse(event.target.result));
 					var lastempty = loadedPoneData.TableOfContents.length;
 					var ponecounter = loadedPoneData.TableOfContents.length; //Count # of pones loaded
 					for(i = 0; i < ponydata.TableOfContents.length; i++) {
