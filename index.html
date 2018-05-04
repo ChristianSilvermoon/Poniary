@@ -76,7 +76,7 @@
 			width: 100%;
 		}
 
-		#LoadUIMenu, #SaveUIMenu, #MsgBoxUI {
+		#LoadUIMenu, #SaveUIMenu, #MsgBoxUI, #PonyContextMenuOn>Table {
 			position: absolute;
 			height: 100%;
 			width: 100%;
@@ -108,7 +108,7 @@
 			width: 90%;
 		}
 
-		#LoadUIMenu, #SaveUIMenu, #MsgBoxUI {
+		#LoadUIMenu, #SaveUIMenu, #MsgBoxUI, #PonyContextMenuOn>Table {
 			position: absolute;
   			top: 50%;
   			left: 50%;
@@ -627,7 +627,7 @@
 	<div id="LoadBox"></div>
 	<div id="MsgBox"></div>
 	<div id="PonyContextMenu" style="overflow-y: auto;">
-		<table class=ffwin style="top: 30%; left: 45%; position: absolute;">
+		<table class=ffwin>
 			<tr>
 				<td>
 					<center>
@@ -653,37 +653,42 @@
 
 	<script>
 
-		var bugReportURL = "https://github.com/ChristianSilvermoon/Poniary/issues/new?labels=bug&title=New+bug+report&template=bug_report.md";
-		var featureRequestURL = "https://github.com/ChristianSilvermoon/Poniary/issues/new?labels=Feature+Request&title=New+Feature+Request&template=feature_request.md";
-		function getURLParams() {
-				var currentURL = window.location.href;
-				var params = currentURL.split("?");
+		const bugReportURL = "https://github.com/ChristianSilvermoon/Poniary/issues/new?labels=bug&title=New+bug+report&template=bug_report.md";
+		const featureRequestURL = "https://github.com/ChristianSilvermoon/Poniary/issues/new?labels=Feature+Request&title=New+Feature+Request&template=feature_request.md";
+
+		/* --------------------------
+		 * Start of Class Definitions
+		 */
+
+		class urlParameters {
+			constructor( url = window.location.href) {
+				//Initizalize
+				this.url = url;
+				var params = this.url.split("?");
 				params.shift();
-				params = params.toString().split("&");
-				return params;
+				this.params = params.toString().split("&");
 			}
 
-		function getURLParam(target) {
-				var params = getURLParams();
-
-				for( var i = 0; i < params.length; i++ ) {
-					var test = params[i].split("=");
+			get(target) {
+				//Get value of specified target
+				for( var i = 0; i < this.params.length; i++ ) {
+					var test = this.params[i].split("=");
 
 					if( test[0] == target ) {
-						return test[1];
+						return test[1]; // Return Target's value
 					}
-
-					delete test;
 				}
 
-				return null;
+				return null; //Return null if target doesn't exist
+			}
 		}
 
-		function rmIllChars(element) {
-			//Remove Illegal Characters from passed in element value.
-			//Should be used with onkeyup="rmIllChars(this)"
-			//element.value = element.value.replace(/</g,"").replace(/>/g,"");
-		}
+		/*
+		 * End of Class Definitions
+		 * ------------------------- */
+
+		const Parameters = new urlParameters();
+
 
 		function ponyContextMenu() {
 			if ( typeof viewing == "number" ) {
@@ -1555,6 +1560,9 @@
 			}
 			if( (event.key == "Escape" || event.keyCode === 27) && (document.getElementById('MsgBoxOn') != null) ) {
 				CloseMsgBox();
+			}
+			if ( (event.key == "Escape" || event.keyCode === 27) && (document.getElementById('SmallMenuOn')) ) {
+				CloseSmallUIMenu();
 			}
 			if( (event.key == "Escape" || event.keyCode === 27) && (document.getElementById('editorOn') != null) ) {
 				editorSav('cancel');
