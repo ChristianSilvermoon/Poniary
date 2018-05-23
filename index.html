@@ -652,6 +652,7 @@
 	</div>
 
 	<script>
+
 		const bugReportURL = "https://github.com/ChristianSilvermoon/Poniary/issues/new?labels=bug&title=New+bug+report&template=bug_report.md";
 		const featureRequestURL = "https://github.com/ChristianSilvermoon/Poniary/issues/new?labels=Feature+Request&title=New+Feature+Request&template=feature_request.md";
 
@@ -664,7 +665,6 @@
 				//Initizalize
 				this.url = url;
 				var params = this.url.split("?");
-
 				params.shift();
 				this.params = params.toString().split("&");
 			}
@@ -689,6 +689,11 @@
 
 		const Parameters = new urlParameters();
 
+
+		function copyInnerText(element) {
+			window.getSelection().selectAllChildren(element);
+			document.execCommand("copy");
+		}
 
 		function ponyContextMenu() {
 			if ( typeof viewing == "number" ) {
@@ -1189,7 +1194,6 @@
 				tableContent = tableContent.concat("<a href=\"", bugReportURL, "\" target=\"_blank\">Report a Bug</a><br/>");
 				tableContent = tableContent.concat("<a href=\"", featureRequestURL, "\" target=\"_blank\">Request a Feature</a>");
 
-
 				tableContent = tableContent.concat("</td></tr></table>");
 
 				document.getElementById("infocontainer").innerHTML = tableContent;
@@ -1493,9 +1497,9 @@
 
 			/*Pony Colors Table*/
 			if ( ponydata.TableOfContents[pony].colors.length > 0 ) {
-				tableContent = tableContent.concat("<br/>Coloration:<br/><table class=\"list_table\"><tr><td>Color</td><td>Item(s)</td></tr>");
+				tableContent = tableContent.concat("<br/>Coloration (Click Code to Copy):<br/><table class=\"list_table\"><tr><td>Color</td><td>Item(s)</td></tr>");
 				for(i = 0; ponydata.TableOfContents[pony].colors[i] != undefined; i++) {
-					tableContent = tableContent.concat("<tr><td style=\"background: " + ponydata.TableOfContents[pony].colors[i][0] + ";\">" + ponydata.TableOfContents[pony].colors[i][0] + "</td><td>" + bbCodeDecode( bbCodeStrip(ponydata.TableOfContents[pony].colors[i][1], [ "quote", "code", "authoredQuote"])) + "</td></tr>" );
+					tableContent = tableContent.concat("<tr><td style=\"background: " + ponydata.TableOfContents[pony].colors[i][0] + ";\" onclick=\"copyInnerText(this); msgBox('Copied Color Code to Clipboard','Text Copied')\" title=\"Click to Copy\">" + ponydata.TableOfContents[pony].colors[i][0] + "</td><td>" + bbCodeDecode( bbCodeStrip(ponydata.TableOfContents[pony].colors[i][1], [ "quote", "code", "authoredQuote"])) + "</td></tr>" );
 				}
 				tableContent = tableContent.concat("</table><br/>");
 			}
