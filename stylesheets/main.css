@@ -1,0 +1,101 @@
+html {
+	font-family: verdana;
+	text-shadow:
+		-1px -1px 0 #000,
+		1px -1px 0 #000,
+		-1px 1px 0 #000,
+		1px 1px 0 #000;
+}
+
+body {
+	margin: 0;
+}
+
+
+/* Main Divs */
+#Header {
+	margin-left: 0;
+	margin-right: 0;
+	width: 100%;
+	padding: 0px;
+	border-bottom-width: 2px;
+	position: fixed;
+	min-height: 10px;
+	z-index: 100
+}
+
+#menuBar {
+	padding: 3px;
+}
+
+#titleBar {
+	width: 100%;
+	padding: 4px;
+}
+
+#StatusBar {
+	width: 100%;
+	padding: 2px;
+	min-height: 10px;
+	position: fixed;
+	bottom: 0px;
+	border-top-width: 2px;
+	z-index: 100
+}
+
+#StatusBarConsole {
+	background: #000;
+	padding: 2px;
+	border-radius: 4px;
+	color: #FFF;
+	min-width: 200px;
+	min-height: 13px;
+	float: left;
+	border: 1px solid #FFF;
+}
+
+#ContentContainer {
+	padding: 10%;
+}
+
+/* Dropdown Menus */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown > span, .dropdown-content > a, .dropdown-content-right > a {
+	padding-left: 4px;
+	padding-right: 4px;
+	white-space: nowrap;
+}
+
+.dropdown-content, .dropdown-content-right {
+    display: none;
+	white-space: nowrap;
+    position: absolute;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+	padding: 4px 6px;
+    z-index: 1;
+}
+
+.dropdown-content-right {
+	left: 100%;
+	top: 0%;
+}
+
+.dropdown:hover > .dropdown-content, .dropdown:hover > .dropdown-content-right {
+	display: block;
+}
+
+
+/* CSS Images */
+#MainLogo {
+	background-image: url('../img/logo.gif');
+	background-size: 100%;
+	background-repeat: no-repeat;
+	min-height: 108px;
+	max-height: 108px;
+	max-width: 148px;
+	max-width: 148px;
+}
