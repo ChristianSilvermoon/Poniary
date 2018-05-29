@@ -65,6 +65,15 @@ body {
 	);
 }
 
+#topButton {
+	background: linear-gradient(135deg,  #606000 0%,#000000 100%)!important;
+	border: 2px white outset;
+	border-radius: 4px;
+	color: white;
+	padding: 6px;
+}
+
+
 a:link, a:visited {
 	color: #F2C574;
 	text-decoration: none;
@@ -81,7 +90,7 @@ a:hover {
 	color: #F2C574;
 }
 
-.dropdown:hover > span {
+.dropdown:hover > span, .highlightable:hover {
 	transition: 0.2s ease-in;
 	color: #26FF6A;
 	animation-name: highlighted;
@@ -117,4 +126,34 @@ a:hover {
 		#444 0%,
 		#000 100%
 	);
+}
+
+.list_table tr td {
+	border-bottom: dotted 1px gray;
+	border-right: dotted 1px gray;
+}
+
+/*BBCode*/
+.codeblock {
+	background: rgba(0, 0, 0, 0.5);
+	border: 1px solid white;
+	border-radius: 2px;
+	padding: 4px;
+}
+
+
+.blockquote {
+	background: rgba(0, 0, 0, 0.3);
+	border: 2px dashed gray;
+	border-radius: 2px;
+	padding: 4px;
+}
+
+.quoteAuthor {
+	background: rgba(0, 0, 0, 0.3);
+	display: inline-block;
+	font-size: 1.2em;
+	border-bottom: 1px dashed gray;
+	padding: 0px;
+	width: 100%;
 }

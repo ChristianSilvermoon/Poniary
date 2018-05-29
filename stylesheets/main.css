@@ -1,5 +1,7 @@
 html {
 	font-family: verdana;
+	/* -webkit-text-stroke: 1px black;
+	font-weight: 600; */
 	text-shadow:
 		-1px -1px 0 #000,
 		1px -1px 0 #000,
@@ -11,6 +13,9 @@ body {
 	margin: 0;
 }
 
+#refElements {
+	display: none;
+}
 
 /* Main Divs */
 #Header {
@@ -25,6 +30,7 @@ body {
 }
 
 #menuBar {
+	filter: drop-shadow(0px 10px 4px rgba(0, 0, 0, 0.5));
 	padding: 3px;
 }
 
@@ -36,11 +42,12 @@ body {
 #StatusBar {
 	width: 100%;
 	padding: 2px;
-	min-height: 10px;
+	min-height: 13px;
 	position: fixed;
 	bottom: 0px;
 	border-top-width: 2px;
-	z-index: 100
+	z-index: 100;
+	filter: drop-shadow(0px -10px 4px rgba(0, 0, 0, 0.5));
 }
 
 #StatusBarConsole {
@@ -52,6 +59,50 @@ body {
 	min-height: 13px;
 	float: left;
 	border: 1px solid #FFF;
+}
+
+#StatusBarFileInfo {
+	background: #000;
+	padding: 2px;
+	padding-right: 6px;
+	border-radius: 4px;
+	color: #FFF;
+	min-height: 13px;
+	float: right;
+	border: 1px solid #FFF;
+}
+
+#topButton {
+	padding: 4px;
+	margin-left: 50%;
+	position: absolute;
+	transform: translate(-50%, -3px);
+	margin-bottom: 3px;
+}
+
+#topButton:hover {
+	animation-name: bounce;
+	animation-duration: 0.5s;
+	animation-direction: normal;
+	animation-iteration-count: infinite;
+}
+
+@keyframes bounce {
+	0%, 100% {
+		transform: translate(-50%, 0px;)
+	}
+	50% {
+		transform: translate(-50%, -10px)
+	}
+}
+
+#displayArea {
+	filter: drop-shadow(0px 0px 8px rgba(0, 0, 0, 0.5));
+}
+
+#StatusBarFileInfo > span {
+	padding-right: 2px;
+	padding-left: 2px;
 }
 
 #ContentContainer {
@@ -74,7 +125,7 @@ body {
     display: none;
 	white-space: nowrap;
     position: absolute;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    filter: drop-shadow(10px 10px 4px rgba(0, 0, 0, 0.5));
 	padding: 4px 6px;
     z-index: 1;
 }
@@ -88,6 +139,39 @@ body {
 	display: block;
 }
 
+
+/* BBCode */
+.prisma {
+	animation: prisma 2s linear 0s infinite alternate;
+}
+
+@keyframes prisma {
+	0%, 100% { color: red }
+	16% { color: orange}
+	32% { color: yellow}
+	48% { color: green }
+	64% { color: blue}
+	80% { color: violet}
+}
+
+.spoiler {
+	color: darkred;
+	background: darkred;
+	border-radius: 6px;
+	text-shadow: none;
+	transition: ease-in-out 0.5s;
+}
+
+.spoiler:hover {
+	color: unset;
+	background: rgba(139, 0, 0, 0.5);
+	text-shadow:
+		-1px -1px 0 #000,
+		1px -1px 0 #000,
+		-1px 1px 0 #000,
+		1px 1px 0 #000;
+	transition: ease-in-out 1s;
+}
 
 /* CSS Images */
 #MainLogo {

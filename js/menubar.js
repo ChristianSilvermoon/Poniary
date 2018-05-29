@@ -1,16 +1,29 @@
 /*
 	Menubar Class
-	-Needs to support adding/removal of entires, etc.
+
+	Handles the menubar and it's entries.
+
+	See: menubar_presets.js
+	For: preset reference, and to define presets.
 */
 
-class menuEntry {
-	constructor(name = "untitled item", type = "entry", func = false, enabled = true, tooltip = false ) {
-		this.name		= name; //Entry's name
-		this.type		= type; //entry, topmenu, submenu, or seperator
-		this.tooltip	= tooltip; //Tool tip if present;
-		this.enabled	= enabled; //Disabled or not;
-		this.func		= func; //JS Click Function;
-		this.entries	= {}; //Menu Entries, if applicable;
+class MenuEntry {
+	constructor( menuJSON = { name: "untitled item", type: "entry", func: false, enabled: true, tooltip: false, iconURL: false, menuEntries: [] }) {
+		this.name			= menuJSON.name? menuJSON.name : "Untitled Entry"; //Entry's name
+		this.type			= menuJSON.type? menuJSON.type : "entry"; //entry, topmenu, submenu, or seperator
+		this.tooltip		= menuJSON.tooltip? menuJSON.tooltip : false; //Tool tip if present;
+		this.iconURL		= menuJSON.iconURL? menuJSON.iconURL : false;
+		this.enabled		= menuJSON.enabled? menuJSON.enabled : true; //Disabled or not;
+		this.func			= menuJSON.func? menuJSON.func : false; //JS Click Function;
+		this.menuEntries	= [];
+
+		if ( menuJSON.menuEntries ) {
+			menuJSON.menuEntries.forEach( entry => {
+				this.menuEntries.push(new MenuEntry(entry));
+			});
+		}
+
+		return this;
 	}
 
 	addEntry(name = "untitled item", type = "entry", func = false, enabled = true, tooltip = false ) {
@@ -27,75 +40,54 @@ class menuEntry {
 
 	toString() {
 		//Return the complete HTML of this entry as a string
-		var string;
-		if ( this.type == "seperator" ) {
-			//Seperator entries are just lines, they have nothing else.
-			string = "<hr/>";
-			return string;
+		var string = "";
+
+		switch( this.type ) {
+			case "seperator":
+				string = "<hr/>";
+				break;
+
+			case "entry":
+				if ( this.enabled ) {
+					string += `<a href=\"javascript:void(0)\" class=\"highlightable\" ${this.func? " onclick=\"" + this.func + "\"" : ""}${this.tooltip? " title=\"" + this.tooltip + "\"" : ""}>${this.iconURL? "<img height=\"10px\" width=\"10px\" src=\"" + this.iconURL + "\"></img> " : ""}${this.name}</a><br/>`;
+				} else {
+					string += `<span${this.tooltip? " title=" + this.tooltip : ""}>${this.iconURL? "<img height=\"10px\" width=\"10px\" src=\"" + this.iconURL + "\"></img> " : ""}${this.name}</span><br/>`;
+				}
+				break;
+
+			case "topEntry":
+				if ( this.enabled ) {
+					string += `<a href=\"javascript:void(0)\" class=\"highlightable\" ${this.func? " onclick=\"" + this.func + "\"" : ""}${this.tooltip? " title=\"" + this.tooltip + "\"" : ""}>${this.iconURL? "<img height=\"10px\" width=\"10px\" src=\"" + this.iconURL + "\"></img> " : ""}${this.iconURL? "<img height=\"10px\" width=\"10px\" src=\"" + this.iconURL + "\"></img> " : ""}${this.name}</a>`;
+				} else {
+					string += `<span${this.tooltip? " title=" + this.tooltip : ""}>${this.iconURL? "<img height=\"10px\" width=\"10px\" src=\"" + this.iconURL + "\"></img> " : ""}${this.name}</span>`;
+				}
+				break;
+			case "subMenu":
+				if ( this.enabled ) {
+					string += `<div class=dropdown><span${this.func? " onclick=\"" + this.func + "\"": ""}${this.tooltip? " title=\"" + this.tooltip + "\"" : ""}>${this.iconURL? "<img height=\"10px\" width=\"10px\" src=\"" + this.iconURL + "\"></img> " : ""}${this.name} ►</span><div class="dropdown-content-right">`;
+					this.menuEntries.forEach( entry => {
+						string += entry.toString();
+					});
+					string += "</div></div><br/>";
+				} else {
+					string += `<span${this.tooltip? " title=\"" + this.tooltip + "\"" : ""}>${this.iconURL? "<img height=\"10px\" width=\"10px\" src=\"" + this.iconURL + "\"></img> " : ""}${this.name} ►</span><br/>`;
+				}
+				break;
+
+			case "topMenu":
+				if ( this.enabled ) {
+					string += `<div class=dropdown><span${this.func? " onclick=\"" + this.func + "\"": ""}${this.tooltip? " title=\"" + this.tooltip + "\"" : ""}>${this.iconURL? "<img height=\"10px\" width=\"10px\" src=\"" + this.iconURL + "\"></img> " : ""}${this.name}</span><div class="dropdown-content">`;
+					this.menuEntries.forEach( entry => {
+						string += entry.toString();
+					});
+					string += "</div></div>";
+				} else {
+					string += `<span${this.tooltip? " title=\"" + this.tooltip + "\"" : ""}>${this.iconURL? "<img height=\"10px\" width=\"10px\" src=\"" + this.iconURL + "\"></img> " : ""}${this.name}</span>`;
+				}
+				break;
 		}
 
-		if ( this.type == "entry" ) {
-			//Simple clickable entry
-			if ( this.enabled ) {
-				//Entry is enabled
-				string = "<a href=\"javascript:void(0);\" ";
-
-				//Add tooltip if set
-				if ( this.tooltip ) {
-					string += `title="${this.tooltip}" `
-				}
-
-				//Add clickEvent if set
-				if ( this.func ) {
-					string += `onclick=\"${this.func}\"`
-				}
-
-				string += `>${this.name}</a>`;
-
-			} else {
-				//Return grayed out, non-interactive text
-				string = "<span ";
-				if ( this.tooltip ) {
-					string += `title="${this.tooltip}" `;
-				}
-				string += `class=disabled>${this.title}</span>`;
-			}
-			return string;
-		}
-
-		//Top/Sub menu
-		if ( this.enabled ) {
-			string = "<div class=dropdown><span";
-
-			if ( this.tooltip ) {
-				string += `title=\"${this.tooltip}\"`
-			}
-			string += `>${this.name}`;
-
-			if ( this.type == "submenu" ) {
-				string += " ►</span><div class=\"dropdown-content-right\">";
-
-			} else {
-				string += "</span><div class=\"dropdown-content\">";
-			}
-
-			for ( var entry in this.entries ) {
-				let thisEntry = this.entries[entry].toString();
-				string += thisEntry;
-				if ( thisEntry != "<hr/>") {
-					string += "<br/>";
-				}
-			}
-
-			string += "</div></div>";
-
-			return string;
-		} else {
-			string = `<span class=disabled>${this.name}`
-			if ( this.type == "submenu" ) {
-				string += "<span class=floatRight>►</span>"
-			}
-		}
+		return string;
 
 	}
 
@@ -105,22 +97,25 @@ export default class MenuBar {
 	constructor() {
 		this.element = document.createElement("div");
 		this.element.setAttribute("id", "menuBar");
-		this.menuSets	= {}
+		this.menuSets	= {};
 		this.setName	= "default";
+		this.menuSets["default"] = [];
 	}
 
-	addEntry(name = "untitled item", set = "default", type = "entry", func = false, enabled = true, tooltip = false) {
-		if ( !this.menuSets[set] ) {
-			this.menuSets[set] = {};
-		}
-		this.menuSets[set][name] = new menuEntry(name, type, func, enabled, tooltip);
+	set(setName = "default", menuJSON ) {
+		this.menuSets[setName] = [];
+		menuJSON.forEach( menu => {
+			console.log( menu );
+			this.menuSets[setName].push(new MenuEntry(menu));
+		});
 	}
 
 	update() {
 		var string = "";
-		for (var entry in this.menuSets[this.setName] ) {
-			string += this.menuSets[this.setName][entry].toString();
-		}
+		this.menuSets[this.setName].forEach( menu => {
+			string += menu.toString();
+		});
+
 		this.element.innerHTML = string;
 	}
 }
