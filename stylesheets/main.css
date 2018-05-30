@@ -115,10 +115,14 @@ body {
     display: inline-block;
 }
 
-.dropdown > span, .dropdown-content > a, .dropdown-content-right > a {
+.dropdown > span, .dropdown-content-right > span, .dropdown-content > a, .dropdown-content-right > a {
 	padding-left: 4px;
 	padding-right: 4px;
 	white-space: nowrap;
+}
+
+.dropdown > span > img, .dropdown-content > a > img, .dropdown-content-right > a > img {
+	transform: translate( 0%, 25%);
 }
 
 .dropdown-content, .dropdown-content-right {
@@ -182,4 +186,8 @@ body {
 	max-height: 108px;
 	max-width: 148px;
 	max-width: 148px;
+}
+
+.charCard {
+	padding: 2px;
 }

@@ -47,6 +47,24 @@ export default class PoniarySave {
 		}
 	}
 
+	loadOverwrite(loadedSave) {
+		saveUpdater(loadedSave, (updatedSave, error) => {
+			if ( !error.error ) {
+				this.Characters = JSON.parse(JSON.stringify(updatedSave.Characters));
+				this.MetaInf	= JSON.parse(JSON.stringify(updatedSave.MetaInf));
+			} else {
+				console.log(error);
+				alert("Unable to load Save!\n" + error.details);
+			}
+		});
+	}
+
+	forEachChar( callback = (character) => {}) {
+		this.Characters.forEach( character => {
+			callback(character)
+		});
+	}
+
 	toString() {
 		//Convert this object to a string, following it's pretty print prefrence
 		return this.MetaInf.pretty ? JSON.stringify(this, null, 3): JSON.stringify(this);
@@ -98,6 +116,61 @@ export default class PoniarySave {
 		element.click();
 		document.body.removeChild(element);
 	}
+}
+
+function saveUpdater(save, callback) {
+	var error			= false;
+	var errorDetails	= "";
+
+	if ( save.MetaInf.app != AppData.name ) {
+		error			= true;
+		errorDetails	= "Not a valid Poniary Save";
+	} else {
+		switch( save.MetaInf.version ) {
+			case "18.2.2":
+				save.MetaInf.pretty		= false;
+				save.MetaInf.version	= AppData.saveVersion;
+				save.Characters			= save.TableOfContents;
+				delete save.tableOfContents;
+				save.Characters.forEach(character => {
+					character.birthPlace = character.birth_place;
+					delete character.birth_place;
+
+					character.cutieMark = character.cutie_mark;
+					delete character.cutie_mark;
+
+					character.specialTalent = character.special_talent;
+					delete character.special_talent;
+				});
+				console.info(`Save version updated<br/>18.2.2 <b><font color=#26FF6A>→</font></b> ${poniarySaveVersion}`, "Save Updater");
+				break;
+
+			case "18.4.27":
+				save.Characters			= save.TableOfContents;
+				delete save.tableOfContents;
+				save.Characters.forEach(character => {
+					character.birthPlace = character.birth_place;
+					delete character.birth_place;
+
+					character.cutieMark = character.cutie_mark;
+					delete character.cutie_mark;
+
+					character.specialTalent = character.special_talent;
+					delete character.special_talent;
+				});
+				break;
+			case AppData.saveVersion:
+				console.info("Save Version is Up To Date");
+				break;
+			default:
+				console.error("UNKNOWN SAVE VERSION!");
+				error = true;
+				errorDetails = "Unknown Save Version: " + save.MetaInf.version + "\nPlease ensure that Poniary is NOT out of date and that your save is not damaged or not a save."
+				break;
+		}
+	}
+
+	callback(save, { error: error, details: errorDetails });
 }
 
 function getSizeEstimate(stringifedObject, doAbbreviation = true) {

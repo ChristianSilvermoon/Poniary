@@ -117,7 +117,7 @@ a:hover {
 	}
 }
 
-.dropdown-content, .dropdown-content-right {
+.dropdown-content, .dropdown-content-right, .charCard {
 	border: 2px solid white;
 	border-radius: 4px;
 

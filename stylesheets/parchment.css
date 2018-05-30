@@ -107,7 +107,7 @@ a:hover {
 	}
 }
 
-.dropdown-content, .dropdown-content-right {
+.dropdown-content, .dropdown-content-right, .charCard {
 	border-image: url("../img/parchment_border.png") 25 fill repeat;
 	border-image-width: 25px;
 	padding: 12px;

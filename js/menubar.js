@@ -13,7 +13,7 @@ class MenuEntry {
 		this.type			= menuJSON.type? menuJSON.type : "entry"; //entry, topmenu, submenu, or seperator
 		this.tooltip		= menuJSON.tooltip? menuJSON.tooltip : false; //Tool tip if present;
 		this.iconURL		= menuJSON.iconURL? menuJSON.iconURL : false;
-		this.enabled		= menuJSON.enabled? menuJSON.enabled : true; //Disabled or not;
+		this.enabled		= menuJSON.enabled == false ? false : true; //Disabled or not;
 		this.func			= menuJSON.func? menuJSON.func : false; //JS Click Function;
 		this.menuEntries	= [];
 
@@ -24,10 +24,6 @@ class MenuEntry {
 		}
 
 		return this;
-	}
-
-	addEntry(name = "untitled item", type = "entry", func = false, enabled = true, tooltip = false ) {
-		this.entries[name] = new menuEntry(name, type, func, enabled, tooltip);
 	}
 
 	enable() {
@@ -49,40 +45,40 @@ class MenuEntry {
 
 			case "entry":
 				if ( this.enabled ) {
-					string += `<a href=\"javascript:void(0)\" class=\"highlightable\" ${this.func? " onclick=\"" + this.func + "\"" : ""}${this.tooltip? " title=\"" + this.tooltip + "\"" : ""}>${this.iconURL? "<img height=\"10px\" width=\"10px\" src=\"" + this.iconURL + "\"></img> " : ""}${this.name}</a><br/>`;
+					string += `<a href=\"javascript:void(0)\" class=\"highlightable\" ${this.func? " onclick=\"" + this.func + "\"" : ""}${this.tooltip? " title=\"" + this.tooltip + "\"" : ""}>${this.iconURL? "<img height=\"16px\" width=\"16px\" src=\"" + this.iconURL + "\"></img> " : ""}${this.name}</a><br/>`;
 				} else {
-					string += `<span${this.tooltip? " title=" + this.tooltip : ""}>${this.iconURL? "<img height=\"10px\" width=\"10px\" src=\"" + this.iconURL + "\"></img> " : ""}${this.name}</span><br/>`;
+					string += `<span style="color: gray"${this.tooltip? " title=" + this.tooltip : ""}>${this.iconURL? "<img height=\"16px\" width=\"16px\" src=\"" + this.iconURL + "\"></img> " : ""}${this.name}</span><br/>`;
 				}
 				break;
 
 			case "topEntry":
 				if ( this.enabled ) {
-					string += `<a href=\"javascript:void(0)\" class=\"highlightable\" ${this.func? " onclick=\"" + this.func + "\"" : ""}${this.tooltip? " title=\"" + this.tooltip + "\"" : ""}>${this.iconURL? "<img height=\"10px\" width=\"10px\" src=\"" + this.iconURL + "\"></img> " : ""}${this.iconURL? "<img height=\"10px\" width=\"10px\" src=\"" + this.iconURL + "\"></img> " : ""}${this.name}</a>`;
+					string += `<a href=\"javascript:void(0)\" class=\"highlightable\" ${this.func? " onclick=\"" + this.func + "\"" : ""}${this.tooltip? " title=\"" + this.tooltip + "\"" : ""}>${this.iconURL? "<img height=\"16px\" width=\"16px\" src=\"" + this.iconURL + "\"></img> " : ""}${this.iconURL? "<img height=\"16px\" width=\"16px\" src=\"" + this.iconURL + "\"></img> " : ""}${this.name}</a>`;
 				} else {
-					string += `<span${this.tooltip? " title=" + this.tooltip : ""}>${this.iconURL? "<img height=\"10px\" width=\"10px\" src=\"" + this.iconURL + "\"></img> " : ""}${this.name}</span>`;
+					string += `<span  style="color: gray"${this.tooltip? " title=" + this.tooltip : ""}>${this.iconURL? "<img height=\"16px\" width=\"16px\" src=\"" + this.iconURL + "\"></img> " : ""}${this.name}</span>`;
 				}
 				break;
 			case "subMenu":
 				if ( this.enabled ) {
-					string += `<div class=dropdown><span${this.func? " onclick=\"" + this.func + "\"": ""}${this.tooltip? " title=\"" + this.tooltip + "\"" : ""}>${this.iconURL? "<img height=\"10px\" width=\"10px\" src=\"" + this.iconURL + "\"></img> " : ""}${this.name} ►</span><div class="dropdown-content-right">`;
+					string += `<div class=dropdown><span${this.func? " onclick=\"" + this.func + "\"": ""}${this.tooltip? " title=\"" + this.tooltip + "\"" : ""}>${this.iconURL? "<img height=\"16px\" width=\"16px\" src=\"" + this.iconURL + "\"></img> " : ""}${this.name} ►</span><div class="dropdown-content-right">`;
 					this.menuEntries.forEach( entry => {
 						string += entry.toString();
 					});
 					string += "</div></div><br/>";
 				} else {
-					string += `<span${this.tooltip? " title=\"" + this.tooltip + "\"" : ""}>${this.iconURL? "<img height=\"10px\" width=\"10px\" src=\"" + this.iconURL + "\"></img> " : ""}${this.name} ►</span><br/>`;
+					string += `<span style="color: gray"${this.tooltip? " title=\"" + this.tooltip + "\"" : ""}>${this.iconURL? "<img height=\"16px\" width=\"16px\" src=\"" + this.iconURL + "\"></img> " : ""}${this.name} ►</span><br/>`;
 				}
 				break;
 
 			case "topMenu":
 				if ( this.enabled ) {
-					string += `<div class=dropdown><span${this.func? " onclick=\"" + this.func + "\"": ""}${this.tooltip? " title=\"" + this.tooltip + "\"" : ""}>${this.iconURL? "<img height=\"10px\" width=\"10px\" src=\"" + this.iconURL + "\"></img> " : ""}${this.name}</span><div class="dropdown-content">`;
+					string += `<div class=dropdown><span${this.func? " onclick=\"" + this.func + "\"": ""}${this.tooltip? " title=\"" + this.tooltip + "\"" : ""}>${this.iconURL? "<img height=\"16px\" width=\"16px\" src=\"" + this.iconURL + "\"></img> " : ""}${this.name}</span><div class="dropdown-content">`;
 					this.menuEntries.forEach( entry => {
 						string += entry.toString();
 					});
 					string += "</div></div>";
 				} else {
-					string += `<span${this.tooltip? " title=\"" + this.tooltip + "\"" : ""}>${this.iconURL? "<img height=\"10px\" width=\"10px\" src=\"" + this.iconURL + "\"></img> " : ""}${this.name}</span>`;
+					string += `<span style="color: gray"${this.tooltip? " title=\"" + this.tooltip + "\"" : ""}>${this.iconURL? "<img height=\"16px\" width=\"16px\" src=\"" + this.iconURL + "\"></img> " : ""}${this.name}</span>`;
 				}
 				break;
 		}
@@ -105,7 +101,6 @@ export default class MenuBar {
 	set(setName = "default", menuJSON ) {
 		this.menuSets[setName] = [];
 		menuJSON.forEach( menu => {
-			console.log( menu );
 			this.menuSets[setName].push(new MenuEntry(menu));
 		});
 	}

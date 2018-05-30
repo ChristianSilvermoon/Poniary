@@ -43,6 +43,35 @@ export default class Page {
 		showPony(id, this);
 	}
 
+	showCharList() {
+		const actionBar = document.createElement("div");
+		actionBar.setAttribute("class", "actionbar smallwin");
+
+		actionBar.innerHTML = ("<input type=text placeholder=\"RegEXP Filter\"></input><div style=\"float:right\">Sort: [ABC] [ZYX] [REV]</div>");
+
+		const origContent = page.contentContainer.innerHTML;
+		page.contentContainer.innerHTML = "";
+		page.contentContainer.appendChild(actionBar);
+		page.contentContainer.appendChild(page.displayArea);
+
+		this.displayArea.innerHTML = "";
+
+		saveData.forEachChar( pony => {
+			let charHTML = "";
+			charHTML += "<div class='charCard'>";
+			charHTML += saveData.Characters.indexOf(pony).toString().padStart(3, "0") + " — "
+			charHTML += `<span style="border-bottom: 4px solid; border-image: linear-gradient( to right, ${pony.bkg} 0%, 80%, #000 100% ) 1">`;
+			charHTML += `${BBCode.decode( BBCode.strip(pony.name, ["code", "quote", "authoredQuote", "url", "namedURL"]) )}<br/>`;
+			charHTML += `</span><br/><font size=1>`;
+			charHTML += `<a href="javascript:void(0)" onclick="page.showPony(${saveData.Characters.indexOf(pony)})">View</a>` + " | Move Up | Move Down | Edit | Delete<br/>";
+			charHTML += `Estimated Size: ${saveData.estimatedSize(true, saveData.Characters.indexOf(pony))}`;
+			charHTML += "</font></div>"
+
+			this.displayArea.innerHTML += charHTML;
+		});
+
+	}
+
 	showWelcome() {
 		//Clear Content Area
 		this.contentContainer.innerHTML = "";
@@ -73,6 +102,17 @@ export default class Page {
 			window.requestAnimationFrame(page.smoothScrollTop);
 			window.scrollTo(0, currentScroll - (currentScroll/5));
 		}
+	}
+
+	handleLoadFile(element, mode = "overwrite") {
+		const fileReader = new FileReader();
+		fileReader.onload = event => {
+			if ( mode == "overwrite" ) {
+				saveData.loadOverwrite(JSON.parse(event.target.result));
+			}
+		}
+
+		fileReader.readAsText(element.files[0]);
 	}
 
 	init() {
@@ -134,7 +174,7 @@ function showPony(id, page) {
 	const actionBar = document.createElement("div");
 	actionBar.setAttribute("class", "actionbar smallwin");
 
-	actionBar.innerHTML = ("◄ Back to Character List <span style=\"float:right;\">Edit</span>");
+	actionBar.innerHTML = ("<a href=\"javascript:void(0)\" onclick=\"page.showCharList()\">◄ Back to Character List</a> <span style=\"float:right;\">Edit</span>");
 
 	const origContent = page.contentContainer.innerHTML;
 	page.contentContainer.innerHTML = "";

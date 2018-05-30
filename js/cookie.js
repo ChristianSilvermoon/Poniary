@@ -39,11 +39,8 @@ export default class Cookie {
 			let cookieArray	= cookie.split("=");
 			let cookieName	= cookieArray[0];
 			if ( cookieName == name ) {
-				console.log("Matched!")
 				cookieArray.shift();
 				returnValue = new Cookie(cookieName, cookieArray.join("="), false);
-			} else {
-				console.log("Didn't Match!", cookieName, name);
 			}
 		});
 
