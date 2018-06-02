@@ -17,6 +17,28 @@ body {
 	display: none;
 }
 
+#DialogBlackout {
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	margin: 0;
+	background: radial-gradient(
+		circle at center,
+		rgba(0,0,0, 100%) 0%,
+		rgba(0,0,0, 60%) 100%
+	);
+	z-index: 900;
+	overflow: auto;
+}
+
+#dialogBox {
+	margin: 10%;
+	width: 75%;
+	text-align: center;
+}
+
 /* Main Divs */
 #Header {
 	margin-left: 0;
@@ -107,6 +129,11 @@ body {
 
 #ContentContainer {
 	padding: 10%;
+}
+
+#Editor_Description {
+	max-width: 98%;
+	min-width: 98%;
 }
 
 /* Dropdown Menus */

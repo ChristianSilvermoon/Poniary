@@ -30,6 +30,9 @@ export default class BBCode {
 		string = string.replace(/\[url=((?:.|\t|\n|\r)*?)\]((?:.|\t|\n|\r)*?)\[\/url\]/g, "<a href=\"$1\" target=\"_blank\" title=\"Link to:&#10;$1\">$2</a>");
 		string = string.replace(/\[url]((?:.|\t|\n|\r)*?)\[\/url\]/g, "<a href=\"$1\" target=\"_blank\" title=\"Link to:&#10;$1\">$1</a>");
 
+		//Char
+		string = string.replace(/\[char=((?:.|\t|\n|\r)*?)\]((?:.|\t|\n|\r)*?)\[\/char\]/g, "<a href=\"javascript:void(0)\" onclick=\"page.handleCharLink('$1')\" title=\"Click for Character Page\">$2</a>");
+
 		//Code
 		string = string.replace(/\[code]((?:.|\t|\n|\r)*?)\[\/code\]/g, "<br/><div class=\"codeblock\"><code>$1</code></div><br/>");
 
@@ -49,7 +52,7 @@ export default class BBCode {
 		return string;
 	}
 
-	static strip(string, toStrip = [ "i", "b", "u", "s", "url", "namedURL", "sub", "sup", "spoiler", "quote", "authoredQuote", "color", "highlight", "prisma", "code"]) {
+	static strip(string, toStrip = [ "i", "b", "u", "s", "url", "char", "namedURL", "sub", "sup", "spoiler", "quote", "authoredQuote", "color", "highlight", "prisma", "code"]) {
 		//Strip BBCODE from text
 
 
@@ -91,6 +94,9 @@ export default class BBCode {
 					break;
 				case "url":
 					string = string.replace(/\[url]((?:.|\t|\n|\r)*?)\[\/url\]/g, "$1");
+					break;
+				case "char":
+					string = string.replace(/\[char=((?:.|\t|\n|\r)*?)\]((?:.|\t|\n|\r)*?)\[\/char\]/g, "$2");
 					break;
 				case "code":
 					//Code

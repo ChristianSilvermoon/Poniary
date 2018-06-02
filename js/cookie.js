@@ -1,5 +1,9 @@
 import {AppData} from './app.js';
 
+/*
+	Makes dealing cookies easier.
+*/
+
 export default class Cookie {
 	constructor(name, value, prependNameWithVersion = true) {
 		if ( prependNameWithVersion ) {

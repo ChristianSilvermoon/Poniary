@@ -1,4 +1,5 @@
 import {AppData} from "./app.js";
+import BBCode from './bbcode.js';
 
 /*
 	Class handles manipulation, storage, loading, etc. of pony data
@@ -8,7 +9,7 @@ class Pony {
 	constructor() {
 		this.name			= "New Character";
 		this.subtitle		= "New Character";
-		this.bkg			= "#003F8C";
+		this.ribbonColor	= "#003F8C";
 		this.creator		= "unknown";
 		this.dob			= "unknown";
 		this.birthPlace 	= "unknown";
@@ -32,6 +33,7 @@ export default class PoniarySave {
 	constructor() {
 		this.Characters		= [];
 		this.MetaInf		= {
+			app: AppData.name,
 			author: "unknown",
 			displayOrder: [],
 			lock: false,
@@ -47,6 +49,19 @@ export default class PoniarySave {
 		}
 	}
 
+	loadPrepend(loadedSave) {
+		saveUpdater(loadedSave, (updatedSave, error) => {
+			if ( !error.error ) {
+				loadedSave.Characters.forEach( pony => {
+					this.Characters.unshift(pony);
+				});
+			} else {
+				console.log(error);
+				alert("Unable to load Save!\n" + error.details);
+			}
+		});
+	}
+
 	loadOverwrite(loadedSave) {
 		saveUpdater(loadedSave, (updatedSave, error) => {
 			if ( !error.error ) {
@@ -59,10 +74,52 @@ export default class PoniarySave {
 		});
 	}
 
+	loadAppend(loadedSave) {
+		saveUpdater(loadedSave, (updatedSave, error) => {
+			if ( !error.error ) {
+				loadedSave.Characters.forEach( pony => {
+					this.Characters.push(pony);
+				});
+			} else {
+				console.log(error);
+				alert("Unable to load Save!\n" + error.details);
+			}
+		});
+	}
+
 	forEachChar( callback = (character) => {}) {
 		this.Characters.forEach( character => {
 			callback(character)
 		});
+	}
+
+	removeChar(id) {
+		if ( this.Characters[id] ) {
+			var oldponyname = this.Characters[id].name
+			this.Characters.splice(id,1);
+			//msgBox("Looks like <b>" + oldponyname + "</b> may be gone forever...<br/>");
+		}
+	}
+
+	sortChars(method) {
+		if ( method == "ABC" || method == "ZYX" ) {
+			var ponlist = JSON.parse( JSON.stringify(this.Characters) );
+			var sortinglist = [];
+			for ( let i = 0; i < ponlist.length; i++ ) {
+				sortinglist[i] = [ BBCode.strip(ponlist[i].name), i ];
+			}
+			sortinglist = sortinglist.sort();
+
+			for ( let i = 0; i != ponlist.length; i++ ) {
+				this.Characters[i] = ponlist[sortinglist[i][1]];
+			}
+
+			if ( method == "ZYX" ) {
+				this.Characters.reverse();
+			}
+		} else if ( method == "REV" ) {
+			this.Characters.reverse();
+		}
 	}
 
 	toString() {
@@ -86,7 +143,43 @@ export default class PoniarySave {
 	}
 
 	estimatedSize(doAbbreviation = true, characterID = false) {
-		return getSizeEstimate(characterID? this.exportChar(characterID).toString() : this.toString(), doAbbreviation);
+		return getSizeEstimate(characterID !== false? this.exportChar(characterID).toString() : this.toString(), doAbbreviation);
+	}
+
+	swapChars(oldPos, newPos) {
+		//Switches characters positions from old position to new position
+		if ( newPos < 0 || newPos > this.length - 1 ) {
+			console.error("Cannot move character to that position!");
+			return;
+		}
+
+		const oldChar = this.Characters[oldPos];
+		const newChar = this.Characters[newPos];
+		this.Characters[newPos] = oldChar;
+		this.Characters[oldPos] = newChar;
+	}
+
+	queryName(regExp_query, result_cap = 5) {
+		//Accepts a REGEXP query,
+		//result_cap can be a number or false to disable it.
+		var results = [];
+
+		this.forEachChar( char => {
+			try {
+				if ( BBCode.strip(char.name.toLowerCase()).match(regExp_query.toLowerCase()) ) {
+					results.push( this.Characters.indexOf(char) );
+				}
+			} catch (error) {
+				//IGNORE
+				//console.warn("Ignoring Error in poniarySave.queryName()", error.message);
+			}
+		});
+
+		if ( (result_cap != false) && (results.length > result_cap)) {
+			results.length = result_cap;
+		}
+
+		return results;
 	}
 
 	exportChar(id) {
@@ -101,7 +194,7 @@ export default class PoniarySave {
 		//Offer file for Download
 		let element = document.createElement("a");
 
-		if ( id ) {
+		if ( id !== false) {
 			//Export requested Character
 			console.info(`Offered Character ${id} Download...`)
 			element.href = this.exportChar(id).toDataURI();
@@ -136,13 +229,16 @@ function saveUpdater(save, callback) {
 					character.birthPlace = character.birth_place;
 					delete character.birth_place;
 
+					character.ribbonColor = character.bkg;
+					delete character.bkg;
+
 					character.cutieMark = character.cutie_mark;
 					delete character.cutie_mark;
 
 					character.specialTalent = character.special_talent;
 					delete character.special_talent;
 				});
-				console.info(`Save version updated<br/>18.2.2 <b><font color=#26FF6A>→</font></b> ${poniarySaveVersion}`, "Save Updater");
+				alert(`Save version updated!\n18.2.2 → ${AppData.saveVersion}`);
 				break;
 
 			case "18.4.27":
@@ -152,20 +248,24 @@ function saveUpdater(save, callback) {
 					character.birthPlace = character.birth_place;
 					delete character.birth_place;
 
+					character.ribbonColor = character.bkg;
+					delete character.bkg;
+
 					character.cutieMark = character.cutie_mark;
 					delete character.cutie_mark;
 
 					character.specialTalent = character.special_talent;
 					delete character.special_talent;
-				});
+				});;
+				alert(`Save version updated!\n18.2.2 → ${AppData.saveVersion}`);
 				break;
 			case AppData.saveVersion:
-				console.info("Save Version is Up To Date");
+				// console.info("Save Version is Up To Date");
 				break;
 			default:
 				console.error("UNKNOWN SAVE VERSION!");
 				error = true;
-				errorDetails = "Unknown Save Version: " + save.MetaInf.version + "\nPlease ensure that Poniary is NOT out of date and that your save is not damaged or not a save."
+				errorDetails = "Unknown Save Version: " + save.MetaInf.version + "\n\nPlease ensure that:\n - Poniary is NOT out of date\n - That your save is not damaged or corrupted\n - That your JSON file is definately a Poniary Save\n\nIf you're CERTAIN this message is in error, please use:\nHelp → Report a Bug"
 				break;
 		}
 	}

@@ -61,6 +61,12 @@ hr {
 	); */
 }
 
+#topButton {
+	border-image: url("../img/parchment_textarea_enabled.png") 25 fill repeat;
+	border-image-width: 25px;
+	padding: 6px;
+}
+
 #StatusBarFileInfo {
 	padding-right: 6px;
 }
@@ -74,6 +80,26 @@ a:link, a:visited {
 a:hover {
 	color: #26FF6A;
 	transition: 0.2s ease-in;
+}
+
+input, textarea {
+	border-image: url("../img/parchment_textarea_enabled.png") 25 fill repeat;
+	border-image-width: 25px;
+	padding: 8px;
+	background: none;
+	color: black;
+}
+
+textarea {
+	padding: 10px;
+}
+
+input[type=text][disabled], textarea[type=text][disabled] {
+	opacity: 0.5;
+}
+
+input[type=color] {
+	padding: 2px;
 }
 
 .dropdown > span {
@@ -140,4 +166,14 @@ a:hover {
 	border-bottom: 1px solid #80FF80;
 	padding-bottom: 4px;
 	width: 100%;
+}
+
+
+/* Wekit-only */
+::-webkit-scrollbar {
+	border-image: url("../img/parchment_border.png") 25 fill repeat;
+	border-image-width: 0 0 25px;
+	border-width: 0px;
+	border-left-width: 50px;
+	padding-bottom: 14px;
 }

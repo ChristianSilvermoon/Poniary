@@ -10,6 +10,7 @@
 	<link rel="stylesheet" href="stylesheets/main.css">
 	<link rel="stylesheet" id="stylesheet" name="Decorative">
 	<link rel="icon" id="favicon" href="img/favicon.png" name="favicon">
+	<link rel="manifest" href="poniary_manifest.json">
 	<script type=module src="js/main.js"></script>
 </head>
 <body>
@@ -42,10 +43,94 @@
 				Hopefully this Interactive OC Manager will help you keep track of your OCs as well as it
 				does for me!<br/>
 				<br/>
-				Happy Ponying!
+				Happy Ponying!<br/>
+				<br/>
+				<a href="javascript:void(0)" onclick="page.showCharList()">Continue To Character List</a>
 			</center>
 		</div>
-		<input id=LoadFileRef type=file onchange="page.handleLoadFile(this)" accept="application/json, .json"></input>
+		<input id=LoadFilePrependRef type=file onchange="page.handleLoadFile(this, 'prepend')" accept="application/json, .json"></input>
+		<input id=LoadFileRef type=file onchange="page.handleLoadFile(this, 'overwrite')" accept="application/json, .json"></input>
+		<input id=LoadFileAppendRef type=file onchange="page.handleLoadFile(this, 'append')" accept="application/json, .json"></input>
+
+		<div id="RegEXPRef">
+			Regular Expressions (RegEXP)<hr/>
+			<a href="https://en.wikipedia.org/wiki/Regular_expression" target="_blank" title="Wikipedia Article on Regular Expressions">Regular Expressions</a>
+
+			are used in many computer programs and programing languages to determine if a string (aka a snippet of text), matches what you might want it to.<br/>
+			<br/>
+			This page's puprose is <u><b>NOT</b></u> to teach you all the details of RegEXP, nor is it a complete tutorial... however, it will teach you how
+			some of RegEXP's basic features work, and how it applies to Poniary and it's Search Feature.<br/>
+			<br/>
+			To test out and practice Regular Expressions, a good place to check out is: <a href="https://www.debuggex.com/" target="_blank">Debuggex</a><br/>
+			<br/>
+			The first thing to note is that certain characters are <i>special</i> and are not just what they appear to be. If you actually intend THAT character
+			and it's a special one, you'll need to use a backslash (\) to <i>escape</i> the character from it's special function.<br/>
+			<br/>
+			When searching in Poniary, things are case-insensitve and BBCode is removed, for simplicity</br>
+			This means that "[b]Pineapples[/b][sup]are YUMMY[/sup]" is treated as "pineapplesare yummy" when searching.<br/>
+			<br/>
+			Here are some examples of RegEXP in action:<br/>
+			<div class=codeblock>
+				<code>
+					This is a string of text. It will be the string we use for our examples.<br/>
+					This is the start of a line. This is NOT.<br/>
+					This NOT is not at the end of a line</br/>
+					That string ends here.<br/>
+					<br/>-----<br/>
+					Characters that are special will be colored like <font color=lime>so</font><br/>
+					Matches will normally be colored like <font color=yellow>this</font><br/>
+					Escaped Characters will be colored like <font color=aqua>this</font><br/>
+					<br/>-----<br/>
+					RegEXP:<br/>
+					<font color=lime>^</font>This<br/>
+					<br/>
+					Matches:<br/>
+					<font color=yellow>This</font> is a string of text. It will be the string we use for our examples.<br/>
+					<font color=yellow>This</font> is the start of a line. This is NOT.<br/>
+					<font color=yellow>This</font> NOT is not at the end of a line</br/>
+					That string ends here.<br/>
+					<br/>
+					Because:<br/>
+					The <font color=lime>^</font> character means "Start of a line".<br/>
+					This means that only the <u>This</u> at the start of a line matches<br/>
+					<br/>-----<br/>
+					RegEXP:<br/>
+					NOT<font color=lime>\</font><font color=aqua>.</font><font color=lime>$</font><br/>
+					<br/>
+					Matches:<br/>
+					This is a string of text. It will be the string we use for our examples.<br/>
+					This is the start of a line. This is <font color=yellow>NOT.</font><br/>
+					This NOT is not at the end of a line</br/>
+					That string ends here.<br/>
+					<br/>
+					Because:<br/>
+					The <font color=lime>$</font> character means "End of line".<br/>
+					Normally <font color=lime>.</font> means "Any character", but...<br/>
+					We used <font color=lime>\</font> to escape it, meaning we literally want a "."<br/>
+					What if we literally want a <font color=lime>\</font> ?<br/>
+					Just do "<font color=lime>\</font><font color=aqua>\</font>"<br/>
+					<br/>-----<br/>
+					RegEXP:<br/>
+					Th<font color=lime>(</font>is<font color=lime>|</font>at<font color=lime>)</font><br/>
+					<br/>
+					Matches:<br/>
+					<font color=yellow>This</font> is a string of text. It will be the string we use for our examples.<br/>
+					<font color=yellow>This</font> is the start of a line. <font color=yellow>This</font> is NOT.<br/>
+					<font color=yellow>This</font> NOT is not at the end of a line</br/>
+					<font color=yellow>That</font> string ends here.<br/>
+					<br/>
+					Because:<br/>
+					Things are grouped together by <font color=lime>()</font>!<br/>
+					So the above means <font color=yellow>Th</font><font color=lime>is</font> and/or
+					<font color=yellow>Th</font><font color=lime>at</font> are matches!<br/>
+					Note that <font color=lime>|</font> is only special inside something like <font color=lime>()</font> and means "Or"
+				</code>
+			</div>
+		</div>
+		<div id="DialogBlackout">
+			<div class=smallwin id="dialogBox">
+			</div>
+		</div>
 		<div id="bbCodeRef">
 			BBCode Reference<hr/>
 			Bulletin Board Code is pretty common place on the Internet today... and you can use it here too!<br/>
@@ -90,7 +175,10 @@
 					<td>This text is [color=orange]Colored[/color]</td><td>This text is <font color=orange>Colored</font></td>
 				</tr>
 				<tr>
-					<td>[code]This is a codeblock[/code]</td><td><div class=codeblock>This is a codeblock</div></td>
+					<td>[code]This is a codeblock[/code]</td><td><div class=codeblock><code>This is a codeblock</code></div></td>
+				</tr>
+				<tr>
+					<td>[char=Character Name]Character Link[/char]</td><td>*Special. Will attempt to pull up character's page when clicked.</td>
 				</tr>
 				<tr>
 					<td>[quote=Author says]Authored Quote[/quote]</td><td><div class=blockquote><div class=quoteAuthor>Author says</div>Authored Quote</div></td>
@@ -109,6 +197,55 @@
 				</tr>
 			</table>
 			</center>
+		</div>
+
+		<div id="EditorRef">
+			<div class="EditorContainer">
+				<center>Editing Charcter ID: <span id="Editor_ID"></span></center><br/>
+				Character Name: <input id=Editor_Name type=text placeholder="Character Name"></input>
+				<span style="float: right;">Subtitle: <input id=Editor_Subtitle type=text placeholder="Subtitle"></input></span><hr/>
+
+				Images: [<input id="Editor_ImageSubmitter" type=file accept="image/*"></input> <a href="javascript:void(0)" onclick="page.editorFunc('newImg')">+Add</a>]<br/>
+				<table class=list_table id="Editor_Images"></table><br/>
+				<br/>
+				Ribbon Color: <input id=Editor_RibbonColor type=color></input><br/>
+				Creator: <input id=Editor_Creator type=text placeholder="Creator Name"></input> [<a href="javascript:void(0)" onclick="document.getElementById('Editor_Creator').value = saveData.MetaInf.author" title="Set as Author of Save From Meta Information">Set As Author</a>]<br/>
+				Birth Date: <input id=Editor_DOB type=text placeholder="Birth Date"></input><br/>
+				Birth Place: <input id=Editor_BirthPlace type=text placeholder="Birth Place"></input><br/>
+				Race: <input id=Editor_Race type=text placeholder="Birth Place"></input><br/>
+				Gender: <select id=Editor_Gender type=listbox>
+						<option>Undefined</option>
+						<option>Female</option>
+						<option>Intersex</option>
+						<option>Male</option>
+						<option>N/a</option>
+						<option>Other</option>
+					</select><br/>
+				Orientation: <input id=Editor_Orientation type=text placeholder="Orientation"></input><br/>
+				Occupation: <input id=Editor_Occupation type=text placeholder="Occupation"></input><br/>
+				Special Talent: <input id=Editor_Talent type=text placeholder="Special Talent"></input><br/>
+				Cutie Mark: <input id=Editor_CutieMark type=text placeholder="Cutie Mark"></input><br/>
+				Universe: <input id=Editor_Universe type=text placeholder="Universe"></input><br/>
+				<br/>
+				Custom Fields: [<a href="javascript:void(0)" onclick="page.editorFunc('newCustField')">+New</a>]<br/>
+				<table class=list_table id="Editor_CustomFields"></table>
+				<br/>
+				Coloration: [<a href="javascript:void(0)" onclick="page.editorFunc('newColor')">+New</a>]<br/>
+				<table class=list_table id="Editor_Colors"></table>
+				<br/>
+				Family: [<a href="javascript:void(0)" onclick="page.editorFunc('newFamily')">+New</a>]<br/>
+				<table class=list_table id="Editor_Family"></table>
+				<br/>
+				Description:<br/>
+				<textarea rows=10 id=Editor_Description></textarea><br/>
+				<br/>
+				Abilities: [<a href="javascript:void(0)" onclick="page.editorFunc('newAbility')">+New</a>]<br/>
+				<table class=list_table id="Editor_Abilities"></table><br/>
+				<br/>
+				<hr/><br/>
+				<center><a href="javascript:void(0)" onclick="page.editorFunc('save')">Save</a><br/>
+				<a href="javascript:void(0)" onclick="page.editorFunc('discard')">Discard</center><br/>
+			</div>
 		</div>
 	</div>
 	<!------------>

@@ -47,7 +47,7 @@ class MenuEntry {
 				if ( this.enabled ) {
 					string += `<a href=\"javascript:void(0)\" class=\"highlightable\" ${this.func? " onclick=\"" + this.func + "\"" : ""}${this.tooltip? " title=\"" + this.tooltip + "\"" : ""}>${this.iconURL? "<img height=\"16px\" width=\"16px\" src=\"" + this.iconURL + "\"></img> " : ""}${this.name}</a><br/>`;
 				} else {
-					string += `<span style="color: gray"${this.tooltip? " title=" + this.tooltip : ""}>${this.iconURL? "<img height=\"16px\" width=\"16px\" src=\"" + this.iconURL + "\"></img> " : ""}${this.name}</span><br/>`;
+					string += `<span style="color: gray"${this.tooltip? " title=\"" + this.tooltip + "\"" : ""}>${this.iconURL? "<img height=\"16px\" width=\"16px\" src=\"" + this.iconURL + "\"></img> " : ""}${this.name}</span><br/>`;
 				}
 				break;
 
@@ -55,7 +55,7 @@ class MenuEntry {
 				if ( this.enabled ) {
 					string += `<a href=\"javascript:void(0)\" class=\"highlightable\" ${this.func? " onclick=\"" + this.func + "\"" : ""}${this.tooltip? " title=\"" + this.tooltip + "\"" : ""}>${this.iconURL? "<img height=\"16px\" width=\"16px\" src=\"" + this.iconURL + "\"></img> " : ""}${this.iconURL? "<img height=\"16px\" width=\"16px\" src=\"" + this.iconURL + "\"></img> " : ""}${this.name}</a>`;
 				} else {
-					string += `<span  style="color: gray"${this.tooltip? " title=" + this.tooltip : ""}>${this.iconURL? "<img height=\"16px\" width=\"16px\" src=\"" + this.iconURL + "\"></img> " : ""}${this.name}</span>`;
+					string += `<span  style="color: gray"${this.tooltip? " title=\"" + this.tooltip + "\"" : ""}>${this.iconURL? "<img height=\"16px\" width=\"16px\" src=\"" + this.iconURL + "\"></img> " : ""}${this.name}</span>`;
 				}
 				break;
 			case "subMenu":

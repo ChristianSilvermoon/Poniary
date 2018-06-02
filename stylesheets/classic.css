@@ -42,13 +42,14 @@ body {
 	color: white;
 	padding: 6px;
 }
+
 .smallwin {
 	background: linear-gradient(
 		135deg,
 		#003F8C 0%,
 		#000000 100%
 	);
-	padding: 4px;
+	padding: 12px;
 	border: 2px outset white;
 }
 
@@ -81,6 +82,17 @@ a:link, a:visited {
 a:hover {
 	color: #26FF6A;
 	transition: 0.2s ease-in;
+}
+
+input, textarea {
+  border-radius: 4px;
+  border: 2px inset rgba(255, 255, 255, 0.4);
+  background: rgba(0, 0, 0, 0.2);
+  color: white;
+}
+
+input[type=text][disabled], textarea[type=text][disabled] {
+	border: none;
 }
 
 .dropdown > span {

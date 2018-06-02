@@ -6,8 +6,8 @@
 export const AppData = {
 	name: "Poniary OC Manager",
 	author: "Christian \"Krissy\" Silvermoon",
-	version: "18.5.23",
-	saveVersion: "18.5.23",
+	version: "18.6.2",
+	saveVersion: "18.6.2",
 	hyperlinks: {
 		"github": "https://github.com/ChristianSilvermoon/Poniary",
 		"bugReport": "https://github.com/ChristianSilvermoon/Poniary/issues/new?labels=bug&title=New+bug+report&template=bug_report.md",
