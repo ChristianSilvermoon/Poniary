@@ -23,13 +23,13 @@ const universalHelpMenu = {
 			name: "BBCode Reference Guide",
 			func: "page.showBBCodeRef()",
 			tooltip: "Show Poniary's BBCode Reference",
-			iconURL: "../img/icon_bbcode.png"
+			iconURL: "img/icon_bbcode.png"
 		},
 		{
 			name: "Regular Expressions (RegEXP) Guide",
 			func: "page.showRegEXPHelp()",
 			tooltip: "Show Poniary's RegExp Reference",
-			iconURL: "../img/icon_regexp.png"
+			iconURL: "img/icon_regexp.png"
 		},
 		{
 			name: "seperator",
@@ -39,19 +39,19 @@ const universalHelpMenu = {
 			name: "Github Repository",
 			func: `window.open('${AppData.hyperlinks.github}', '_blank').focus();`,
 			tooltip: `Go to&#10;${AppData.hyperlinks.github}`,
-			iconURL: "../img/icon_repository.png"
+			iconURL: "img/icon_repository.png"
 		},
 		{
 			name: "Report a Bug",
 			func: `window.open('${AppData.hyperlinks.bugReport}', '_blank').focus();`,
 			tooltip: `Go to&#10;${AppData.hyperlinks.bugReport}`,
-			iconURL: "../img/icon_bugreport.png"
+			iconURL: "img/icon_bugreport.png"
 		},
 		{
 			name: "Request a Feature",
 			func: `window.open('${AppData.hyperlinks.featureRequest}', '_blank').focus();`,
 			tooltip: `Go to&#10;${AppData.hyperlinks.featureRequest}`,
-			iconURL: "../img/icon_plus.png"
+			iconURL: "img/icon_plus.png"
 		}
 	]
 }
@@ -73,14 +73,14 @@ const universalViewMenu = {
 					name: "Save/Update Cookie",
 					func: "let cookie = new Cookie('stylesheet', page.style); cookie.store(); console.info(`Saved Cookie: ${cookie.name} = ${cookie.value}`)",
 					tooltip: "Saves a Cookie for 365 Days&#10;Stores currently selected Stylesheet",
-					iconURL: "../img/icon_cookie.png"
+					iconURL: "img/icon_cookie.png"
 
 				},
 				{
 					name: "Remove Cookie",
 					func: "let cookie = Cookie.get('stylesheet'); cookie.destroy(); console.info(`Removed Cookie: ${cookie.name} = ${cookie.value}`)",
 					tooltip: "Delete the Stylesheet Cookie from this computer if present",
-					iconURL: "../img/icon_x.png"
+					iconURL: "img/icon_x.png"
 				},
 				{
 					name: "Seperator",
@@ -90,19 +90,19 @@ const universalViewMenu = {
 					name: "Classic",
 					func: "page.style = 'classic'",
 					tooltip: "Poniary's Classic Look",
-					iconURL: "../img/icon_theme_classic.png"
+					iconURL: "img/icon_theme_classic.png"
 				},
 				{
 					name: "Classic (Dark)",
 					func: "page.style = 'dark'",
 					tooltip: "A dark version of Poniary's Classic Theme",
-					iconURL: "../img/icon_theme_classic_dark.png"
+					iconURL: "img/icon_theme_classic_dark.png"
 				},
 				{
 					name: "Parchment",
 					func: "page.style = 'parchment'",
 					tooltip: "A brand new theme... with an Old Parchment Look",
-					iconURL: "../img/icon_theme_parchment.png"
+					iconURL: "img/icon_theme_parchment.png"
 				}
 			]
 		},
@@ -241,14 +241,14 @@ const menuBarPresets = {
 							name: "Save/Update Cookie",
 							func: "let cookie = new Cookie('stylesheet', page.style); cookie.store(); console.info(`Saved Cookie: ${cookie.name} = ${cookie.value}`)",
 							tooltip: "Saves a Cookie for 365 Days&#10;Stores currently selected Stylesheet",
-							iconURL: "../img/icon_cookie.png"
+							iconURL: "img/icon_cookie.png"
 
 						},
 						{
 							name: "Remove Cookie",
 							func: "let cookie = Cookie.get('stylesheet'); cookie.destroy(); console.info(`Removed Cookie: ${cookie.name} = ${cookie.value}`)",
 							tooltip: "Delete the Stylesheet Cookie from this computer if present",
-							iconURL: "../img/icon_x.png"
+							iconURL: "img/icon_x.png"
 						},
 						{
 							name: "Seperator",
@@ -258,19 +258,19 @@ const menuBarPresets = {
 							name: "Classic",
 							func: "page.style = 'classic'",
 							tooltip: "Poniary's Classic Look",
-							iconURL: "../img/icon_theme_classic.png"
+							iconURL: "img/icon_theme_classic.png"
 						},
 						{
 							name: "Classic (Dark)",
 							func: "page.style = 'dark'",
 							tooltip: "A dark version of Poniary's Classic Theme",
-							iconURL: "../img/icon_theme_classic_dark.png"
+							iconURL: "img/icon_theme_classic_dark.png"
 						},
 						{
 							name: "Parchment",
 							func: "page.style = 'parchment'",
 							tooltip: "A brand new theme... with an Old Parchment Look",
-							iconURL: "../img/icon_theme_parchment.png"
+							iconURL: "img/icon_theme_parchment.png"
 						}
 					]
 				},
