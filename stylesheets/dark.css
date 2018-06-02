@@ -1,0 +1,172 @@
+body {
+	background: radial-gradient(
+		circle at center,
+		#000 0%,
+		#333 100%
+		) no-repeat center center fixed;
+	color: #EEE;
+}
+
+#menuBar {
+	border-bottom-style: solid;
+	border-bottom-color: white;
+	color: #FFF;
+	font-size: 8pt;
+	background: linear-gradient(
+		to bottom,
+		#444 0%,
+		#777 50%,
+		#444 100%
+	);
+}
+
+
+#titleBar {
+	text-align: center;
+	background: radial-gradient(
+ 		circle at center,
+		#707 0%,
+		#404 100%
+	);
+	border-bottom: 1px solid #CCC;
+	padding: 4px;
+}
+
+.bigwin {
+	background: linear-gradient(
+		135deg,
+		#444 0%,
+		#000 100%
+	);
+
+	border: 2px white outset;
+	border-radius: 4px;
+	color: white;
+	padding: 6px;
+}
+
+.smallwin {
+	background: linear-gradient(
+		135deg,
+		#444 0%,
+		#000 100%
+	);
+	padding: 12px;
+	border: 2px outset white;
+}
+
+#StatusBar {
+	border-top-style: solid;
+	border-top-color: white;
+	color: #FFF;
+	font-size: 8pt;
+	background: radial-gradient(
+ 		circle at center,
+		#444 0%,
+		#000 100%
+	);
+}
+
+#topButton {
+	background: linear-gradient(135deg,  #606000 0%,#000000 100%)!important;
+	border: 2px white outset;
+	border-radius: 4px;
+	color: white;
+	padding: 6px;
+}
+
+
+a:link, a:visited {
+	color: #F2C574;
+	text-decoration: none;
+	transition: 0.2s ease-in;
+}
+
+a:hover {
+	color: #26FF6A;
+	transition: 0.2s ease-in;
+}
+
+input, textarea {
+  border-radius: 4px;
+  border: 2px inset rgba(255, 255, 255, 0.4);
+  background: rgba(0, 0, 0, 0.2);
+  color: white;
+}
+
+input[type=text][disabled], textarea[type=text][disabled] {
+	border: none;
+}
+
+.dropdown > span {
+	transition: 0.2s ease-in;
+	color: #F2C574;
+}
+
+.dropdown:hover > span, .highlightable:hover {
+	transition: 0.2s ease-in;
+	color: #26FF6A;
+	animation-name: highlighted;
+	animation-duration: 1s;
+	animation-direction: alternate;
+	animation-iteration-count: infinite;
+}
+
+::-moz-selection {
+	background: #C228ED;
+}
+
+::selection {
+	background: #C228ED;
+}
+
+
+@keyframes highlighted {
+	0% {
+		background: rgba(226, 218, 116, 0.5);
+	}
+	100%{
+		background: rgba(226, 218, 116, 1);
+	}
+}
+
+.dropdown-content, .dropdown-content-right, .charCard {
+	border: 2px solid white;
+	border-radius: 4px;
+
+	background: linear-gradient(
+		135deg,
+		#444 0%,
+		#000 100%
+	);
+}
+
+.list_table tr td {
+	border-bottom: dotted 1px gray;
+	border-right: dotted 1px gray;
+}
+
+/*BBCode*/
+.codeblock {
+	background: rgba(0, 0, 0, 0.5);
+	border: 1px solid white;
+	border-radius: 2px;
+	padding: 4px;
+}
+
+
+.blockquote {
+	background: rgba(0, 0, 0, 0.3);
+	border: 2px dashed gray;
+	border-radius: 2px;
+	padding: 4px;
+}
+
+.quoteAuthor {
+	background: rgba(0, 0, 0, 0.3);
+	display: inline-block;
+	font-size: 1.2em;
+	border-bottom: 1px dashed gray;
+	padding: 0px;
+	width: 100%;
+}
