@@ -1,0 +1,179 @@
+
+body {
+	background: radial-gradient(
+		circle at center,
+		#000 0%,
+		#5C4331 100%
+		) no-repeat center center fixed;
+	color: #EEE;
+}
+
+hr {
+	color: #685215;
+	border-width: 2px;
+	border-style: dotted;
+}
+
+#menuBar {
+	border-image: url("../img/parchment_border.png") 25 fill repeat;
+	border-image-width: 0 0 25px;
+	padding-bottom: 14px;
+	color: #FFF;
+	font-size: 8pt;
+	);
+}
+
+#titleBar {
+	text-align: center;
+	background: radial-gradient(
+ 		circle at center,
+		#C27144 0%,
+		#000 100%
+	);
+	border-bottom: 2px solid black;
+}
+
+.bigwin {
+	border-image: url("../img/scroll_border.png") 25 fill repeat;
+	border-image-width: 25px;
+	padding: 28px;
+}
+.smallwin {
+	border-image: url("../img/scroll_border_horizontal.png") 25 fill repeat;
+	border-image-width: 25px;
+	padding: 28px;
+}
+
+
+#StatusBar {
+	border-image: url("../img/parchment_border.png") 25 fill repeat;
+	border-image-width: 25px 0 0 0;
+	padding-top: 14px;
+	padding-bottom: 8px;
+	padding-left: 8px;
+	padding-right: 8px;
+	color: #FFF;
+	font-size: 8pt;
+	/* background: radial-gradient(
+		circle at center,
+		#C27144 0%,
+		#000 100%
+	); */
+}
+
+#topButton {
+	border-image: url("../img/parchment_textarea_enabled.png") 25 fill repeat;
+	border-image-width: 25px;
+	padding: 6px;
+}
+
+#StatusBarFileInfo {
+	padding-right: 6px;
+}
+
+a:link, a:visited {
+	color: rgba(246,235,84,1);
+	text-decoration: none;
+	transition: 0.2s ease-in;
+}
+
+a:hover {
+	color: #26FF6A;
+	transition: 0.2s ease-in;
+}
+
+input, textarea {
+	border-image: url("../img/parchment_textarea_enabled.png") 25 fill repeat;
+	border-image-width: 25px;
+	padding: 8px;
+	background: none;
+	color: black;
+}
+
+textarea {
+	padding: 10px;
+}
+
+input[type=text][disabled], textarea[type=text][disabled] {
+	opacity: 0.5;
+}
+
+input[type=color] {
+	padding: 2px;
+}
+
+.dropdown > span {
+	transition: 0.2s ease-in;
+	color: rgba(246,235,84,1);
+}
+
+.dropdown:hover > span, .highlightable:hover {
+	transition: 0.2s ease-in;
+	color: #26FF6A;
+	animation-name: highlighted;
+	animation-duration: 1s;
+	animation-direction: alternate;
+	animation-iteration-count: infinite;
+}
+
+::-moz-selection {
+	background: rgba(201, 77, 7, 1);
+}
+
+::selection {
+	background: rgba(201, 77, 7, 1);
+}
+
+@keyframes highlighted {
+	0% {
+		background: rgba(201, 77, 7, 0.5);
+	}
+	100%{
+		background: rgba(201, 77, 7, 1);
+	}
+}
+
+.dropdown-content, .dropdown-content-right, .charCard {
+	border-image: url("../img/parchment_border.png") 25 fill repeat;
+	border-image-width: 25px;
+	padding: 12px;
+}
+
+.list_table tr td {
+	border-bottom: dotted 2px  #685215;
+	border-right: dotted 2px  #685215;
+	padding: 2px;
+}
+
+/*BBCode */
+.codeblock {
+	border-image: url("../img/parchment_code_border.png") 25 fill repeat;
+	border-image-width: 25px;
+	padding: 28px;
+}
+
+
+.blockquote {
+	border-image: url("../img/parchment_code_border.png") 25 fill repeat;
+	border-image-width: 25px;
+	padding: 28px;
+}
+
+.quoteAuthor {
+	background: rgba(0, 0, 0, 0.3);
+	display: inline-block;
+	font-size: 1.2em;
+	border-bottom: 1px solid #80FF80;
+	padding-bottom: 4px;
+	width: 100%;
+}
+
+
+/* Wekit-only */
+::-webkit-scrollbar {
+	border-image: url("../img/parchment_border.png") 25 fill repeat;
+	border-image-width: 0 0 25px;
+	border-width: 0px;
+	border-left-width: 50px;
+	padding-bottom: 14px;
+}
