@@ -2,7 +2,6 @@ import Page from './page.js';
 import getURLParameter from './geturlparameter.js';
 import PoniarySave from './poniary_save.js';
 import './console_override.js'; //Override Console
-import Cookie from './cookie.js';
 
 /*
 	The big, main script that kicks everything off.
@@ -35,7 +34,8 @@ switch(styleParameter) {
 		break;
 	default:
 		//Stylesheet Setup Scope. None of this is important later, so it's all scoped.
-		let StyleCookie = Cookie.get("stylesheet");
+		let StyleCookie = page.styleCookie;
+		console.log(StyleCookie);
 		if ( StyleCookie !== null) {
 			page.style = StyleCookie.value;
 			console.info("Stylesheet selected from Cookie.")

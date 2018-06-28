@@ -71,7 +71,7 @@ const universalViewMenu = {
 			menuEntries: [
 				{
 					name: "Save/Update Cookie",
-					func: "let cookie = new Cookie('stylesheet', page.style); cookie.store(); console.info(`Saved Cookie: ${cookie.name} = ${cookie.value}`)",
+					func: "page.styleCookie = page.style",
 					tooltip: "Saves a Cookie for 365 Days&#10;Stores currently selected Stylesheet",
 					iconURL: "img/icon_cookie.png"
 

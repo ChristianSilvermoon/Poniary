@@ -2,7 +2,9 @@ import BBCode from './bbcode.js';
 import DialogManager from './dialog.js';
 import MenuBar from './menubar.js';
 import menuBarPresets from './menubar_presets.js';
+import Cookie from './cookie.js';
 import {AppData} from './app.js';
+
 /*
 	The page class is inteded to make modification of the page simple
 	Especially for recurring actions and other major app functions
@@ -26,6 +28,17 @@ export default class Page {
 		this.menuBar		= new MenuBar();
 		this.state			= "Loading"
 		this.init();
+	}
+
+	get styleCookie() {
+		console.log(Cookie.get("stylesheet"));
+		return Cookie.get("stylesheet");
+	}
+
+	set styleCookie(style) {
+		let cookie = new Cookie('stylesheet', style);
+		cookie.store();
+		console.info(`Saved Cookie: ${cookie.name} = ${cookie.value}`)
 	}
 
 	get body() {
