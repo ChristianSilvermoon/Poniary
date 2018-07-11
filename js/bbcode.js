@@ -32,6 +32,7 @@ export default class BBCode {
 
 		//Char
 		string = string.replace(/\[char=((?:.|\t|\n|\r)*?)\]((?:.|\t|\n|\r)*?)\[\/char\]/g, "<a href=\"javascript:void(0)\" onclick=\"page.handleCharLink('$1')\" title=\"Click for Character Page\">$2</a>");
+		string = string.replace(/\[char\]((?:.|\t|\n|\r)*?)\[\/char\]/g, "<a href=\"javascript:void(0)\" onclick=\"page.handleCharLink('$1')\" title=\"Click for Character Page\">$1</a>");
 
 		//Code
 		string = string.replace(/\[code]((?:.|\t|\n|\r)*?)\[\/code\]/g, "<br/><div class=\"codeblock\"><code>$1</code></div><br/>");
@@ -97,6 +98,7 @@ export default class BBCode {
 					break;
 				case "char":
 					string = string.replace(/\[char=((?:.|\t|\n|\r)*?)\]((?:.|\t|\n|\r)*?)\[\/char\]/g, "$2");
+					string = string.replace(/\[char\]((?:.|\t|\n|\r)*?)\[\/char\]/g, "$1");
 					break;
 				case "code":
 					//Code
