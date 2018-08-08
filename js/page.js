@@ -573,6 +573,16 @@ export default class Page {
 		this.menuBar.update();
 	}
 
+	copyInnerText(element) {
+		window.getSelection().selectAllChildren(element);
+		document.execCommand("copy");
+
+		this.dialogManager.create({
+			title: "Color Code Copied",
+			text: "The color code \"" + element.innerHTML + "\" has been copied to your clipboard" + "<br/><br/>" + this.dialogManager.createDialogLink("Okay")
+		});
+	}
+
 	init() {
 		this.clear(); //Wipe current contents
 
@@ -654,7 +664,7 @@ function showPony(id, page) {
 
 	actionBar.innerHTML = ("<a href=\"javascript:void(0)\" onclick=\"page.showCharList()\">◄ Back to Character List</a>");
 
-	//ACtion Bar Controls
+	//Action Bar Controls
 	var controlSpan = "<span style=\"float:right;\">";
 	controlSpan += `<a href=\"javascript:void(0)\" onclick=\"saveData.offerDownload(${id})\">Export</a>`;
 	if ( saveData.MetaInf.lock == false ) {
@@ -790,7 +800,16 @@ function showPony(id, page) {
 	if ( pony.colors.length > 0 ) {
 		tableContent = tableContent.concat("<br/>Coloration (Click Code to Copy):<br/><table class=\"list_table\"><tr><td>Color</td><td>Item(s)</td></tr>");
 		for(let i = 0; pony.colors[i] != undefined; i++) {
-			tableContent += "<tr><td style=\"background: " + pony.colors[i][0] + ";\" onclick=\"copyInnerText(this); msgBox('Copied Color Code to Clipboard','Text Copied')\" title=\"Click to Copy\">" + pony.colors[i][0] + "</td><td>" + BBCode.decode( BBCode.strip(pony.colors[i][1], [ "quote", "code", "authoredQuote"])) + "</td></tr>";
+			let ponyColorHex	= pony.colors[i][0];
+			let ponyColor		= {
+				"r": parseInt("0x" + ponyColorHex.substring(1,3)),
+				"g": parseInt("0x" + ponyColorHex.substring(3,5)),
+				"b": parseInt("0x" + ponyColorHex.substring(5,7)),
+			}
+
+			let ponyColorString = `\nRed: ${ponyColor.r}\nGreen: ${ponyColor.g}\nBlue: ${ponyColor.b}`
+
+			tableContent += "<tr><td style=\"background: " + pony.colors[i][0] + ";\" onclick=\"page.copyInnerText(this); msgBox('Copied Color Code to Clipboard','Text Copied')\" title=\"Click to Copy" + ponyColorString + "\">" + pony.colors[i][0] + "</td><td>" + BBCode.decode( BBCode.strip(pony.colors[i][1], [ "quote", "code", "authoredQuote"])) + "</td></tr>";
 		}
 		tableContent += "</table><br/>";
 	}
