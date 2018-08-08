@@ -573,6 +573,15 @@ export default class Page {
 		this.menuBar.update();
 	}
 
+	copyInnerText(element) {
+		window.getSelection().selectAllChildren(element);
+		document.execCommand("copy");
+		this.dialogManager.create({
+			title: "Color Code Copied",
+			text: "The color code \"" + element.innerHTML + "\" has been copied to your clipboard" + "<br/><br/>" + this.dialogManager.createDialogLink("Okay")
+		});
+	}
+
 	init() {
 		this.clear(); //Wipe current contents
 
@@ -790,7 +799,7 @@ function showPony(id, page) {
 	if ( pony.colors.length > 0 ) {
 		tableContent = tableContent.concat("<br/>Coloration (Click Code to Copy):<br/><table class=\"list_table\"><tr><td>Color</td><td>Item(s)</td></tr>");
 		for(let i = 0; pony.colors[i] != undefined; i++) {
-			tableContent += "<tr><td style=\"background: " + pony.colors[i][0] + ";\" onclick=\"copyInnerText(this); msgBox('Copied Color Code to Clipboard','Text Copied')\" title=\"Click to Copy\">" + pony.colors[i][0] + "</td><td>" + BBCode.decode( BBCode.strip(pony.colors[i][1], [ "quote", "code", "authoredQuote"])) + "</td></tr>";
+			tableContent += "<tr><td style=\"background: " + pony.colors[i][0] + ";\" onclick=\"page.copyInnerText(this); msgBox('Copied Color Code to Clipboard','Text Copied')\" title=\"Click to Copy\">" + pony.colors[i][0] + "</td><td>" + BBCode.decode( BBCode.strip(pony.colors[i][1], [ "quote", "code", "authoredQuote"])) + "</td></tr>";
 		}
 		tableContent += "</table><br/>";
 	}
