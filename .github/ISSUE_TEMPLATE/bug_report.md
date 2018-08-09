@@ -1,7 +1,7 @@
 ## Platform Information
 **Operating System:** (Linux, Mac, Windows?)
 **Web Browser:** (Firefox, Google Chrome?)
-**Using NoScript?:** (Y/N)
+**Using A Script/Content Blocker?:** (Y/N)
 
 ### What Happened?
 (Please provide a detailed explanation)
