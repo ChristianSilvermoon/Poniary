@@ -274,31 +274,39 @@ function saveUpdater(save, callback) {
 }
 
 function getSizeEstimate(stringifedObject, doAbbreviation = true) {
-	var size = stringifedObject.length;
-	var suffix = doAbbreviation? "B" : "Bytes";
+	return new Promise( (resolve, reject) => {
+		var dataBlob		= new Blob([stringifedObject], {type: "application/json; charset=utf-8"});
+		var reader			= new FileReader();
+		reader.onload = () => {
+			let size	= reader.result.byteLength;
+			let suffix	= doAbbreviation? "B" : "Bytes";
 
-	if ( size > 1023) {
-		//Divide to Kilobytes
-		size = (size / 1024);
-		suffix = doAbbreviation? "KB" : "Kilobytes";
-	}
+			if ( size > 1023) {
+				//Divide to Kilobytes
+				size = (size / 1024);
+				suffix = doAbbreviation? "KB" : "Kilobytes";
+			}
 
-	if  ( size > 1023) {
-		//Divide to Megabytes
-		size = (size / 1024);
-		suffix = doAbbreviation? "MB" : "Megabytes";
-	}
+			if  ( size > 1023) {
+				//Divide to Megabytes
+				size = (size / 1024);
+				suffix = doAbbreviation? "MB" : "Megabytes";
+			}
 
-	if  ( size > 1023) {
-		//Divide to Gigabytes
-		size = (size / 1024);
-		suffix = doAbbreviation? "GB" : "Gigabytes";
-	}
+			if  ( size > 1023) {
+				//Divide to Gigabytes
+				size = (size / 1024);
+				suffix = doAbbreviation? "GB" : "Gigabytes";
+			}
 
-	if ( size.toString().includes(".") ) {
-		//Remove Decimal if present
-		size = size.toString().substring(0, (size.toString().indexOf(".") + 2));
-	}
+			if ( size.toString().includes(".") ) {
+				//Remove Decimal if present
+				size = size.toString().substring(0, (size.toString().indexOf(".") + 2));
+			}
 
-	return size + " " + suffix; //Return output
+			resolve(size + " " + suffix);
+		}
+
+		reader.readAsArrayBuffer(dataBlob);
+	});
 }
