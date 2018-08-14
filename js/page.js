@@ -75,6 +75,7 @@ export default class Page {
 		}
 
 		showPony(id, this);
+		this.updateStatusBar();
 	}
 
 	showCharList(query = "", refreshCharsOnly = false) {
@@ -95,7 +96,7 @@ export default class Page {
 			if ( saveData.MetaInf.lock == false ){
 				let tmpActionBarString = "";
 				tmpActionBarString += "<div style=\"float:right; text-align: right;\">";
-				tmpActionBarString += "<a href=\"javascript:void(0)\" onclick=\"saveData.addChar(); page.showCharList(this.value, true)\">+New Character</a><br/>Sort: ";
+				tmpActionBarString += "<a href=\"javascript:void(0)\" onclick=\"saveData.addChar(); page.showEditor(saveData.length - 1)\">+New Character</a><br/>Sort: ";
 				tmpActionBarString += `<a href="javascript:void(0)" onclick="saveData.sortChars('ABC'); page.showCharList('${query}', true)" title="Sort Characters Alphabetically">[ABC]</a>`;
 				tmpActionBarString += `<a href="javascript:void(0)" onclick="saveData.sortChars('ZYX'); page.showCharList('${query}', true)" title="Sort Characters Inverse Alphabetically">[ZYX]</a>`;
 				tmpActionBarString += `<a href="javascript:void(0)" onclick="saveData.sortChars('REV'); page.showCharList('${query}', true)" title="Reverse Characters">[REV]</a>`;
@@ -113,26 +114,28 @@ export default class Page {
 
 		saveData.queryName(query, false).forEach( pony_id => {
 			let pony = saveData.Characters[pony_id];
-			let charHTML = "";
-			charHTML += "<div class='charCard'>";
-			charHTML += saveData.Characters.indexOf(pony).toString().padStart(3, "0") + " — "
-			charHTML += `<span style="border-bottom: 4px solid; border-image: linear-gradient( to right, ${pony.ribbonColor} 0%, 80%, #000 100% ) 1">`;
-			charHTML += `${BBCode.decode( BBCode.strip(pony.name, ["code", "quote", "authoredQuote", "url", "namedURL"]) )}<br/>`;
-			charHTML += `</span><br/><font size=1>`;
-			charHTML += `<a href="javascript:void(0)" onclick="page.showPony(${saveData.Characters.indexOf(pony)})">View</a>`
-			if ( saveData.MetaInf.lock == false ) {
-				charHTML += ` | <a href="javascript:void(0)" onclick="saveData.swapChars(${pony_id}, ${pony_id} - 1); page.showCharList('${query}', true);">Move Up</a>`;
-				charHTML += ` | <a href="javascript:void(0)" onclick="saveData.swapChars(${pony_id}, ${pony_id} + 1); page.showCharList('${query}', true);">Move Down</a>`;
-				charHTML += ` | <a href="javascript:void(0)" onclick="page.showEditor(${pony_id});">Edit</a>`;
+			saveData.estimatedSize(true, saveData.Characters.indexOf(pony)).then( estimatedSize => {
+				let charHTML = "";
+				charHTML += "<div class='charCard'>";
+				charHTML += saveData.Characters.indexOf(pony).toString().padStart(3, "0") + " — "
+				charHTML += `<span style="border-bottom: 4px solid; border-image: linear-gradient( to right, ${pony.ribbonColor} 0%, 80%, #000 100% ) 1">`;
+				charHTML += `${BBCode.decode( BBCode.strip(pony.name, ["code", "quote", "authoredQuote", "url", "namedURL"]) )}<br/>`;
+				charHTML += `</span><br/><font size=1>`;
+				charHTML += `<a href="javascript:void(0)" onclick="page.showPony(${saveData.Characters.indexOf(pony)})">View</a>`
+				if ( saveData.MetaInf.lock == false ) {
+					charHTML += ` | <a href="javascript:void(0)" onclick="saveData.swapChars(${pony_id}, ${pony_id} - 1); page.showCharList('${query}', true);">Move Up</a>`;
+					charHTML += ` | <a href="javascript:void(0)" onclick="saveData.swapChars(${pony_id}, ${pony_id} + 1); page.showCharList('${query}', true);">Move Down</a>`;
+					charHTML += ` | <a href="javascript:void(0)" onclick="page.showEditor(${pony_id});">Edit</a>`;
 
-				charHTML += ` | <a href="javascript:void(0)" onclick="saveData.offerDownload(${pony_id})\">Export</a>`;
+					charHTML += ` | <a href="javascript:void(0)" onclick="saveData.offerDownload(${pony_id})\">Export</a>`;
 
-				charHTML += ` | <a href="javascript:void(0)" onclick="page.promptDeleteChar(${pony_id})">Delete</a>`;
-			}
-			charHTML += `<br/>Estimated Size: ${saveData.estimatedSize(true, saveData.Characters.indexOf(pony))}`;
-			charHTML += "</font></div>"
+					charHTML += ` | <a href="javascript:void(0)" onclick="page.promptDeleteChar(${pony_id})">Delete</a>`;
+				}
+				charHTML += `<br/>Estimated Size: ${estimatedSize}`;
+				charHTML += "</font></div>"
 
-			this.displayArea.innerHTML += charHTML;
+				this.displayArea.innerHTML += charHTML;
+			});
 		});
 		this.updateStatusBar();
 	}
@@ -564,8 +567,11 @@ export default class Page {
 		this.saveAuthor.innerHTML		= authorElement.outerHTML + " |";
 		this.prettyStatus.innerHTML		= `<img width="10px" height="10px" src="${prettyIcon}"></img> |`;
 		this.lockStatus.innerHTML		= `<img width="10px" height="10px" src="${lockIcon}"></img> |`;
-		this.fileSizeInfo.innerHTML		= saveData.estimatedSize() + " |";
-		this.charCountInfo.innerHTML	= saveData.length + " ";
+
+		saveData.estimatedSize().then( estimatedSize => {
+			this.fileSizeInfo.innerHTML		= estimatedSize + " |";
+			this.charCountInfo.innerHTML	= saveData.length + " ";
+		});
 	}
 
 	setMenuBar(preset = "default") {
