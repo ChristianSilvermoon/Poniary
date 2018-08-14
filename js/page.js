@@ -95,7 +95,7 @@ export default class Page {
 			if ( saveData.MetaInf.lock == false ){
 				let tmpActionBarString = "";
 				tmpActionBarString += "<div style=\"float:right; text-align: right;\">";
-				tmpActionBarString += "<a href=\"javascript:void(0)\" onclick=\"saveData.addChar(); page.showCharList(this.value, true)\">+New Character</a><br/>Sort: ";
+				tmpActionBarString += "<a href=\"javascript:void(0)\" onclick=\"saveData.addChar(); page.showEditor(saveData.length - 1)\">+New Character</a><br/>Sort: ";
 				tmpActionBarString += `<a href="javascript:void(0)" onclick="saveData.sortChars('ABC'); page.showCharList('${query}', true)" title="Sort Characters Alphabetically">[ABC]</a>`;
 				tmpActionBarString += `<a href="javascript:void(0)" onclick="saveData.sortChars('ZYX'); page.showCharList('${query}', true)" title="Sort Characters Inverse Alphabetically">[ZYX]</a>`;
 				tmpActionBarString += `<a href="javascript:void(0)" onclick="saveData.sortChars('REV'); page.showCharList('${query}', true)" title="Reverse Characters">[REV]</a>`;
