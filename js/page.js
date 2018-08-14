@@ -75,6 +75,7 @@ export default class Page {
 		}
 
 		showPony(id, this);
+		this.updateStatusBar();
 	}
 
 	showCharList(query = "", refreshCharsOnly = false) {
