@@ -24,14 +24,22 @@ switch(styleParameter) {
 		page.style = "classic";
 		console.info("Stylesheet selected from URL.");
 		break;
+
 	case "dark":
 		page.style = "dark";
 		console.info("Stylesheet selected from URL.");
 		break;
+
 	case "parchment":
 		page.style = "parchment";
 		console.info("Stylesheet selected from URL.");
 		break;
+
+	case "pb3000":
+		page.style = "pb3000";
+		console.info("Stylesheet selected from URL.");
+		break;
+
 	default:
 		//Stylesheet Setup Scope. None of this is important later, so it's all scoped.
 		let StyleCookie = page.styleCookie;

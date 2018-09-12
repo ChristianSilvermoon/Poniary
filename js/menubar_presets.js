@@ -103,6 +103,24 @@ const universalViewMenu = {
 					func: "page.style = 'parchment'",
 					tooltip: "A brand new theme... with an Old Parchment Look",
 					iconURL: "img/icon_theme_parchment.png"
+				},
+				{
+					name: "Pip 3000",
+					func: "page.style = 'pb3000'",
+					tooltip: "A Theme for FoE Fans.",
+					iconURL: "img/icon_theme_pb3000.png"
+				},
+				{
+					name: "Pip ST99",
+					func: "page.style = 'pbST99'",
+					tooltip: "A Theme for FoE:PH Fans.",
+					iconURL: "img/icon_theme_pbST99.png"
+				},
+				{
+					name: "Pip Delta",
+					func: "page.style = 'pbDelta'",
+					tooltip: "A Theme for FoE:PH Fans.",
+					iconURL: "img/icon_theme_pbDelta.png"
 				}
 			]
 		},
