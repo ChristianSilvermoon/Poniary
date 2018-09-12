@@ -1,0 +1,183 @@
+
+body {
+	background: radial-gradient(
+		circle at center,
+		#000 0%,
+		#232C46 100%
+		) no-repeat center center fixed;
+	color: #80A1FF;
+	animation: flicker 1s infinite;
+}
+
+/*Monospace Font*/
+html {
+	font-family: monospace;
+}
+
+@keyframes flicker {
+	0% { opacity: 100% }
+	100% { opacity: 0% }
+
+}
+
+/*Colorize Main.css shadows*/
+#menuBar, #StatusBar, #displayArea, .dropdown-content, .dropdown-content-right{
+	filter: drop-shadow(0px 0px 4px rgba(128, 161, 255, 0.5));
+}
+
+hr {
+	color: #80A1FF;
+	border-width: 2px;
+	border-style: solid;
+}
+
+#menuBar {
+	border-bottom: 2px solid #80A1FF;
+	background: #000;
+	color: #80A1FF;
+	font-size: 8pt;
+	);
+}
+
+#titleBar {
+	text-align: center;
+	background: radial-gradient(
+ 		circle at center,
+		#232C46 0%,
+		#000 100%
+	);
+	border-bottom: 2px solid black;
+}
+
+.bigwin {
+	border-image: url("../img/pbDelta_border.png") 25 fill repeat;
+	border-image-width: 25px;
+	padding: 28px;
+}
+.smallwin {
+	border-image: url("../img/pbDelta_border.png") 25 fill repeat;
+	border-image-width: 25px;
+	padding: 28px;
+}
+
+
+#StatusBar {
+	border-top: 2px solid #80A1FF;
+	background: #000;
+	color: #80A1FF;
+	font-size: 8pt;
+}
+
+#topButton {
+	border: 2px solid #80A1FF;
+	background: #000;
+	padding: 6px;
+}
+
+#StatusBarFileInfo {
+	padding-right: 6px;
+}
+
+a:link, a:visited {
+	color: rgba(246,235,84,1);
+	text-decoration: none;
+	transition: 0.2s ease-in;
+}
+
+a:hover {
+	color: violet;
+	transition: 0.2s ease-in;
+}
+
+input, textarea {
+	background: #232C46;
+	border: 2px solid #80A1FF;
+	padding: 8px;
+	color: #80A1FF;
+}
+
+textarea {
+	padding: 10px;
+}
+
+input[type=text][disabled], textarea[type=text][disabled] {
+	opacity: 0.5;
+}
+
+input[type=color] {
+	padding: 2px;
+}
+
+.dropdown > span {
+	transition: 0.2s ease-in;
+	color: rgba(246,235,84,1);
+}
+
+.dropdown:hover > span, .highlightable:hover {
+	transition: 0.2s ease-in;
+	color: violet;
+	animation-name: highlighted;
+	animation-duration: 1s;
+	animation-direction: alternate;
+	animation-iteration-count: infinite;
+}
+
+::-moz-selection {
+	background: rgba(128, 161, 255, 1);
+}
+
+::selection {
+	background: rgba(128, 161, 255, 1);
+}
+
+@keyframes highlighted {
+	0% {
+		background: rgba(128, 161, 255, 0.5);
+	}
+	100%{
+		background: rgba(128, 161, 255, 1);
+	}
+}
+
+.dropdown-content, .dropdown-content-right, .charCard {
+	border-image: url("../img/pbDelta_border.png") 25 fill repeat;
+	border-image-width: 25px;
+	padding: 12px;
+}
+
+.list_table tr td {
+	border-bottom: dotted 2px #80A1FF;
+	border-right: dotted 2px #80A1FF;
+	padding: 2px;
+}
+
+/*BBCode */
+.codeblock {
+	border: 2px solid #80A1FF;
+	padding: 4px;
+}
+
+
+.blockquote {
+	border: 2px solid #80A1FF;
+	padding: 4px;
+}
+
+.quoteAuthor {
+	background: rgba(0, 0, 0, 0.3);
+	display: inline-block;
+	font-size: 1.2em;
+	border-bottom: 1px solid #80A1FF;
+	padding-bottom: 4px;
+	width: 100%;
+}
+
+
+/* Wekit-only */
+::-webkit-scrollbar {
+	border-image: url("../img/parchment_border.png") 25 fill repeat;
+	border-image-width: 0 0 25px;
+	border-width: 0px;
+	border-left-width: 50px;
+	padding-bottom: 14px;
+}
