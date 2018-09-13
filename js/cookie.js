@@ -30,7 +30,7 @@ export default class Cookie {
 	}
 
 	static get(nameInput, prependNameWithVersion = true) {
-		let cookies		= document.cookie.split(", ");
+		let cookies		= document.cookie.split("; ");
 		var returnValue = null;
 
 		if ( prependNameWithVersion ) {
