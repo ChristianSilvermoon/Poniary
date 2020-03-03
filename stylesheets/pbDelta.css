@@ -6,7 +6,7 @@ body {
 		#232C46 100%
 		) no-repeat center center fixed;
 	color: #80A1FF;
-	animation: flicker 1s infinite;
+	animation: flicker 1s 1;
 }
 
 /*Monospace Font*/
@@ -15,8 +15,8 @@ html {
 }
 
 @keyframes flicker {
-	0% { opacity: 100% }
-	100% { opacity: 0% }
+	0% { opacity: 0% }
+	100% { opacity: 100% }
 
 }
 
